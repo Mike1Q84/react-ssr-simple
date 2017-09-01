@@ -13,9 +13,10 @@ const browserConfig = {
   module: {
     rules: [
       {
-        test: /\.js$/,
-        exclude: /(node_modules)/,
-        loader: 'babel-loader'
+        test: /\.jsx?$/,
+        exclude: /node_modules/,
+        loader: 'babel-loader',
+        query: { presets: ['es2015', 'react']}
       }
     ]
   }
@@ -33,9 +34,10 @@ const serverConfig = {
   module: {
     rules: [
       {
-        test: /\.js$/,
-        exclude: /(node_modules)/,
-        loader: 'babel-loader'
+        test: /\.jsx?$/,
+        exclude: /node_modules/,
+        loader: 'babel-loader',
+        query: { presets: ['es2015', 'react']}
       }
     ]
   },

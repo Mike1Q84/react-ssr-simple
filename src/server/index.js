@@ -1,4 +1,7 @@
 import express from 'express';
+import React from 'react';
+import { renderToString } from 'react-dom/server';
+import App from '../shared/App';
 
 const app = express();
 
@@ -8,10 +11,10 @@ app.get('*', (req, res) => {
   res.send(`<!DOCTYPE html>
 <head>
   <title>React SSR Simple</title>
+  <script src="/bundle.js" defer></script>
 </head>
 <body>
-  <h1>Hello World!</h1>
-  <script src="/bundle.js" defer></script>
+  <div id="root">${renderToString(<App />)}</div>
 </body>`)
 });
 
