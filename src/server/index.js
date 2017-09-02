@@ -21,6 +21,10 @@ app.get('*', (req, res) => {
 </body>`)
 });
 
-app.listen(process.env.PORT || port, () => {
-  console.log(`Server is listening on port: ${port}`)
-})
+if (!module.parent) { // Make sure test DOES NOT listen port 3000 THE SECOND TIME
+  app.listen(process.env.PORT || port, () => {
+    console.log(`Server is listening on port: ${port}`)
+  });
+}
+
+export default app;
