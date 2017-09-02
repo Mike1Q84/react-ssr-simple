@@ -1,7 +1,7 @@
 const path = require('path');
-const webpack = require('webpack');
+// const webpack = require('webpack');
 const nodeExternals = require('webpack-node-externals'); // Exclude node_modules
-const Uglify = require('uglifyjs-webpack-plugin'); // Uglify ES6 support
+// const Uglify = require('uglifyjs-webpack-plugin'); // Uglify ES6 support
 
 const browserConfig = {
   entry: './src/browser/index.js',
@@ -16,7 +16,7 @@ const browserConfig = {
         test: /\.jsx?$/,
         exclude: /(node_modules)/,
         loader: 'babel-loader',
-        query: { presets: ['es2015', 'react']}
+        query: { presets: ['es2015', 'react'] }
       }
     ]
   }
@@ -42,7 +42,7 @@ const serverConfig = {
     ]
   },
   plugins: [
-    new Uglify() // AVOID ERROR in server.js from UglifyJs Invalid assignment
+    // new Uglify() // AVOID ERROR in server.js from UglifyJs Invalid assignment
     // Uglify DOES NOT support ES6 at the moment
   ]
 };
