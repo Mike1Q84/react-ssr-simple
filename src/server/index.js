@@ -3,6 +3,9 @@ import React from 'react';
 import { renderToString } from 'react-dom/server';
 import App from '../shared/App';
 
+/* eslint-disable no-console */
+
+const port = 3000;
 const app = express();
 
 app.use(express.static('dist'));
@@ -17,8 +20,6 @@ app.get('*', (req, res) => {
   <div id="root">${renderToString(<App />)}</div>
 </body>`)
 });
-
-const port = 3000;
 
 app.listen(process.env.PORT || port, () => {
   console.log(`Server is listening on port: ${port}`)

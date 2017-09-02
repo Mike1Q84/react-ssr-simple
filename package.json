@@ -4,9 +4,13 @@
   "description": "Simple server-side rendering React without Redux",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "webpack -w & nodemon server.js",
-    "prod": "NODE_ENV=production webpack -p"
+    "clean": "rimraf dist",
+    "serve": "nodemon server.js",
+    "dev": "run-p clean dev:bundle serve",
+    "dev:bundle": "webpack -w",
+    "prod": "run-p clean prod:bundle serve",
+    "prod:bundle": "NODE_ENV=production webpack -p",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
     "React",
@@ -27,6 +31,8 @@
     "file-loader": "^0.11.2",
     "node-sass": "^4.5.3",
     "nodemon": "^1.11.0",
+    "npm-run-all": "^4.1.1",
+    "rimraf": "^2.6.1",
     "sass-loader": "^6.0.6",
     "style-loader": "^0.18.2",
     "uglifyjs-webpack-plugin": "1.0.0-beta.2",
