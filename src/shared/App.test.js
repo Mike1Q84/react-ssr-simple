@@ -1,9 +1,13 @@
 import React from 'react';
 import { expect } from 'chai';
-import { shallow } from 'enzyme';
+import { shallow, mount } from 'enzyme';
 import App from './App';
 
 describe('App', () => {
+  it("should be mounted", function() {
+    expect(mount(<App />).find('.App').length).to.equal(1);
+  });
+
   describe('Header', () => {
     it('renders 1 header', () => {
       const wrapper = shallow(<App />);

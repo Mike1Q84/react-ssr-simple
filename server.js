@@ -198,7 +198,7 @@ var App = function (_Component) {
     value: function render() {
       return _react2.default.createElement(
         'div',
-        null,
+        { className: 'App' },
         _react2.default.createElement(
           'div',
           { className: 'header' },
