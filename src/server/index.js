@@ -14,7 +14,7 @@ app.get('*', (req, res) => {
   res.send(`<!DOCTYPE html>
 <head>
   <title>React SSR Simple</title>
-  <link rel="stylesheet" href="/css/dark.css">
+  <link rel="stylesheet" href="/css/main.css">
   <script src="/bundle.js" defer></script>
 </head>
 <body>

@@ -3,15 +3,10 @@ const nodeExternals = require('webpack-node-externals'); // Exclude node_modules
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 const browserConfig = {
-  // entry: './src/browser/index.js',
-  entry: {
-    bundle: './src/browser/index.js',
-    light: './src/shared/App.light.sass',
-    dark: './src/shared/App.dark.sass'
-  },
+  entry: './src/browser/index.js',
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: '[name].js',
+    filename: 'bundle.js',
     publicPath: '/dist'
   },
   module: {
