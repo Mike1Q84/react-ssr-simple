@@ -2,6 +2,8 @@
 dist/
 # server.js
 # server.js
+# yarn-cache
+.yarn-cache/
 
 # Logs
 logs

@@ -1,0 +1,24 @@
+version: "3"
+
+services:
+  yarn:
+    image: node:8.4.0-alpine
+    user: node
+    working_dir: /home/node/app
+    #stdin_open: true
+    #tty: true
+    environment:
+      NODE_ENV: development
+    ports:
+      - 3000:3000
+      - 9876:9876
+    volumes:
+      # mount host yarn cache dir for root user
+      # - .yarn-cache:/usr/local/share/.cache/yarn/v1
+      # mount host yarn cache dir for node user
+      - .yarn-cache:/home/node/.cache/yarn/v1
+      # mount project dir of host in node user's dir
+      - .:/home/node/app
+    command: yarn install
+    command: npm run dev
+    #command: npm run test
