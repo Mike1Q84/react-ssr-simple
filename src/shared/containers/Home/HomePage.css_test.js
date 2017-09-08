@@ -1,7 +1,7 @@
 import { assert } from 'chai';
 import quixote from 'quixote';
 
-describe("body div", () => {
+describe("HomePage div", () => {
   let frame;
   let container;
   let body;
@@ -20,19 +20,19 @@ describe("body div", () => {
     frame.reset();
     container = frame.add(`
 <div>
-  <div class="body"></div>
+  <div class="home"></div>
 </div>`);
-    body = frame.get(".body");
+    body = frame.get(".home");
   });
 
-  it("has width 100px", function() {
+  it("should have width 100px", function() {
     body.assert({
       width: 100
     });
   });
 });
 
-describe("body title", () => {
+describe("HomePage title", () => {
   let GREEN = "rgb(0, 128, 0)";
 
   let frame;
@@ -53,12 +53,12 @@ describe("body title", () => {
     frame.reset();
     container = frame.add(`
 <div>
-  <h1 class="body__title"></h1>
+  <h1 class="home__title"></h1>
 </div>`);
-    bodyTitle = frame.get(".body__title");
+    bodyTitle = frame.get(".home__title");
   });
 
-  it("has color green", function() {
+  it("should have color green", function() {
     assert.equal(bodyTitle.getRawStyle("color"), GREEN);
   });
 });

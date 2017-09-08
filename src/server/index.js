@@ -12,14 +12,15 @@ app.use(express.static('dist'));
 
 app.get('*', (req, res) => {
   res.send(`<!DOCTYPE html>
-<head>
-  <title>React SSR Simple</title>
-  <link rel="stylesheet" href="/css/main.css">
-  <script src="/bundle.js" defer></script>
-</head>
-<body>
-  <div id="root">${renderToString(<App />)}</div>
-</body>`)
+  <head>
+    <title>React SSR Simple</title>
+    <link rel="stylesheet" href="/css/main.css">
+    <script src="/bundle.js" defer></script>
+  </head>
+  <body>
+    <div id="root">${renderToString(<App />)}</div>
+  </body>
+</html>`);
 });
 
 if (!module.parent) { // Make sure test DOES NOT listen port 3000 THE SECOND TIME

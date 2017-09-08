@@ -104,7 +104,7 @@ var app = (0, _express2.default)();
 app.use(_express2.default.static('dist'));
 
 app.get('*', function (req, res) {
-  res.send('<!DOCTYPE html>\n<head>\n  <title>React SSR Simple</title>\n  <link rel="stylesheet" href="/css/main.css">\n  <script src="/bundle.js" defer></script>\n</head>\n<body>\n  <div id="root">' + (0, _server.renderToString)(_react2.default.createElement(_App2.default, null)) + '</div>\n</body>');
+  res.send('<!DOCTYPE html>\n  <head>\n    <title>React SSR Simple</title>\n    <link rel="stylesheet" href="/css/main.css">\n    <script src="/bundle.js" defer></script>\n  </head>\n  <body>\n    <div id="root">' + (0, _server.renderToString)(_react2.default.createElement(_App2.default, null)) + '</div>\n  </body>\n</html>');
 });
 
 if (!module.parent) {
@@ -174,7 +174,17 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-__webpack_require__(6);
+var _Header = __webpack_require__(8);
+
+var _Header2 = _interopRequireDefault(_Header);
+
+var _Footer = __webpack_require__(7);
+
+var _Footer2 = _interopRequireDefault(_Footer);
+
+var _HomePage = __webpack_require__(9);
+
+var _HomePage2 = _interopRequireDefault(_HomePage);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -199,33 +209,9 @@ var App = function (_Component) {
       return _react2.default.createElement(
         'div',
         { className: 'App' },
-        _react2.default.createElement(
-          'div',
-          { className: 'header' },
-          _react2.default.createElement(
-            'h1',
-            { className: 'header__title' },
-            'Header'
-          )
-        ),
-        _react2.default.createElement(
-          'div',
-          { className: 'body' },
-          _react2.default.createElement(
-            'h1',
-            { className: 'body__title' },
-            'Main Content'
-          )
-        ),
-        _react2.default.createElement(
-          'div',
-          { className: 'footer' },
-          _react2.default.createElement(
-            'h1',
-            { className: 'footer__title' },
-            'Footer'
-          )
-        )
+        _react2.default.createElement(_Header2.default, null),
+        _react2.default.createElement(_HomePage2.default, null),
+        _react2.default.createElement(_Footer2.default, null)
       );
     }
   }]);
@@ -236,7 +222,126 @@ var App = function (_Component) {
 exports.default = App;
 
 /***/ }),
-/* 6 */
+/* 6 */,
+/* 7 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var Footer = function Footer() {
+  return _react2.default.createElement(
+    "div",
+    { className: "footer" },
+    _react2.default.createElement(
+      "h1",
+      { className: "footer__title" },
+      "Footer"
+    )
+  );
+};
+
+exports.default = Footer;
+
+/***/ }),
+/* 8 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var Header = function Header() {
+  return _react2.default.createElement(
+    "div",
+    { className: "header" },
+    _react2.default.createElement(
+      "h1",
+      { className: "header__title" },
+      "Header"
+    )
+  );
+};
+
+exports.default = Header;
+
+/***/ }),
+/* 9 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+__webpack_require__(10);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var HomePage = function (_Component) {
+  _inherits(HomePage, _Component);
+
+  function HomePage() {
+    _classCallCheck(this, HomePage);
+
+    return _possibleConstructorReturn(this, (HomePage.__proto__ || Object.getPrototypeOf(HomePage)).apply(this, arguments));
+  }
+
+  _createClass(HomePage, [{
+    key: 'render',
+    value: function render() {
+      return _react2.default.createElement(
+        'div',
+        { className: 'home' },
+        _react2.default.createElement(
+          'h1',
+          { className: 'home__title' },
+          'Home Page'
+        )
+      );
+    }
+  }]);
+
+  return HomePage;
+}(_react.Component);
+
+exports.default = HomePage;
+
+/***/ }),
+/* 10 */
 /***/ (function(module, exports) {
 
 
