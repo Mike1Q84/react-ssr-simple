@@ -3,6 +3,10 @@ Simple server-side rendering React without Redux
 
 TDD/BDD in both [React](https://github.com/facebook/react) and [Sass](https://github.com/sass/sass) with [Webpack](https://github.com/webpack/webpack), [Karma](https://github.com/karma-runner/karma), [Mocha](https://github.com/mochajs/mocha), [Chai](https://github.com/chaijs/chai), [Enzyme](https://github.com/airbnb/enzyme), [Quixote](https://github.com/jamesshore/quixote) and [Docker Compose](https://github.com/docker/compose)
 
+### link host's yarn cache dir to project's .yarn-cache
+`ln -s ~/.cache/yarn/v1 .yarn-cache`
+### install dependencies through yarn
+`sudo docker-compose -f docker-compose.install.yml`
 ### start the development environment
 `sudo docker-compose up -d`
 ### login into the docker container
