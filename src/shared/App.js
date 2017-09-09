@@ -1,18 +1,19 @@
-import React, { Component } from 'react';
+import React from 'react';
+import { Switch, Route } from 'react-router-dom';
 import Header from './components/Header/Header';
 import Footer from './components/Footer/Footer';
-import HomePage from './containers/Home/HomePage';
+import routes from './routes';
 
-class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <Header />
-        <HomePage />
-        <Footer />
-      </div>
-    );
-  }
+const App = () => {
+  return (
+    <div className="App">
+      <Header />
+      <Switch>
+        {routes.map((route, i) => <Route key={i} {...route} />)}
+      </Switch>
+      <Footer />
+    </div>
+  );
 }
 
 export default App;

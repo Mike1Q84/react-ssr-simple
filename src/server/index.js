@@ -1,6 +1,7 @@
 import express from 'express';
 import React from 'react';
 import { renderToString } from 'react-dom/server';
+import { StaticRouter } from 'react-router-dom';
 import App from '../shared/App';
 
 /* eslint-disable no-console */
@@ -11,6 +12,12 @@ const app = express();
 app.use(express.static('dist'));
 
 app.get('*', (req, res) => {
+  const markup = renderToString(
+    <StaticRouter location={req.url}>
+      <App />
+    </StaticRouter>
+  );
+
   res.send(`<!DOCTYPE html>
   <head>
     <title>React SSR Simple</title>
@@ -18,7 +25,7 @@ app.get('*', (req, res) => {
     <script src="/bundle.js" defer></script>
   </head>
   <body>
-    <div id="root">${renderToString(<App />)}</div>
+    <div id="root">${markup}</div>
   </body>
 </html>`);
 });

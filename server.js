@@ -90,6 +90,8 @@ var _react2 = _interopRequireDefault(_react);
 
 var _server = __webpack_require__(4);
 
+var _reactRouterDom = __webpack_require__(6);
+
 var _App = __webpack_require__(5);
 
 var _App2 = _interopRequireDefault(_App);
@@ -104,7 +106,13 @@ var app = (0, _express2.default)();
 app.use(_express2.default.static('dist'));
 
 app.get('*', function (req, res) {
-  res.send('<!DOCTYPE html>\n  <head>\n    <title>React SSR Simple</title>\n    <link rel="stylesheet" href="/css/main.css">\n    <script src="/bundle.js" defer></script>\n  </head>\n  <body>\n    <div id="root">' + (0, _server.renderToString)(_react2.default.createElement(_App2.default, null)) + '</div>\n  </body>\n</html>');
+  var markup = (0, _server.renderToString)(_react2.default.createElement(
+    _reactRouterDom.StaticRouter,
+    { location: req.url },
+    _react2.default.createElement(_App2.default, null)
+  ));
+
+  res.send('<!DOCTYPE html>\n  <head>\n    <title>React SSR Simple</title>\n    <link rel="stylesheet" href="/css/main.css">\n    <script src="/bundle.js" defer></script>\n  </head>\n  <body>\n    <div id="root">' + markup + '</div>\n  </body>\n</html>');
 });
 
 if (!module.parent) {
@@ -168,89 +176,51 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _Header = __webpack_require__(6);
+var _reactRouterDom = __webpack_require__(6);
+
+var _Header = __webpack_require__(11);
 
 var _Header2 = _interopRequireDefault(_Header);
 
-var _Footer = __webpack_require__(7);
+var _Footer = __webpack_require__(12);
 
 var _Footer2 = _interopRequireDefault(_Footer);
 
-var _HomePage = __webpack_require__(8);
+var _routes = __webpack_require__(7);
 
-var _HomePage2 = _interopRequireDefault(_HomePage);
+var _routes2 = _interopRequireDefault(_routes);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var App = function (_Component) {
-  _inherits(App, _Component);
-
-  function App() {
-    _classCallCheck(this, App);
-
-    return _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).apply(this, arguments));
-  }
-
-  _createClass(App, [{
-    key: 'render',
-    value: function render() {
-      return _react2.default.createElement(
-        'div',
-        { className: 'App' },
-        _react2.default.createElement(_Header2.default, null),
-        _react2.default.createElement(_HomePage2.default, null),
-        _react2.default.createElement(_Footer2.default, null)
-      );
-    }
-  }]);
-
-  return App;
-}(_react.Component);
+var App = function App() {
+  return _react2.default.createElement(
+    'div',
+    { className: 'App' },
+    _react2.default.createElement(_Header2.default, null),
+    _react2.default.createElement(
+      _reactRouterDom.Switch,
+      null,
+      _routes2.default.map(function (route, i) {
+        return _react2.default.createElement(_reactRouterDom.Route, _extends({ key: i }, route));
+      })
+    ),
+    _react2.default.createElement(_Footer2.default, null)
+  );
+};
 
 exports.default = App;
 
 /***/ }),
 /* 6 */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, exports) {
 
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _react = __webpack_require__(0);
-
-var _react2 = _interopRequireDefault(_react);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var Header = function Header() {
-  return _react2.default.createElement(
-    "div",
-    { className: "header" },
-    _react2.default.createElement(
-      "h1",
-      { className: "header__title" },
-      "Header"
-    )
-  );
-};
-
-exports.default = Header;
+module.exports = require("react-router-dom");
 
 /***/ }),
 /* 7 */
@@ -263,25 +233,19 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _react = __webpack_require__(0);
+var _HomePage = __webpack_require__(8);
 
-var _react2 = _interopRequireDefault(_react);
+var _HomePage2 = _interopRequireDefault(_HomePage);
+
+var _AboutPage = __webpack_require__(10);
+
+var _AboutPage2 = _interopRequireDefault(_AboutPage);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var Footer = function Footer() {
-  return _react2.default.createElement(
-    "div",
-    { className: "footer" },
-    _react2.default.createElement(
-      "h1",
-      { className: "footer__title" },
-      "Footer"
-    )
-  );
-};
+var routes = [{ path: "/", component: _HomePage2.default, exact: true }, { path: "/about", component: _AboutPage2.default }];
 
-exports.default = Footer;
+exports.default = routes;
 
 /***/ }),
 /* 8 */
@@ -344,6 +308,122 @@ exports.default = HomePage;
 /***/ (function(module, exports) {
 
 
+
+/***/ }),
+/* 10 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var AboutPage = function (_Component) {
+  _inherits(AboutPage, _Component);
+
+  function AboutPage() {
+    _classCallCheck(this, AboutPage);
+
+    return _possibleConstructorReturn(this, (AboutPage.__proto__ || Object.getPrototypeOf(AboutPage)).apply(this, arguments));
+  }
+
+  _createClass(AboutPage, [{
+    key: "render",
+    value: function render() {
+      return _react2.default.createElement(
+        "div",
+        { className: "about" },
+        _react2.default.createElement(
+          "h1",
+          { className: "about__title" },
+          "About Page"
+        )
+      );
+    }
+  }]);
+
+  return AboutPage;
+}(_react.Component);
+
+exports.default = AboutPage;
+
+/***/ }),
+/* 11 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var Header = function Header() {
+  return _react2.default.createElement(
+    "div",
+    { className: "header" },
+    _react2.default.createElement(
+      "h1",
+      { className: "header__title" },
+      "Header"
+    )
+  );
+};
+
+exports.default = Header;
+
+/***/ }),
+/* 12 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var Footer = function Footer() {
+  return _react2.default.createElement(
+    "div",
+    { className: "footer" },
+    _react2.default.createElement(
+      "h1",
+      { className: "footer__title" },
+      "Footer"
+    )
+  );
+};
+
+exports.default = Footer;
 
 /***/ })
 /******/ ]);
