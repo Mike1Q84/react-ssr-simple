@@ -15,4 +15,4 @@ services:
       - .yarn-cache:/home/node/.cache/yarn/v1
       # mount project dir of host inside container for node user
       - .:/home/node/app
-    command: npm run dev
+    command: yarn install

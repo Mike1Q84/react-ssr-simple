@@ -174,7 +174,7 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _Header = __webpack_require__(8);
+var _Header = __webpack_require__(6);
 
 var _Header2 = _interopRequireDefault(_Header);
 
@@ -182,7 +182,7 @@ var _Footer = __webpack_require__(7);
 
 var _Footer2 = _interopRequireDefault(_Footer);
 
-var _HomePage = __webpack_require__(9);
+var _HomePage = __webpack_require__(8);
 
 var _HomePage2 = _interopRequireDefault(_HomePage);
 
@@ -222,7 +222,37 @@ var App = function (_Component) {
 exports.default = App;
 
 /***/ }),
-/* 6 */,
+/* 6 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var Header = function Header() {
+  return _react2.default.createElement(
+    "div",
+    { className: "header" },
+    _react2.default.createElement(
+      "h1",
+      { className: "header__title" },
+      "Header"
+    )
+  );
+};
+
+exports.default = Header;
+
+/***/ }),
 /* 7 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -264,44 +294,13 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _react = __webpack_require__(0);
-
-var _react2 = _interopRequireDefault(_react);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var Header = function Header() {
-  return _react2.default.createElement(
-    "div",
-    { className: "header" },
-    _react2.default.createElement(
-      "h1",
-      { className: "header__title" },
-      "Header"
-    )
-  );
-};
-
-exports.default = Header;
-
-/***/ }),
-/* 9 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-__webpack_require__(10);
+__webpack_require__(9);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -341,7 +340,7 @@ var HomePage = function (_Component) {
 exports.default = HomePage;
 
 /***/ }),
-/* 10 */
+/* 9 */
 /***/ (function(module, exports) {
 
 
