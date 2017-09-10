@@ -60,7 +60,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 1);
+/******/ 	return __webpack_require__(__webpack_require__.s = 2);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -71,6 +71,12 @@ module.exports = require("react");
 
 /***/ }),
 /* 1 */
+/***/ (function(module, exports) {
+
+module.exports = require("react-router-dom");
+
+/***/ }),
+/* 2 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -80,19 +86,23 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _express = __webpack_require__(3);
+var _express = __webpack_require__(4);
 
 var _express2 = _interopRequireDefault(_express);
+
+var _redis = __webpack_require__(5);
+
+var _redis2 = _interopRequireDefault(_redis);
 
 var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _server = __webpack_require__(4);
+var _server = __webpack_require__(6);
 
-var _reactRouterDom = __webpack_require__(6);
+var _reactRouterDom = __webpack_require__(1);
 
-var _App = __webpack_require__(5);
+var _App = __webpack_require__(7);
 
 var _App2 = _interopRequireDefault(_App);
 
@@ -100,33 +110,54 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 /* eslint-disable no-console */
 
-var port = 3000;
+var NODE_PORT = 3000;
+// const REDIS_PORT = 6379;
 var app = (0, _express2.default)();
+var client = _redis2.default.createClient({
+  host: 'redis' // ECONNREFUSED https://github.com/docker-library/redis/issues/45
+});
 
 app.use(_express2.default.static('dist'));
 
 app.get('*', function (req, res) {
-  var markup = (0, _server.renderToString)(_react2.default.createElement(
-    _reactRouterDom.StaticRouter,
-    { location: req.url },
-    _react2.default.createElement(_App2.default, null)
-  ));
+  var url = req.url;
 
-  res.send('<!DOCTYPE html>\n  <head>\n    <title>React SSR Simple</title>\n    <link rel="stylesheet" href="/css/main.css">\n    <script src="/bundle.js" defer></script>\n  </head>\n  <body>\n    <div id="root">' + markup + '</div>\n  </body>\n</html>');
+  client.get(url, function (err, data) {
+    if (err) throw err;
+
+    if (data != null) {
+      // check available cache in redis first
+      res.send(data);
+    } else {
+      // server-side rendering through React's renderToString
+      var rendered = (0, _server.renderToString)(_react2.default.createElement(
+        _reactRouterDom.StaticRouter,
+        { location: req.url },
+        _react2.default.createElement(_App2.default, null)
+      ));
+
+      var markup = '<!DOCTYPE html>\n  <head>\n    <title>React SSR Simple</title>\n    <link rel="stylesheet" href="/css/main.css">\n    <script src="/bundle.js" defer></script>\n  </head>\n  <body>\n    <div id="root">' + rendered + '</div>\n  </body>\n</html>';
+
+      // store ssr markup result in redis cache
+      client.set(url, markup);
+      // send ssr markup result to browser
+      res.send(markup);
+    }
+  });
 });
 
 if (!module.parent) {
   // Make sure test DOES NOT listen port 3000 THE SECOND TIME
-  app.listen(process.env.PORT || port, function () {
-    console.log('Server is listening on port: ' + port);
+  app.listen(process.env.PORT || NODE_PORT, function () {
+    console.log('Server is listening on port: ' + NODE_PORT);
   });
 }
 
 exports.default = app;
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2)(module)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)(module)))
 
 /***/ }),
-/* 2 */
+/* 3 */
 /***/ (function(module, exports) {
 
 module.exports = function(module) {
@@ -154,19 +185,25 @@ module.exports = function(module) {
 
 
 /***/ }),
-/* 3 */
+/* 4 */
 /***/ (function(module, exports) {
 
 module.exports = require("express");
 
 /***/ }),
-/* 4 */
+/* 5 */
+/***/ (function(module, exports) {
+
+module.exports = require("redis");
+
+/***/ }),
+/* 6 */
 /***/ (function(module, exports) {
 
 module.exports = require("react-dom/server");
 
 /***/ }),
-/* 5 */
+/* 7 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -182,17 +219,17 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactRouterDom = __webpack_require__(6);
+var _reactRouterDom = __webpack_require__(1);
 
-var _Header = __webpack_require__(11);
+var _Header = __webpack_require__(8);
 
 var _Header2 = _interopRequireDefault(_Header);
 
-var _Footer = __webpack_require__(12);
+var _Footer = __webpack_require__(9);
 
 var _Footer2 = _interopRequireDefault(_Footer);
 
-var _routes = __webpack_require__(7);
+var _routes = __webpack_require__(10);
 
 var _routes2 = _interopRequireDefault(_routes);
 
@@ -217,13 +254,7 @@ var App = function App() {
 exports.default = App;
 
 /***/ }),
-/* 6 */
-/***/ (function(module, exports) {
-
-module.exports = require("react-router-dom");
-
-/***/ }),
-/* 7 */
+/* 8 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -233,11 +264,73 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _HomePage = __webpack_require__(8);
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var Header = function Header() {
+  return _react2.default.createElement(
+    "div",
+    { className: "header" },
+    _react2.default.createElement(
+      "h1",
+      { className: "header__title" },
+      "Header"
+    )
+  );
+};
+
+exports.default = Header;
+
+/***/ }),
+/* 9 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var Footer = function Footer() {
+  return _react2.default.createElement(
+    "div",
+    { className: "footer" },
+    _react2.default.createElement(
+      "h1",
+      { className: "footer__title" },
+      "Footer"
+    )
+  );
+};
+
+exports.default = Footer;
+
+/***/ }),
+/* 10 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _HomePage = __webpack_require__(11);
 
 var _HomePage2 = _interopRequireDefault(_HomePage);
 
-var _AboutPage = __webpack_require__(10);
+var _AboutPage = __webpack_require__(13);
 
 var _AboutPage2 = _interopRequireDefault(_AboutPage);
 
@@ -248,7 +341,7 @@ var routes = [{ path: "/", component: _HomePage2.default, exact: true }, { path:
 exports.default = routes;
 
 /***/ }),
-/* 8 */
+/* 11 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -264,7 +357,7 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-__webpack_require__(9);
+__webpack_require__(12);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -304,13 +397,13 @@ var HomePage = function (_Component) {
 exports.default = HomePage;
 
 /***/ }),
-/* 9 */
+/* 12 */
 /***/ (function(module, exports) {
 
 
 
 /***/ }),
-/* 10 */
+/* 13 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -362,68 +455,6 @@ var AboutPage = function (_Component) {
 }(_react.Component);
 
 exports.default = AboutPage;
-
-/***/ }),
-/* 11 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _react = __webpack_require__(0);
-
-var _react2 = _interopRequireDefault(_react);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var Header = function Header() {
-  return _react2.default.createElement(
-    "div",
-    { className: "header" },
-    _react2.default.createElement(
-      "h1",
-      { className: "header__title" },
-      "Header"
-    )
-  );
-};
-
-exports.default = Header;
-
-/***/ }),
-/* 12 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _react = __webpack_require__(0);
-
-var _react2 = _interopRequireDefault(_react);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var Footer = function Footer() {
-  return _react2.default.createElement(
-    "div",
-    { className: "footer" },
-    _react2.default.createElement(
-      "h1",
-      { className: "footer__title" },
-      "Footer"
-    )
-  );
-};
-
-exports.default = Footer;
 
 /***/ })
 /******/ ]);

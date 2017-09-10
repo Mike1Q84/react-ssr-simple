@@ -1,7 +1,10 @@
 version: "3"
 
 services:
-  yarn:
+  app:
+    # connect ECONNREFUSED https://github.com/docker-library/redis/issues/45
+    links:
+      - redis
     image: node:8.4.0-alpine
     user: node
     working_dir: /home/node/app
@@ -16,3 +19,8 @@ services:
       # mount project dir of host inside container for node user
       - .:/home/node/app
     command: npm run dev
+
+  redis:
+    image: redis:4.0.1-alpine
+    ports:
+      - 6379:6379

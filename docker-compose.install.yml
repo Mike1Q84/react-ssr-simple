@@ -1,7 +1,7 @@
 version: "3"
 
 services:
-  yarn:
+  app:
     image: node:8.4.0-alpine
     user: node
     working_dir: /home/node/app
@@ -16,3 +16,4 @@ services:
       # mount project dir of host inside container for node user
       - .:/home/node/app
     command: yarn install
+    command: npm rebuild node-sass
