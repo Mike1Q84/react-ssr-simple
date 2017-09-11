@@ -59,8 +59,12 @@
     "express": "^4.15.4",
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
+    "react-redux": "^5.0.6",
     "react-router": "^4.2.0",
     "react-router-dom": "^4.2.2",
-    "redis": "^2.8.0"
+    "redis": "^2.8.0",
+    "redux": "^3.7.2",
+    "redux-thunk": "^2.2.0",
+    "serialize-javascript": "^1.4.0"
   }
 }

@@ -8,4 +8,8 @@ describe('HomePage', () => {
       const wrapper = shallow(<HomePage />);
       expect(wrapper.find('.home')).to.have.length(1);
   });
+  it("should display title", function() {
+      const wrapper = shallow(<HomePage />);
+      expect(wrapper.find('.home__title')).to.have.length(1);
+  });
 });

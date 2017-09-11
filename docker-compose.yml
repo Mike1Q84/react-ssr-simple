@@ -22,5 +22,6 @@ services:
 
   redis:
     image: redis:4.0.1-alpine
+    user: redis
     ports:
       - 6379:6379

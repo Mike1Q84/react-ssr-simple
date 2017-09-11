@@ -1,7 +1,11 @@
 import React, { Component } from 'react';
+// import PropTypes from 'prop-types';
+// import { connect } from 'react-redux';
 
 class AboutPage extends Component {
   render() {
+    // let { lang } = this.props;
+
     return (
       <div className="about">
         <h1 className="about__title">About Page</h1>
@@ -10,4 +14,15 @@ class AboutPage extends Component {
   }
 }
 
+// AboutPage.propTypes = {
+//   lang: PropTypes.string.isRequired
+// };
+//
+// function mapStateToProps(state) {
+//   return {
+//     lang: state.lang
+//   };
+// }
+//
+// export default connect(mapStateToProps)(AboutPage);
 export default AboutPage;

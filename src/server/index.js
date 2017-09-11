@@ -5,6 +5,11 @@ import { renderToString } from 'react-dom/server';
 import { StaticRouter } from 'react-router-dom';
 import App from '../shared/App';
 
+import { Provider } from "react-redux";
+import configureStore from "../store/configureStore";
+
+import serialize from "serialize-javascript";
+
 /* eslint-disable no-console */
 
 const NODE_PORT = 3000;
@@ -18,6 +23,8 @@ app.use(express.static('dist'));
 
 app.get('*', (req, res) => {
   const url = req.url;
+  const lang = url.split('/')[1];
+  const store = configureStore({'lang': lang});
 
   client.get(url, (err, data) => {
     if (err) throw err;
@@ -26,16 +33,20 @@ app.get('*', (req, res) => {
       res.send(data);
     } else { // server-side rendering through React's renderToString
       const rendered = renderToString(
-        <StaticRouter location={req.url}>
-          <App />
-        </StaticRouter>
+        <Provider store={store}>
+          <StaticRouter location={req.url}>
+            <App />
+          </StaticRouter>
+        </Provider>
       );
 
+      const initialData = store.getState();
       const markup = `<!DOCTYPE html>
   <head>
     <title>React SSR Simple</title>
     <link rel="stylesheet" href="/css/main.css">
     <script src="/bundle.js" defer></script>
+    <script>window.__initialData__ = ${serialize(initialData)}</script>
   </head>
   <body>
     <div id="root">${rendered}</div>

@@ -8,4 +8,8 @@ describe('Footer', () => {
       const wrapper = shallow(<Footer />);
       expect(wrapper.find('.footer')).to.have.length(1);
   });
+  it("should display title", () => {
+    const wrapper = shallow(<Footer />);
+    expect(wrapper.find('.footer__title')).to.have.length(1);
+  });
 });
