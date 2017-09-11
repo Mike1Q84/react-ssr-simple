@@ -4,12 +4,16 @@ import { shallow } from 'enzyme';
 import AboutPage from './AboutPage';
 
 describe('AboutPage', () => {
-  it("should be rendered", function() {
-      const wrapper = shallow(<AboutPage />);
+  let wrapper;
+
+  beforeEach(() => {
+    wrapper = shallow(<AboutPage />);
+  });
+
+  it("should be rendered", () => {
       expect(wrapper.find('.about')).to.have.length(1);
   });
-  it("should display title", function() {
-      const wrapper = shallow(<AboutPage />);
+  it("should display title", () => {
       expect(wrapper.find('.about__title')).to.have.length(1);
   });
 });

@@ -351,8 +351,7 @@ var Header = function Header(_ref) {
 };
 
 Header.propTypes = {
-  // lang: PropTypes.string.isRequired
-  lang: _propTypes2.default.string
+  lang: _propTypes2.default.string.isRequired
 };
 
 exports.default = Header;
