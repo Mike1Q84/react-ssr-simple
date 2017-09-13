@@ -7,6 +7,7 @@ import App from '../shared/App';
 
 import { Provider } from "react-redux";
 import configureStore from "../store/configureStore";
+import { loadLanguages } from '../actions/languageActions';
 
 import serialize from "serialize-javascript";
 
@@ -25,6 +26,9 @@ app.get('*', (req, res) => {
   const url = req.url;
   const lang = url.split('/')[1];
   const store = configureStore({'lang': lang});
+  store.dispatch(loadLanguages());
+
+  const context = {};
 
   client.get(url, (err, data) => {
     if (err) throw err;
@@ -34,7 +38,7 @@ app.get('*', (req, res) => {
     } else { // server-side rendering through React's renderToString
       const rendered = renderToString(
         <Provider store={store}>
-          <StaticRouter location={req.url}>
+          <StaticRouter location={req.url} context={context}>
             <App />
           </StaticRouter>
         </Provider>

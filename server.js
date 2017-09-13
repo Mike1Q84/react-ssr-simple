@@ -60,7 +60,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 2);
+/******/ 	return __webpack_require__(__webpack_require__.s = 6);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -77,6 +77,38 @@ module.exports = require("react-router-dom");
 
 /***/ }),
 /* 2 */
+/***/ (function(module, exports) {
+
+module.exports = require("prop-types");
+
+/***/ }),
+/* 3 */
+/***/ (function(module, exports) {
+
+module.exports = require("react-redux");
+
+/***/ }),
+/* 4 */
+/***/ (function(module, exports) {
+
+module.exports = require("redux");
+
+/***/ }),
+/* 5 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+var LOAD_LANGUAGES_SUCCESS = exports.LOAD_LANGUAGES_SUCCESS = 'LOAD_LANGUAGES_SUCCESS';
+
+var SWITCH_LANGUAGE = exports.SWITCH_LANGUAGE = 'SWITCH_LANGUAGE';
+
+/***/ }),
+/* 6 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -86,11 +118,11 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _express = __webpack_require__(4);
+var _express = __webpack_require__(8);
 
 var _express2 = _interopRequireDefault(_express);
 
-var _redis = __webpack_require__(5);
+var _redis = __webpack_require__(9);
 
 var _redis2 = _interopRequireDefault(_redis);
 
@@ -98,21 +130,23 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _server = __webpack_require__(6);
+var _server = __webpack_require__(10);
 
 var _reactRouterDom = __webpack_require__(1);
 
-var _App = __webpack_require__(7);
+var _App = __webpack_require__(11);
 
 var _App2 = _interopRequireDefault(_App);
 
-var _reactRedux = __webpack_require__(14);
+var _reactRedux = __webpack_require__(3);
 
-var _configureStore = __webpack_require__(15);
+var _configureStore = __webpack_require__(18);
 
 var _configureStore2 = _interopRequireDefault(_configureStore);
 
-var _serializeJavascript = __webpack_require__(20);
+var _languageActions = __webpack_require__(23);
+
+var _serializeJavascript = __webpack_require__(26);
 
 var _serializeJavascript2 = _interopRequireDefault(_serializeJavascript);
 
@@ -133,6 +167,9 @@ app.get('*', function (req, res) {
   var url = req.url;
   var lang = url.split('/')[1];
   var store = (0, _configureStore2.default)({ 'lang': lang });
+  store.dispatch((0, _languageActions.loadLanguages)());
+
+  var context = {};
 
   client.get(url, function (err, data) {
     if (err) throw err;
@@ -147,7 +184,7 @@ app.get('*', function (req, res) {
         { store: store },
         _react2.default.createElement(
           _reactRouterDom.StaticRouter,
-          { location: req.url },
+          { location: req.url, context: context },
           _react2.default.createElement(_App2.default, null)
         )
       ));
@@ -171,10 +208,10 @@ if (!module.parent) {
 }
 
 exports.default = app;
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)(module)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(7)(module)))
 
 /***/ }),
-/* 3 */
+/* 7 */
 /***/ (function(module, exports) {
 
 module.exports = function(module) {
@@ -202,25 +239,25 @@ module.exports = function(module) {
 
 
 /***/ }),
-/* 4 */
+/* 8 */
 /***/ (function(module, exports) {
 
 module.exports = require("express");
 
 /***/ }),
-/* 5 */
+/* 9 */
 /***/ (function(module, exports) {
 
 module.exports = require("redis");
 
 /***/ }),
-/* 6 */
+/* 10 */
 /***/ (function(module, exports) {
 
 module.exports = require("react-dom/server");
 
 /***/ }),
-/* 7 */
+/* 11 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -240,23 +277,23 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactRouterDom = __webpack_require__(1);
 
-var _Header = __webpack_require__(8);
+var _Header = __webpack_require__(12);
 
 var _Header2 = _interopRequireDefault(_Header);
 
-var _Footer = __webpack_require__(9);
+var _Footer = __webpack_require__(13);
 
 var _Footer2 = _interopRequireDefault(_Footer);
 
-var _routes = __webpack_require__(10);
+var _routes = __webpack_require__(14);
 
 var _routes2 = _interopRequireDefault(_routes);
 
-var _propTypes = __webpack_require__(19);
+var _propTypes = __webpack_require__(2);
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
-var _reactRedux = __webpack_require__(14);
+var _reactRedux = __webpack_require__(3);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -310,7 +347,7 @@ function mapStateToProps(state) {
 exports.default = (0, _reactRedux.connect)(mapStateToProps)(App);
 
 /***/ }),
-/* 8 */
+/* 12 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -324,7 +361,7 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _propTypes = __webpack_require__(19);
+var _propTypes = __webpack_require__(2);
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
@@ -357,7 +394,7 @@ Header.propTypes = {
 exports.default = Header;
 
 /***/ }),
-/* 9 */
+/* 13 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -388,7 +425,7 @@ var Footer = function Footer() {
 exports.default = Footer;
 
 /***/ }),
-/* 10 */
+/* 14 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -398,11 +435,11 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _HomePage = __webpack_require__(11);
+var _HomePage = __webpack_require__(15);
 
 var _HomePage2 = _interopRequireDefault(_HomePage);
 
-var _AboutPage = __webpack_require__(13);
+var _AboutPage = __webpack_require__(17);
 
 var _AboutPage2 = _interopRequireDefault(_AboutPage);
 
@@ -413,7 +450,7 @@ var routes = [{ path: "/:lang/", component: _HomePage2.default, exact: true }, {
 exports.default = routes;
 
 /***/ }),
-/* 11 */
+/* 15 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -429,7 +466,7 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-__webpack_require__(12);
+__webpack_require__(16);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -487,13 +524,13 @@ var HomePage = function (_Component) {
 exports.default = HomePage;
 
 /***/ }),
-/* 12 */
+/* 16 */
 /***/ (function(module, exports) {
 
 
 
 /***/ }),
-/* 13 */
+/* 17 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -565,13 +602,7 @@ var AboutPage = function (_Component) {
 exports.default = AboutPage;
 
 /***/ }),
-/* 14 */
-/***/ (function(module, exports) {
-
-module.exports = require("react-redux");
-
-/***/ }),
-/* 15 */
+/* 18 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -582,13 +613,13 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = configureStore;
 
-var _redux = __webpack_require__(16);
+var _redux = __webpack_require__(4);
 
-var _reducers = __webpack_require__(18);
+var _reducers = __webpack_require__(19);
 
 var _reducers2 = _interopRequireDefault(_reducers);
 
-var _reduxThunk = __webpack_require__(17);
+var _reduxThunk = __webpack_require__(22);
 
 var _reduxThunk2 = _interopRequireDefault(_reduxThunk);
 
@@ -599,19 +630,7 @@ function configureStore(initialState) {
 }
 
 /***/ }),
-/* 16 */
-/***/ (function(module, exports) {
-
-module.exports = require("redux");
-
-/***/ }),
-/* 17 */
-/***/ (function(module, exports) {
-
-module.exports = require("redux-thunk");
-
-/***/ }),
-/* 18 */
+/* 19 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -621,141 +640,176 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _redux = __webpack_require__(16);
+var _redux = __webpack_require__(4);
 
-var rootReducer = (0, _redux.combineReducers)({});
+var _languageReducer = __webpack_require__(20);
+
+var _languageReducer2 = _interopRequireDefault(_languageReducer);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var rootReducer = (0, _redux.combineReducers)({
+  languages: _languageReducer2.default
+});
 
 exports.default = rootReducer;
-
-/***/ }),
-/* 19 */
-/***/ (function(module, exports) {
-
-module.exports = require("prop-types");
 
 /***/ }),
 /* 20 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/*
-Copyright (c) 2014, Yahoo! Inc. All rights reserved.
-Copyrights licensed under the New BSD License.
-See the accompanying LICENSE file for terms.
-*/
 
 
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = languageReducer;
 
-// Generate an internal UID to make the regexp pattern harder to guess.
-var UID                 = Math.floor(Math.random() * 0x10000000000).toString(16);
-var PLACE_HOLDER_REGEXP = new RegExp('"@__(F|R|D)-' + UID + '-(\\d+)__@"', 'g');
+var _actionTypes = __webpack_require__(5);
 
-var IS_NATIVE_CODE_REGEXP = /\{\s*\[native code\]\s*\}/g;
-var UNSAFE_CHARS_REGEXP   = /[<>\/\u2028\u2029]/g;
+var types = _interopRequireWildcard(_actionTypes);
 
-// Mapping of unsafe HTML and invalid JavaScript line terminator chars to their
-// Unicode char counterparts which are safe to use in JavaScript strings.
-var ESCAPED_CHARS = {
-    '<'     : '\\u003C',
-    '>'     : '\\u003E',
-    '/'     : '\\u002F',
-    '\u2028': '\\u2028',
-    '\u2029': '\\u2029'
+var _initState = __webpack_require__(21);
+
+var _initState2 = _interopRequireDefault(_initState);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+
+function languageReducer() {
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : _initState2.default.languages;
+  var action = arguments[1];
+
+  switch (action.type) {
+    case types.LOAD_LANGUAGES_SUCCESS:
+      return action.languages;
+    default:
+      return state;
+  }
+}
+
+/***/ }),
+/* 21 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = {
+  languages: []
 };
 
-function escapeUnsafeChars(unsafeChar) {
-    return ESCAPED_CHARS[unsafeChar];
+/***/ }),
+/* 22 */
+/***/ (function(module, exports) {
+
+module.exports = require("redux-thunk");
+
+/***/ }),
+/* 23 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.loadLanguagesSuccess = loadLanguagesSuccess;
+exports.loadLanguages = loadLanguages;
+
+var _actionTypes = __webpack_require__(5);
+
+var types = _interopRequireWildcard(_actionTypes);
+
+var _mockLanguageApi = __webpack_require__(24);
+
+var _mockLanguageApi2 = _interopRequireDefault(_mockLanguageApi);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+
+function loadLanguagesSuccess(languages) {
+  return { type: types.LOAD_LANGUAGES_SUCCESS, languages: languages };
 }
 
-module.exports = function serialize(obj, options) {
-    options || (options = {});
-
-    // Backwards-compatability for `space` as the second argument.
-    if (typeof options === 'number' || typeof options === 'string') {
-        options = {space: options};
-    }
-
-    var functions = [];
-    var regexps   = [];
-    var dates     = [];
-
-    // Returns placeholders for functions and regexps (identified by index)
-    // which are later replaced by their string representation.
-    function replacer(key, value) {
-        if (!value) {
-            return value;
-        }
-
-        // If the value is an object w/ a toJSON method, toJSON is called before
-        // the replacer runs, so we use this[key] to get the non-toJSONed value.
-        var origValue = this[key];
-        var type = typeof origValue;
-
-        if (type === 'object') {
-            if(origValue instanceof RegExp) {
-                return '@__R-' + UID + '-' + (regexps.push(origValue) - 1) + '__@';
-            }
-
-            if(origValue instanceof Date) {
-                return '@__D-' + UID + '-' + (dates.push(origValue) - 1) + '__@';
-            }
-        }
-
-        if (type === 'function') {
-            return '@__F-' + UID + '-' + (functions.push(origValue) - 1) + '__@';
-        }
-
-        return value;
-    }
-
-    var str;
-
-    // Creates a JSON string representation of the value.
-    // NOTE: Node 0.12 goes into slow mode with extra JSON.stringify() args.
-    if (options.isJSON && !options.space) {
-        str = JSON.stringify(obj);
-    } else {
-        str = JSON.stringify(obj, options.isJSON ? null : replacer, options.space);
-    }
-
-    // Protects against `JSON.stringify()` returning `undefined`, by serializing
-    // to the literal string: "undefined".
-    if (typeof str !== 'string') {
-        return String(str);
-    }
-
-    // Replace unsafe HTML and invalid JavaScript line terminator chars with
-    // their safe Unicode char counterpart. This _must_ happen before the
-    // regexps and functions are serialized and added back to the string.
-    str = str.replace(UNSAFE_CHARS_REGEXP, escapeUnsafeChars);
-
-    if (functions.length === 0 && regexps.length === 0 && dates.length === 0) {
-        return str;
-    }
-
-    // Replaces all occurrences of function, regexp and date placeholders in the
-    // JSON string with their string representations. If the original value can
-    // not be found, then `undefined` is used.
-    return str.replace(PLACE_HOLDER_REGEXP, function (match, type, valueIndex) {
-        if (type === 'D') {
-            return "new Date(\"" + dates[valueIndex].toISOString() + "\")";
-        }
-
-        if (type === 'R') {
-            return regexps[valueIndex].toString();
-        }
-
-        var fn           = functions[valueIndex];
-        var serializedFn = fn.toString();
-
-        if (IS_NATIVE_CODE_REGEXP.test(serializedFn)) {
-            throw new TypeError('Serializing native function: ' + fn.name);
-        }
-
-        return serializedFn;
+function loadLanguages() {
+  return function (dispatch) {
+    return _mockLanguageApi2.default.getAllLanguages().then(function (languages) {
+      dispatch(loadLanguagesSuccess(languages));
+    }).catch(function (err) {
+      throw err;
     });
+  };
 }
 
+/***/ }),
+/* 24 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _delay = __webpack_require__(25);
+
+var _delay2 = _interopRequireDefault(_delay);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var languages = [{ id: 'en-AU', des: 'English(AU)' }, { id: 'zh-CN', des: '中文（简体）' }];
+
+var LanguageApi = function () {
+  function LanguageApi() {
+    _classCallCheck(this, LanguageApi);
+  }
+
+  _createClass(LanguageApi, null, [{
+    key: 'getAllLanguages',
+    value: function getAllLanguages() {
+      return new Promise(function (resolve) {
+        setTimeout(function () {
+          resolve(Object.assign([], languages));
+        }, _delay2.default);
+      });
+    }
+  }]);
+
+  return LanguageApi;
+}();
+
+exports.default = LanguageApi;
+
+/***/ }),
+/* 25 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = 1200;
+
+/***/ }),
+/* 26 */
+/***/ (function(module, exports) {
+
+module.exports = require("serialize-javascript");
 
 /***/ })
 /******/ ]);
