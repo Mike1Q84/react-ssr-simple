@@ -1,8 +1,8 @@
 import delay from './delay';
 
 const languages = [
-  { id: 'en-AU', des: 'English(AU)' },
-  { id: 'zh-CN', des: '中文（简体）' }
+  { id: 'en-AU', name: 'English(AU)' },
+  { id: 'zh-CN', name: '中文（简体）' }
 ];
 
 class LanguageApi {

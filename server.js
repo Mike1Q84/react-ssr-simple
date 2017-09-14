@@ -318,7 +318,7 @@ var App = function (_Component) {
       return _react2.default.createElement(
         'div',
         { className: 'App' },
-        _react2.default.createElement(_Header2.default, { lang: this.props.lang }),
+        _react2.default.createElement(_Header2.default, { lang: this.props.lang, languages: this.props.languages }),
         _react2.default.createElement(
           _reactRouterDom.Switch,
           null,
@@ -335,11 +335,13 @@ var App = function (_Component) {
 }(_react.Component);
 
 App.propTypes = {
+  languages: _propTypes2.default.array.isRequired,
   lang: _propTypes2.default.string.isRequired
 };
 
 function mapStateToProps(state) {
   return {
+    languages: state.languages,
     lang: state.lang
   };
 }
@@ -368,8 +370,10 @@ var _propTypes2 = _interopRequireDefault(_propTypes);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var Header = function Header(_ref) {
-  var lang = _ref.lang;
+  var lang = _ref.lang,
+      languages = _ref.languages;
 
+  console.log(languages);
   return _react2.default.createElement(
     'div',
     { className: 'header' },
@@ -383,11 +387,23 @@ var Header = function Header(_ref) {
       { className: 'header__lang' },
       'LANG: ',
       lang
+    ),
+    _react2.default.createElement(
+      'ul',
+      { className: 'lang-list' },
+      languages.map(function (language) {
+        return _react2.default.createElement(
+          'li',
+          { className: 'lang-list__item', key: language.id },
+          language.name
+        );
+      })
     )
   );
 };
 
 Header.propTypes = {
+  languages: _propTypes2.default.array.isRequired,
   lang: _propTypes2.default.string.isRequired
 };
 
@@ -770,7 +786,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-var languages = [{ id: 'en-AU', des: 'English(AU)' }, { id: 'zh-CN', des: '中文（简体）' }];
+var languages = [{ id: 'en-AU', name: 'English(AU)' }, { id: 'zh-CN', name: '中文（简体）' }];
 
 var LanguageApi = function () {
   function LanguageApi() {

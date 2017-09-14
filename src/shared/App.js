@@ -11,7 +11,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <Header lang={this.props.lang} />
+        <Header lang={this.props.lang} languages={this.props.languages} />
         <Switch>
           {routes.map((route, i) => <Route key={i} {...route} />)}
         </Switch>
@@ -22,11 +22,13 @@ class App extends Component {
 }
 
 App.propTypes = {
+  languages: PropTypes.array.isRequired,
   lang: PropTypes.string.isRequired
 };
 
 function mapStateToProps(state) {
   return {
+    languages: state.languages,
     lang: state.lang
   };
 }
