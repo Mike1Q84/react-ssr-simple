@@ -183,17 +183,18 @@ app.get('*', function (req, res, next) {
 
   var store = (0, _configureStore2.default)();
 
-  Promise.resolve(store.dispatch(_App2.default.initialAction())).then(function () {
+  client.get(url, function (err, data) {
+    // redis client
+    if (err) throw err;
 
-    client.get(url, function (err, data) {
-      // redis client
-      if (err) throw err;
+    if (data != null) {
+      // check available cache in redis first
+      res.send(data);
+    } else {
+      // server-side rendering through React's renderToString
 
-      if (data != null) {
-        // check available cache in redis first
-        res.send(data);
-      } else {
-        // server-side rendering through React's renderToString
+      Promise.resolve(store.dispatch(_App2.default.initialAction())).then(function () {
+
         var context = {};
 
         var rendered = (0, _server.renderToString)(_react2.default.createElement(
@@ -213,10 +214,10 @@ app.get('*', function (req, res, next) {
         client.set(url, markup);
         // send ssr markup result to browser
         res.send(markup);
-      } // server-side rendering through React's renderToString
-    }); // redis client
-  }) // .then()
-  .catch(next);
+      }) // .then()
+      .catch(next);
+    } // server-side rendering through React's renderToString
+  }); // redis client
 });
 
 if (!module.parent) {

@@ -27,15 +27,16 @@ app.get('*', (req, res, next) => {
 
   const store = configureStore();
 
-  Promise.resolve(store.dispatch(App.initialAction()))
-    .then(() => {
+  client.get(url, (err, data) => { // redis client
+    if (err) throw err;
 
-      client.get(url, (err, data) => { // redis client
-        if (err) throw err;
+    if (data != null) { // check available cache in redis first
+      res.send(data);
+    } else { // server-side rendering through React's renderToString
 
-        if (data != null) { // check available cache in redis first
-          res.send(data);
-        } else { // server-side rendering through React's renderToString
+      Promise.resolve(store.dispatch(App.initialAction()))
+        .then(() => {
+
           const context = {};
 
           const rendered = renderToString(
@@ -63,11 +64,10 @@ app.get('*', (req, res, next) => {
           client.set(url, markup);
           // send ssr markup result to browser
           res.send(markup);
-        } // server-side rendering through React's renderToString
-      }); // redis client
-
-    }) // .then()
-    .catch(next);
+        }) // .then()
+        .catch(next);
+    } // server-side rendering through React's renderToString
+  }); // redis client
 });
 
 if (!module.parent) { // Make sure test DOES NOT listen port 3000 THE SECOND TIME
