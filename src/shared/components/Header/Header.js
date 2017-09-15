@@ -2,11 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const Header = ({lang, languages}) => {
-  console.log(languages);
   return (
     <div className="header">
       <h1 className="header__title">Header</h1>
-      <p className="header__lang">LANG: {lang}</p>
+      <p className="header__lang">LANG: {lang.name}</p>
       <ul className="lang-list">
         {languages.map(language => {
           return (
@@ -19,8 +18,8 @@ const Header = ({lang, languages}) => {
 };
 
 Header.propTypes = {
-  languages: PropTypes.array.isRequired,
-  lang: PropTypes.string.isRequired
+  lang: PropTypes.object.isRequired,
+  languages: PropTypes.array.isRequired
 };
 
 export default Header;

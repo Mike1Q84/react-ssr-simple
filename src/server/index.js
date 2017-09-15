@@ -7,7 +7,6 @@ import App from '../shared/App';
 
 import { Provider } from "react-redux";
 import configureStore from "../store/configureStore";
-import { loadLanguages } from '../actions/languageActions';
 
 import serialize from "serialize-javascript";
 
@@ -22,30 +21,33 @@ const client = redis.createClient({
 
 app.use(express.static('dist'));
 
-app.get('*', (req, res) => {
+app.get('*', (req, res, next) => {
   const url = req.url;
-  const lang = url.split('/')[1];
-  const store = configureStore({'lang': lang});
-  store.dispatch(loadLanguages());
+  // const lang = url.split('/')[1];
 
-  const context = {};
+  const store = configureStore();
 
-  client.get(url, (err, data) => {
-    if (err) throw err;
+  Promise.resolve(store.dispatch(App.initialAction()))
+    .then(() => {
 
-    if (data != null) { // check available cache in redis first
-      res.send(data);
-    } else { // server-side rendering through React's renderToString
-      const rendered = renderToString(
-        <Provider store={store}>
-          <StaticRouter location={req.url} context={context}>
-            <App />
-          </StaticRouter>
-        </Provider>
-      );
+      client.get(url, (err, data) => { // redis client
+        if (err) throw err;
 
-      const initialData = store.getState();
-      const markup = `<!DOCTYPE html>
+        if (data != null) { // check available cache in redis first
+          res.send(data);
+        } else { // server-side rendering through React's renderToString
+          const context = {};
+
+          const rendered = renderToString(
+            <Provider store={store}>
+              <StaticRouter location={req.url} context={context}>
+                <App />
+              </StaticRouter>
+            </Provider>
+          );
+
+          const initialData = store.getState();
+          const markup = `<!DOCTYPE html>
   <head>
     <title>React SSR Simple</title>
     <link rel="stylesheet" href="/css/main.css">
@@ -57,12 +59,15 @@ app.get('*', (req, res) => {
   </body>
 </html>`;
 
-      // store ssr markup result in redis cache
-      client.set(url, markup);
-      // send ssr markup result to browser
-      res.send(markup);
-    }
-  });
+          // store ssr markup result in redis cache
+          client.set(url, markup);
+          // send ssr markup result to browser
+          res.send(markup);
+        } // server-side rendering through React's renderToString
+      }); // redis client
+
+    }) // .then()
+    .catch(next);
 });
 
 if (!module.parent) { // Make sure test DOES NOT listen port 3000 THE SECOND TIME

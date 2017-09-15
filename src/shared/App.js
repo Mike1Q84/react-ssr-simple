@@ -7,7 +7,19 @@ import routes from './routes';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
+import { loadLanguages } from '../actions/languageActions';
+
 class App extends Component {
+  static initialAction() {
+    return loadLanguages();
+  }
+
+  componentDidMount() {
+    if (!this.props.languages) {
+      this.props.dispatch(App.initialAction());
+    }
+  }
+
   render() {
     return (
       <div className="App">
@@ -22,14 +34,14 @@ class App extends Component {
 }
 
 App.propTypes = {
-  languages: PropTypes.array.isRequired,
-  lang: PropTypes.string.isRequired
+  lang: PropTypes.object.isRequired,
+  languages: PropTypes.array.isRequired
 };
 
 function mapStateToProps(state) {
   return {
-    languages: state.languages,
-    lang: state.lang
+    lang: state.lang,
+    languages: state.languages
   };
 }
 
