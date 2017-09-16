@@ -212,7 +212,7 @@ app.get('*', function (req, res, next) {
     } else {
       // server-side rendering through React's renderToString
 
-      Promise.resolve(store.dispatch(_App2.default.initialAction())).then(function () {
+      Promise.resolve(store.dispatch(_App2.default.initLang())).then(Promise.resolve(store.dispatch(_App2.default.initLanguages()))).then(function () {
         var markup = renderMarkup(url, store);
         // store ssr markup result in redis cache
         client.set(url, markup);
@@ -335,8 +335,11 @@ var App = function (_Component) {
   _createClass(App, [{
     key: 'componentDidMount',
     value: function componentDidMount() {
+      if (!this.props.lang) {
+        this.props.dispatch(App.initLang());
+      }
       if (!this.props.languages) {
-        this.props.dispatch(App.initialAction());
+        this.props.dispatch(App.initLanguages());
       }
     }
   }, {
@@ -357,8 +360,13 @@ var App = function (_Component) {
       );
     }
   }], [{
-    key: 'initialAction',
-    value: function initialAction() {
+    key: 'initLang',
+    value: function initLang() {
+      return (0, _languageActions.loadLang)();
+    }
+  }, {
+    key: 'initLanguages',
+    value: function initLanguages() {
       return (0, _languageActions.loadLanguages)();
     }
   }]);

@@ -63,7 +63,8 @@ app.get('*', (req, res, next) => {
       res.send(data);
     } else { // server-side rendering through React's renderToString
 
-      Promise.resolve(store.dispatch(App.initialAction()))
+      Promise.resolve(store.dispatch(App.initLang()))
+        .then(Promise.resolve(store.dispatch(App.initLanguages())))
         .then(() => {
           const markup = renderMarkup(url, store);
           // store ssr markup result in redis cache

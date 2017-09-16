@@ -7,16 +7,22 @@ import routes from './routes';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
-import { loadLanguages } from '../actions/languageActions';
+import { loadLang, loadLanguages } from '../actions/languageActions';
 
 class App extends Component {
-  static initialAction() {
+  static initLang() {
+    return loadLang();
+  }
+  static initLanguages() {
     return loadLanguages();
   }
 
   componentDidMount() {
+    if (!this.props.lang) {
+      this.props.dispatch(App.initLang());
+    }
     if (!this.props.languages) {
-      this.props.dispatch(App.initialAction());
+      this.props.dispatch(App.initLanguages());
     }
   }
 
