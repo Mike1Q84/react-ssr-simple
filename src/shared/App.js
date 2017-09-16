@@ -38,12 +38,11 @@ class App extends Component {
 
 App.propTypes = {
   lang: PropTypes.object.isRequired,
-  languages: PropTypes.array.isRequired
+  languages: PropTypes.array.isRequired,
+  dispatch: PropTypes.func.isRequired
 };
 
-function mapStateToProps(state, ownProps) {
-  // const lang = ownProps.params.lang;
-
+function mapStateToProps(state) {
   return {
     lang: state.lang,
     languages: state.languages

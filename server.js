@@ -371,12 +371,11 @@ var App = function (_Component) {
 
 App.propTypes = {
   lang: _propTypes2.default.object.isRequired,
-  languages: _propTypes2.default.array.isRequired
+  languages: _propTypes2.default.array.isRequired,
+  dispatch: _propTypes2.default.func.isRequired
 };
 
-function mapStateToProps(state, ownProps) {
-  // const lang = ownProps.params.lang;
-
+function mapStateToProps(state) {
   return {
     lang: state.lang,
     languages: state.languages
@@ -878,7 +877,6 @@ var LanguageApi = function () {
       return new Promise(function (resolve) {
         setTimeout(function () {
           resolve(Object.assign([], languages));
-          // Object.assign([], languages);
         }, _delay2.default);
       });
     }
@@ -887,10 +885,9 @@ var LanguageApi = function () {
     value: function getCurrentLang(lang) {
       return new Promise(function (resolve) {
         setTimeout(function () {
-          resolve(languages.find(function (language) {
+          resolve(Object.assign({}, languages.find(function (language) {
             return language.id === lang;
-          }));
-          // Object.assign({}, languages.find(language => language.id === lang));
+          })));
         }, _delay2.default);
       });
     }
