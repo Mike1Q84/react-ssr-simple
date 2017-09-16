@@ -198,7 +198,7 @@ function renderMarkup(url, store) {
 
 app.get('*', function (req, res, next) {
   var url = req.url;
-  // const lang = url.split('/')[1];
+  var lang = url.split('/')[1];
 
   var store = (0, _configureStore2.default)();
 
@@ -211,15 +211,13 @@ app.get('*', function (req, res, next) {
       res.send(data);
     } else {
       // server-side rendering through React's renderToString
-
-      Promise.resolve(store.dispatch(_App2.default.initLang())).then(Promise.resolve(store.dispatch(_App2.default.initLanguages()))).then(function () {
+      var p1 = Promise.resolve(store.dispatch(_App2.default.initLang(lang)));
+      var p2 = Promise.resolve(store.dispatch(_App2.default.initLanguages()));
+      Promise.all([p1, p2]).then(function () {
         var markup = renderMarkup(url, store);
-        // store ssr markup result in redis cache
-        client.set(url, markup);
-        // send ssr markup result to browser
-        res.send(markup);
-      }) // .then()
-      .catch(next);
+        client.set(url, markup); // store ssr markup result in redis cache
+        res.send(markup); // send ssr markup result to browser
+      }).catch(next);
     } // server-side rendering through React's renderToString
   }); // redis client
 });
@@ -335,9 +333,6 @@ var App = function (_Component) {
   _createClass(App, [{
     key: 'componentDidMount',
     value: function componentDidMount() {
-      if (!this.props.lang) {
-        this.props.dispatch(App.initLang());
-      }
       if (!this.props.languages) {
         this.props.dispatch(App.initLanguages());
       }
@@ -361,8 +356,8 @@ var App = function (_Component) {
     }
   }], [{
     key: 'initLang',
-    value: function initLang() {
-      return (0, _languageActions.loadLang)();
+    value: function initLang(lang) {
+      return (0, _languageActions.loadLang)(lang);
     }
   }, {
     key: 'initLanguages',
@@ -379,7 +374,9 @@ App.propTypes = {
   languages: _propTypes2.default.array.isRequired
 };
 
-function mapStateToProps(state) {
+function mapStateToProps(state, ownProps) {
+  // const lang = ownProps.params.lang;
+
   return {
     lang: state.lang,
     languages: state.languages
@@ -744,7 +741,7 @@ function langReducer() {
 
   switch (action.type) {
     case types.LOAD_LANG_SUCCESS:
-      return Object.assign({}, state, { lang: action.lang });
+      return action.lang;
     default:
       return state;
   }
@@ -820,12 +817,10 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
 function loadLangSuccess(lang) {
-  // console.log(lang);
   return { type: types.LOAD_LANG_SUCCESS, lang: lang };
 }
 
 function loadLanguagesSuccess(languages) {
-  // console.log(languages);
   return { type: types.LOAD_LANGUAGES_SUCCESS, languages: languages };
 }
 

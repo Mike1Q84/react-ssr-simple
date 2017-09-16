@@ -2,12 +2,10 @@ import * as types from './actionTypes';
 import languageApi from '../api/mockLanguageApi';
 
 export function loadLangSuccess(lang) {
-  // console.log(lang);
   return { type: types.LOAD_LANG_SUCCESS, lang };
 }
 
 export function loadLanguagesSuccess(languages) {
-  // console.log(languages);
   return { type: types.LOAD_LANGUAGES_SUCCESS, languages };
 }
 

@@ -52,7 +52,7 @@ function renderMarkup(url, store) {
 
 app.get('*', (req, res, next) => {
   const url = req.url;
-  // const lang = url.split('/')[1];
+  const lang = url.split('/')[1];
 
   const store = configureStore();
 
@@ -62,16 +62,14 @@ app.get('*', (req, res, next) => {
     if (data != null) { // check available cache in redis first
       res.send(data);
     } else { // server-side rendering through React's renderToString
-
-      Promise.resolve(store.dispatch(App.initLang()))
-        .then(Promise.resolve(store.dispatch(App.initLanguages())))
+      const p1 = Promise.resolve(store.dispatch(App.initLang(lang)));
+      const p2 = Promise.resolve(store.dispatch(App.initLanguages()));
+      Promise.all([p1,p2])
         .then(() => {
           const markup = renderMarkup(url, store);
-          // store ssr markup result in redis cache
-          client.set(url, markup);
-          // send ssr markup result to browser
-          res.send(markup);
-        }) // .then()
+          client.set(url, markup); // store ssr markup result in redis cache
+          res.send(markup); // send ssr markup result to browser
+        })
         .catch(next);
     } // server-side rendering through React's renderToString
   }); // redis client

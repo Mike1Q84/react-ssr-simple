@@ -10,17 +10,14 @@ import { connect } from 'react-redux';
 import { loadLang, loadLanguages } from '../actions/languageActions';
 
 class App extends Component {
-  static initLang() {
-    return loadLang();
+  static initLang(lang) {
+    return loadLang(lang);
   }
   static initLanguages() {
     return loadLanguages();
   }
 
   componentDidMount() {
-    if (!this.props.lang) {
-      this.props.dispatch(App.initLang());
-    }
     if (!this.props.languages) {
       this.props.dispatch(App.initLanguages());
     }
@@ -44,7 +41,9 @@ App.propTypes = {
   languages: PropTypes.array.isRequired
 };
 
-function mapStateToProps(state) {
+function mapStateToProps(state, ownProps) {
+  // const lang = ownProps.params.lang;
+
   return {
     lang: state.lang,
     languages: state.languages
