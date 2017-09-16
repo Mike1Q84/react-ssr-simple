@@ -21,6 +21,35 @@ const client = redis.createClient({
 
 app.use(express.static('dist'));
 
+
+function renderMarkup(url, store) {
+  const context = {};
+
+  const rendered = renderToString(
+    <Provider store={store}>
+      <StaticRouter location={url} context={context}>
+        <App />
+      </StaticRouter>
+    </Provider>
+  );
+
+  const initialData = store.getState();
+  const markup = `<!DOCTYPE html>
+<head>
+<title>React SSR Simple</title>
+<link rel="stylesheet" href="/css/main.css">
+<script src="/bundle.js" defer></script>
+<script>window.__initialData__ = ${serialize(initialData)}</script>
+</head>
+<body>
+<div id="root">${rendered}</div>
+</body>
+</html>`;
+
+  return markup;
+}
+
+
 app.get('*', (req, res, next) => {
   const url = req.url;
   // const lang = url.split('/')[1];
@@ -36,30 +65,7 @@ app.get('*', (req, res, next) => {
 
       Promise.resolve(store.dispatch(App.initialAction()))
         .then(() => {
-
-          const context = {};
-
-          const rendered = renderToString(
-            <Provider store={store}>
-              <StaticRouter location={req.url} context={context}>
-                <App />
-              </StaticRouter>
-            </Provider>
-          );
-
-          const initialData = store.getState();
-          const markup = `<!DOCTYPE html>
-  <head>
-    <title>React SSR Simple</title>
-    <link rel="stylesheet" href="/css/main.css">
-    <script src="/bundle.js" defer></script>
-    <script>window.__initialData__ = ${serialize(initialData)}</script>
-  </head>
-  <body>
-    <div id="root">${rendered}</div>
-  </body>
-</html>`;
-
+          const markup = renderMarkup(url, store);
           // store ssr markup result in redis cache
           client.set(url, markup);
           // send ssr markup result to browser

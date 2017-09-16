@@ -177,6 +177,25 @@ var client = _redis2.default.createClient({
 
 app.use(_express2.default.static('dist'));
 
+function renderMarkup(url, store) {
+  var context = {};
+
+  var rendered = (0, _server.renderToString)(_react2.default.createElement(
+    _reactRedux.Provider,
+    { store: store },
+    _react2.default.createElement(
+      _reactRouterDom.StaticRouter,
+      { location: url, context: context },
+      _react2.default.createElement(_App2.default, null)
+    )
+  ));
+
+  var initialData = store.getState();
+  var markup = '<!DOCTYPE html>\n<head>\n<title>React SSR Simple</title>\n<link rel="stylesheet" href="/css/main.css">\n<script src="/bundle.js" defer></script>\n<script>window.__initialData__ = ' + (0, _serializeJavascript2.default)(initialData) + '</script>\n</head>\n<body>\n<div id="root">' + rendered + '</div>\n</body>\n</html>';
+
+  return markup;
+}
+
 app.get('*', function (req, res, next) {
   var url = req.url;
   // const lang = url.split('/')[1];
@@ -194,22 +213,7 @@ app.get('*', function (req, res, next) {
       // server-side rendering through React's renderToString
 
       Promise.resolve(store.dispatch(_App2.default.initialAction())).then(function () {
-
-        var context = {};
-
-        var rendered = (0, _server.renderToString)(_react2.default.createElement(
-          _reactRedux.Provider,
-          { store: store },
-          _react2.default.createElement(
-            _reactRouterDom.StaticRouter,
-            { location: req.url, context: context },
-            _react2.default.createElement(_App2.default, null)
-          )
-        ));
-
-        var initialData = store.getState();
-        var markup = '<!DOCTYPE html>\n  <head>\n    <title>React SSR Simple</title>\n    <link rel="stylesheet" href="/css/main.css">\n    <script src="/bundle.js" defer></script>\n    <script>window.__initialData__ = ' + (0, _serializeJavascript2.default)(initialData) + '</script>\n  </head>\n  <body>\n    <div id="root">' + rendered + '</div>\n  </body>\n</html>';
-
+        var markup = renderMarkup(url, store);
         // store ssr markup result in redis cache
         client.set(url, markup);
         // send ssr markup result to browser
