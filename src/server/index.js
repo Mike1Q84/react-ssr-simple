@@ -23,11 +23,16 @@ app.use(express.static('dist'));
 
 
 function renderMarkup(url, store) {
+  let newUrl = url;
+  if (!store.getState().lang.hasOwnProperty('id')) {
+    newUrl = '/en-AU/404';
+  }
+
   const context = {};
 
   const rendered = renderToString(
     <Provider store={store}>
-      <StaticRouter location={url} context={context}>
+      <StaticRouter location={newUrl} context={context}>
         <App />
       </StaticRouter>
     </Provider>
@@ -35,15 +40,15 @@ function renderMarkup(url, store) {
 
   const initialData = store.getState();
   const markup = `<!DOCTYPE html>
-<head>
-<title>React SSR Simple</title>
-<link rel="stylesheet" href="/css/main.css">
-<script src="/bundle.js" defer></script>
-<script>window.__initialData__ = ${serialize(initialData)}</script>
-</head>
-<body>
-<div id="root">${rendered}</div>
-</body>
+  <head>
+    <title>React SSR Simple</title>
+    <link rel="stylesheet" href="/css/main.css">
+    <script src="/bundle.js" defer></script>
+    <script>window.__initialData__ = ${serialize(initialData)}</script>
+  </head>
+  <body>
+    <div id="root">${rendered}</div>
+  </body>
 </html>`;
 
   return markup;

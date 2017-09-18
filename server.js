@@ -178,6 +178,11 @@ var client = _redis2.default.createClient({
 app.use(_express2.default.static('dist'));
 
 function renderMarkup(url, store) {
+  var newUrl = url;
+  if (!store.getState().lang.hasOwnProperty('id')) {
+    newUrl = '/en-AU/404';
+  }
+
   var context = {};
 
   var rendered = (0, _server.renderToString)(_react2.default.createElement(
@@ -185,13 +190,13 @@ function renderMarkup(url, store) {
     { store: store },
     _react2.default.createElement(
       _reactRouterDom.StaticRouter,
-      { location: url, context: context },
+      { location: newUrl, context: context },
       _react2.default.createElement(_App2.default, null)
     )
   ));
 
   var initialData = store.getState();
-  var markup = '<!DOCTYPE html>\n<head>\n<title>React SSR Simple</title>\n<link rel="stylesheet" href="/css/main.css">\n<script src="/bundle.js" defer></script>\n<script>window.__initialData__ = ' + (0, _serializeJavascript2.default)(initialData) + '</script>\n</head>\n<body>\n<div id="root">' + rendered + '</div>\n</body>\n</html>';
+  var markup = '<!DOCTYPE html>\n  <head>\n    <title>React SSR Simple</title>\n    <link rel="stylesheet" href="/css/main.css">\n    <script src="/bundle.js" defer></script>\n    <script>window.__initialData__ = ' + (0, _serializeJavascript2.default)(initialData) + '</script>\n  </head>\n  <body>\n    <div id="root">' + rendered + '</div>\n  </body>\n</html>';
 
   return markup;
 }
@@ -324,15 +329,18 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var App = function (_Component) {
   _inherits(App, _Component);
 
-  function App() {
+  function App(props, context) {
     _classCallCheck(this, App);
 
-    return _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).apply(this, arguments));
+    return _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).call(this, props, context));
   }
 
   _createClass(App, [{
     key: 'componentDidMount',
     value: function componentDidMount() {
+      // if (!this.props.lang.hasOwnProperty('id')) {
+      //   this.context.router.history.push('/en-AU/404');
+      // }
       if (!this.props.languages) {
         this.props.dispatch(App.initLanguages());
       }
@@ -373,6 +381,10 @@ App.propTypes = {
   lang: _propTypes2.default.object.isRequired,
   languages: _propTypes2.default.array.isRequired,
   dispatch: _propTypes2.default.func.isRequired
+};
+
+App.contextTypes = {
+  router: _propTypes2.default.object.isRequired
 };
 
 function mapStateToProps(state) {
@@ -494,9 +506,13 @@ var _AboutPage = __webpack_require__(17);
 
 var _AboutPage2 = _interopRequireDefault(_AboutPage);
 
+var _NotFoundPage = __webpack_require__(29);
+
+var _NotFoundPage2 = _interopRequireDefault(_NotFoundPage);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var routes = [{ path: "/:lang/", component: _HomePage2.default, exact: true }, { path: "/:lang/about", component: _AboutPage2.default }];
+var routes = [{ path: "/:lang/", component: _HomePage2.default, exact: true }, { path: "/:lang/about", component: _AboutPage2.default }, { path: "/:lang/404", component: _NotFoundPage2.default }];
 
 exports.default = routes;
 
@@ -921,6 +937,61 @@ module.exports = require("serialize-javascript");
 /***/ (function(module, exports) {
 
 module.exports = require("redis");
+
+/***/ }),
+/* 28 */,
+/* 29 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var NotFoundPage = function (_Component) {
+  _inherits(NotFoundPage, _Component);
+
+  function NotFoundPage() {
+    _classCallCheck(this, NotFoundPage);
+
+    return _possibleConstructorReturn(this, (NotFoundPage.__proto__ || Object.getPrototypeOf(NotFoundPage)).apply(this, arguments));
+  }
+
+  _createClass(NotFoundPage, [{
+    key: "render",
+    value: function render() {
+      return _react2.default.createElement(
+        "div",
+        { className: "not-found" },
+        _react2.default.createElement(
+          "h1",
+          { className: "not-found__title" },
+          "404 Not Found"
+        )
+      );
+    }
+  }]);
+
+  return NotFoundPage;
+}(_react.Component);
+
+exports.default = NotFoundPage;
 
 /***/ })
 /******/ ]);

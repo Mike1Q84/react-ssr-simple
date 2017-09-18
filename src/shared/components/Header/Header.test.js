@@ -5,7 +5,11 @@ import Header from './Header';
 
 describe('Header', () => {
   const props = {
-    'lang': 'en'
+    'lang': { id: 'en-AU', name: 'English(AU)' },
+    'languages': [
+      { id: 'en-AU', name: 'English(AU)' },
+      { id: 'zh-CN', name: '中文（简体）' }
+    ]
   };
 
   let wrapper;
