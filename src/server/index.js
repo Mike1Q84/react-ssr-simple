@@ -22,10 +22,24 @@ const client = redis.createClient({
 app.use(express.static('dist'));
 
 
+function initAllLangActions(lang) {
+  return (dispatch) => Promise.all([
+    dispatch(App.initLang(lang)),
+    dispatch(App.initLanguages())
+  ]);
+}
+
+
 function renderMarkup(url, store) {
+  const initialData = store.getState();
+
   let newUrl = url;
   if (!store.getState().lang.hasOwnProperty('id')) {
-    newUrl = '/en-AU/404';
+    const lang = 'en-AU';
+    newUrl = `/${lang}/404`;
+    // newUrl = `/${lang}`;
+
+    initialData.lang = initialData.languages.find(language => language.id === lang);
   }
 
   const context = {};
@@ -38,7 +52,6 @@ function renderMarkup(url, store) {
     </Provider>
   );
 
-  const initialData = store.getState();
   const markup = `<!DOCTYPE html>
   <head>
     <title>React SSR Simple</title>
@@ -51,13 +64,17 @@ function renderMarkup(url, store) {
   </body>
 </html>`;
 
-  return markup;
+  return {newUrl, markup};
 }
 
 
 app.get('*', (req, res, next) => {
-  const url = req.url;
-  const lang = url.split('/')[1];
+  let url = req.url;
+  let lang = url.split('/')[1];
+  if (!lang) {
+    lang = 'en-AU';
+    url = `/${lang}`;
+  }
 
   const store = configureStore();
 
@@ -67,13 +84,15 @@ app.get('*', (req, res, next) => {
     if (data != null) { // check available cache in redis first
       res.send(data);
     } else { // server-side rendering through React's renderToString
-      const p1 = Promise.resolve(store.dispatch(App.initLang(lang)));
-      const p2 = Promise.resolve(store.dispatch(App.initLanguages()));
-      Promise.all([p1,p2])
+      // const p1 = Promise.resolve(store.dispatch(App.initLang(lang)));
+      // const p2 = Promise.resolve(store.dispatch(App.initLanguages()));
+      // Promise.all([p1,p2])
+      store.dispatch(initAllLangActions(lang))
         .then(() => {
-          const markup = renderMarkup(url, store);
-          client.set(url, markup); // store ssr markup result in redis cache
+          const {newUrl, markup} = renderMarkup(url, store);
           res.send(markup); // send ssr markup result to browser
+          // console.log(newUrl);
+          client.set(newUrl, markup); // store ssr markup result in redis cache
         })
         .catch(next);
     } // server-side rendering through React's renderToString

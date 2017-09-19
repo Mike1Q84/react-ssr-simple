@@ -17,7 +17,8 @@ class LanguageApi {
   static getCurrentLang(lang) {
     return new Promise((resolve) => {
       setTimeout(() => {
-        resolve(Object.assign({}, languages.find(language => language.id === lang)));
+        // resolve(Object.assign({}, languages.find(language => language.id === lang)));
+        resolve(languages.find(language => language.id === lang));
       }, delay);
     });
   }

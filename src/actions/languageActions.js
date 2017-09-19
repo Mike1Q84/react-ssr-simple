@@ -5,6 +5,10 @@ export function loadLangSuccess(lang) {
   return { type: types.LOAD_LANG_SUCCESS, lang };
 }
 
+export function loadLangFailure(noLang) {
+  return { type: types.LOAD_LANG_FAILURE, noLang };
+}
+
 export function loadLanguagesSuccess(languages) {
   return { type: types.LOAD_LANGUAGES_SUCCESS, languages };
 }
@@ -13,8 +17,9 @@ export function loadLang(lang) {
   return function(dispatch) {
     return languageApi.getCurrentLang(lang).then((res) => {
       dispatch(loadLangSuccess(res));
-    }).catch((err) => {
-      throw(err);
+    }).catch(() => {
+      const noLang = true;
+      dispatch(loadLangFailure(noLang));
     });
   };
 }
