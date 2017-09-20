@@ -168,6 +168,8 @@ var _serializeJavascript2 = _interopRequireDefault(_serializeJavascript);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+// import languageApi from '../api/mockLanguageApi';
+
 /* eslint-disable no-console */
 
 var NODE_PORT = 3000;
@@ -187,18 +189,7 @@ function initAllLangActions(lang) {
 
 function renderMarkup(url, store) {
   var initialData = store.getState();
-
   var newUrl = url;
-  if (!store.getState().lang.hasOwnProperty('id')) {
-    var lang = 'en-AU';
-    newUrl = '/' + lang + '/404';
-    // newUrl = `/${lang}`;
-
-    initialData.lang = initialData.languages.find(function (language) {
-      return language.id === lang;
-    });
-  }
-
   var context = {};
 
   var rendered = (0, _server.renderToString)(_react2.default.createElement(
@@ -216,14 +207,56 @@ function renderMarkup(url, store) {
   return { newUrl: newUrl, markup: markup };
 }
 
-app.get('*', function (req, res, next) {
-  var url = req.url;
-  var lang = url.split('/')[1];
-  if (!lang) {
-    lang = 'en-AU';
-    url = '/' + lang;
+var languages = [{ id: 'en-AU', name: 'English(AU)' }, { id: 'zh-CN', name: '中文（简体）' }];
+
+var routes = [{ route: 'home', hasChildren: false }, { route: '404', hasChildren: false }, { route: 'about', hasChildren: false }];
+
+// Process requests before hitting ssr React and cache
+app.use(function (req, res, next) {
+  if (req.url.slice(-1) === '/') {
+    req.url = req.url.slice(0, -1);
+  }
+  var reqLang = req.url.split('/')[1];
+  var reqRoute = req.url.split('/')[2];
+  var reqRestTokens = req.url.split('/').slice(3);
+  var reqRest = reqRestTokens.join('/');
+
+  if (!reqLang || !languages.find(function (language) {
+    return language.id === reqLang;
+  })) {
+    reqLang = 'en-AU';
+  }
+  if (!reqRoute) {
+    reqRoute = 'home';
+  }
+  var matchedRoute = routes.find(function (route) {
+    return route.route === reqRoute;
+  });
+
+  if (matchedRoute) {
+    if (reqRoute.hasChildren) {
+      // console.log('200 Pass Route with Children');
+      req.url = '/' + reqLang + '/' + reqRoute + '/' + reqRest;
+    } else {
+      if (!reqRest) {
+        // console.log('200 Pass Route without Children');
+        req.url = '/' + reqLang + '/' + reqRoute;
+      } else {
+        // console.log('404 Extra Routes');
+        req.url = '/' + reqLang + '/404';
+      }
+    }
+  } else {
+    // console.log('404 No Matched Routes');
+    req.url = '/' + reqLang + '/404';
   }
 
+  next();
+});
+
+app.get('*', function (req, res) {
+  var url = req.url;
+  var lang = url.split('/')[1];
   var store = (0, _configureStore2.default)();
 
   client.get(url, function (err, data) {
@@ -235,18 +268,14 @@ app.get('*', function (req, res, next) {
       res.send(data);
     } else {
       // server-side rendering through React's renderToString
-      // const p1 = Promise.resolve(store.dispatch(App.initLang(lang)));
-      // const p2 = Promise.resolve(store.dispatch(App.initLanguages()));
-      // Promise.all([p1,p2])
       store.dispatch(initAllLangActions(lang)).then(function () {
         var _renderMarkup = renderMarkup(url, store),
             newUrl = _renderMarkup.newUrl,
             markup = _renderMarkup.markup;
 
         res.send(markup); // send ssr markup result to browser
-        // console.log(newUrl);
         client.set(newUrl, markup); // store ssr markup result in redis cache
-      }).catch(next);
+      });
     } // server-side rendering through React's renderToString
   }); // redis client
 });
@@ -318,6 +347,8 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 var _react = __webpack_require__(0);
@@ -333,18 +364,6 @@ var _Header2 = _interopRequireDefault(_Header);
 var _Footer = __webpack_require__(14);
 
 var _Footer2 = _interopRequireDefault(_Footer);
-
-var _HomePage = __webpack_require__(16);
-
-var _HomePage2 = _interopRequireDefault(_HomePage);
-
-var _AboutPage = __webpack_require__(18);
-
-var _AboutPage2 = _interopRequireDefault(_AboutPage);
-
-var _NotFoundPage = __webpack_require__(19);
-
-var _NotFoundPage2 = _interopRequireDefault(_NotFoundPage);
 
 var _routes = __webpack_require__(15);
 
@@ -365,6 +384,10 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+// import HomePage from './containers/Home/HomePage';
+// import AboutPage from './containers/About/AboutPage';
+// import NotFoundPage from './containers/404/NotFoundPage';
+
 
 var App = function (_Component) {
   _inherits(App, _Component);
@@ -376,18 +399,20 @@ var App = function (_Component) {
   }
 
   _createClass(App, [{
-    key: 'componentWillMount',
-    value: function componentWillMount() {
-      if (this.props.noLang) {
-        this.props.history.push('/en-AU/404');
-      }
-    }
-  }, {
     key: 'componentDidMount',
+
+
+    // componentWillMount() {
+    //   if (this.props.noLang) {
+    //     this.props.history.push('/en-AU/404');
+    //   }
+    // }
+
     value: function componentDidMount() {
       if (!this.props.languages) {
         this.props.dispatch(App.initLanguages());
       }
+      // console.log(window.location.pathname);
     }
   }, {
     key: 'render',
@@ -399,17 +424,9 @@ var App = function (_Component) {
         _react2.default.createElement(
           _reactRouterDom.Switch,
           null,
-          _react2.default.createElement(_reactRouterDom.Route, { path: '/', component: _HomePage2.default, exact: true }),
-          _react2.default.createElement(_reactRouterDom.Route, { path: '/:lang', component: _HomePage2.default, exact: true }),
-          _react2.default.createElement(_reactRouterDom.Route, { path: '/:lang/', component: _HomePage2.default, exact: true }),
-          _react2.default.createElement(_reactRouterDom.Route, { path: '/:lang/about', component: _AboutPage2.default }),
-          _react2.default.createElement(_reactRouterDom.Route, { path: '/:lang/404', component: _NotFoundPage2.default }),
-          _react2.default.createElement(_reactRouterDom.Route, { path: '/:lang/*', render: function render() {
-              return _react2.default.createElement(_reactRouterDom.Redirect, { to: '404' });
-            } }),
-          _react2.default.createElement(_reactRouterDom.Route, { path: '*', render: function render() {
-              return _react2.default.createElement(_reactRouterDom.Redirect, { to: '/en-AU/404' });
-            } })
+          _routes2.default.map(function (route, i) {
+            return _react2.default.createElement(_reactRouterDom.Route, _extends({ key: i }, route));
+          })
         ),
         _react2.default.createElement(_Footer2.default, null)
       );
@@ -430,8 +447,8 @@ var App = function (_Component) {
 }(_react.Component);
 
 App.propTypes = {
-  history: _propTypes2.default.object.isRequired,
-  noLang: _propTypes2.default.bool.isRequired,
+  // history: PropTypes.object.isRequired,
+  // noLang: PropTypes.bool.isRequired,
   lang: _propTypes2.default.object.isRequired,
   languages: _propTypes2.default.array.isRequired,
   dispatch: _propTypes2.default.func.isRequired
@@ -449,8 +466,8 @@ function mapStateToProps(state) {
   };
 }
 
-// export default connect(mapStateToProps)(App);
-exports.default = (0, _reactRouterDom.withRouter)((0, _reactRedux.connect)(mapStateToProps)(App));
+exports.default = (0, _reactRedux.connect)(mapStateToProps)(App);
+// export default withRouter(connect(mapStateToProps)(App));
 
 /***/ }),
 /* 13 */
@@ -568,9 +585,7 @@ var _NotFoundPage2 = _interopRequireDefault(_NotFoundPage);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var routes = [{ path: "/", component: _HomePage2.default, exact: true }, { path: "/:lang", component: _HomePage2.default, exact: true }, { path: "/:lang/", component: _HomePage2.default, exact: true }, { path: "/:lang/about", component: _AboutPage2.default }, { path: "/:lang/404", component: _NotFoundPage2.default }, { path: "/:lang/*", component: _NotFoundPage2.default },
-// {path: "*", component: NotFoundPage}
-{ path: "*", component: _HomePage2.default }];
+var routes = [{ path: "/", component: _HomePage2.default, exact: true }, { path: "/:lang/", component: _HomePage2.default, exact: true }, { path: "/:lang/home", component: _HomePage2.default, exact: true }, { path: "/:lang/about", component: _AboutPage2.default, exact: true }, { path: "/:lang/404", component: _NotFoundPage2.default }, { path: "*", component: _NotFoundPage2.default }];
 
 exports.default = routes;
 

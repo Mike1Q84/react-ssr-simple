@@ -10,6 +10,8 @@ import configureStore from "../store/configureStore";
 
 import serialize from "serialize-javascript";
 
+// import languageApi from '../api/mockLanguageApi';
+
 /* eslint-disable no-console */
 
 const NODE_PORT = 3000;
@@ -21,7 +23,6 @@ const client = redis.createClient({
 
 app.use(express.static('dist'));
 
-
 function initAllLangActions(lang) {
   return (dispatch) => Promise.all([
     dispatch(App.initLang(lang)),
@@ -29,19 +30,9 @@ function initAllLangActions(lang) {
   ]);
 }
 
-
 function renderMarkup(url, store) {
   const initialData = store.getState();
-
   let newUrl = url;
-  if (!store.getState().lang.hasOwnProperty('id')) {
-    const lang = 'en-AU';
-    newUrl = `/${lang}/404`;
-    // newUrl = `/${lang}`;
-
-    initialData.lang = initialData.languages.find(language => language.id === lang);
-  }
-
   const context = {};
 
   const rendered = renderToString(
@@ -67,15 +58,60 @@ function renderMarkup(url, store) {
   return {newUrl, markup};
 }
 
+const languages = [
+  { id: 'en-AU', name: 'English(AU)' },
+  { id: 'zh-CN', name: '中文（简体）' }
+];
 
-app.get('*', (req, res, next) => {
-  let url = req.url;
-  let lang = url.split('/')[1];
-  if (!lang) {
-    lang = 'en-AU';
-    url = `/${lang}`;
+const routes = [
+  { route: 'home', hasChildren: false },
+  { route: '404', hasChildren: false },
+  { route: 'about', hasChildren: false }
+];
+
+// Process requests before hitting ssr React and cache
+app.use((req, res, next) => {
+  if (req.url.slice(-1) === '/') {
+    req.url = req.url.slice(0, -1);
+  }
+  let reqLang = req.url.split('/')[1];
+  let reqRoute = req.url.split('/')[2];
+  let reqRestTokens = req.url.split('/').slice(3);
+  let reqRest = reqRestTokens.join('/');
+
+  if (!reqLang || !languages.find(language => language.id === reqLang)) {
+    reqLang = 'en-AU';
+  }
+  if (!reqRoute) {
+    reqRoute = 'home';
+  }
+  let matchedRoute = routes.find(route => route.route === reqRoute);
+
+  if (matchedRoute) {
+    if (reqRoute.hasChildren) {
+      // console.log('200 Pass Route with Children');
+      req.url = `/${reqLang}/${reqRoute}/${reqRest}`;
+    } else {
+      if (!reqRest) {
+        // console.log('200 Pass Route without Children');
+        req.url = `/${reqLang}/${reqRoute}`;
+      } else {
+        // console.log('404 Extra Routes');
+        req.url = `/${reqLang}/404`;
+      }
+    }
+  } else {
+    // console.log('404 No Matched Routes');
+    req.url = `/${reqLang}/404`;
   }
 
+  next();
+});
+
+
+app.get('*', (req, res) => {
+  let url = req.url;
+  let lang = url.split('/')[1];
   const store = configureStore();
 
   client.get(url, (err, data) => { // redis client
@@ -84,17 +120,12 @@ app.get('*', (req, res, next) => {
     if (data != null) { // check available cache in redis first
       res.send(data);
     } else { // server-side rendering through React's renderToString
-      // const p1 = Promise.resolve(store.dispatch(App.initLang(lang)));
-      // const p2 = Promise.resolve(store.dispatch(App.initLanguages()));
-      // Promise.all([p1,p2])
       store.dispatch(initAllLangActions(lang))
         .then(() => {
           const {newUrl, markup} = renderMarkup(url, store);
           res.send(markup); // send ssr markup result to browser
-          // console.log(newUrl);
           client.set(newUrl, markup); // store ssr markup result in redis cache
-        })
-        .catch(next);
+        });
     } // server-side rendering through React's renderToString
   }); // redis client
 });

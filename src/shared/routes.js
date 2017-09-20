@@ -4,13 +4,11 @@ import NotFoundPage from './containers/404/NotFoundPage';
 
 const routes = [
   {path: "/", component: HomePage, exact: true},
-  {path: "/:lang", component: HomePage, exact: true},
   {path: "/:lang/", component: HomePage, exact: true},
-  {path: "/:lang/about", component: AboutPage},
+  {path: "/:lang/home", component: HomePage, exact: true},
+  {path: "/:lang/about", component: AboutPage, exact: true},
   {path: "/:lang/404", component: NotFoundPage},
-  {path: "/:lang/*", component: NotFoundPage},
-  // {path: "*", component: NotFoundPage}
-  {path: "*", component: HomePage}
+  {path: "*", component: NotFoundPage}
 ];
 
 export default routes;
