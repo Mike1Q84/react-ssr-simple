@@ -213,6 +213,11 @@ var routes = [{ route: 'home', hasChildren: false }, { route: '404', hasChildren
 
 // Process requests before hitting ssr React and cache
 app.use(function (req, res, next) {
+  var defaultLang = 'en-AU';
+
+  if (req.url.search('//') !== -1) {
+    req.url = '/' + defaultLang + '/404';
+  }
   if (req.url.slice(-1) === '/') {
     req.url = req.url.slice(0, -1);
   }
@@ -224,7 +229,7 @@ app.use(function (req, res, next) {
   if (!reqLang || !languages.find(function (language) {
     return language.id === reqLang;
   })) {
-    reqLang = 'en-AU';
+    reqLang = defaultLang;
   }
   if (!reqRoute) {
     reqRoute = 'home';
@@ -585,7 +590,7 @@ var _NotFoundPage2 = _interopRequireDefault(_NotFoundPage);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var routes = [{ path: "/", component: _HomePage2.default, exact: true }, { path: "/:lang/", component: _HomePage2.default, exact: true }, { path: "/:lang/home", component: _HomePage2.default, exact: true }, { path: "/:lang/about", component: _AboutPage2.default, exact: true }, { path: "/:lang/404", component: _NotFoundPage2.default }, { path: "*", component: _NotFoundPage2.default }];
+var routes = [{ path: "/", component: _HomePage2.default, exact: true }, { path: "/:lang/", component: _HomePage2.default, exact: true }, { path: "/:lang/home", component: _HomePage2.default, exact: true }, { path: "/:lang/about", component: _AboutPage2.default, exact: true }, { path: "/:lang/404", component: _NotFoundPage2.default, exact: true }, { path: "*", component: _NotFoundPage2.default }];
 
 exports.default = routes;
 

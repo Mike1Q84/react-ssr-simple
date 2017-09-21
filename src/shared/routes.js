@@ -7,7 +7,7 @@ const routes = [
   {path: "/:lang/", component: HomePage, exact: true},
   {path: "/:lang/home", component: HomePage, exact: true},
   {path: "/:lang/about", component: AboutPage, exact: true},
-  {path: "/:lang/404", component: NotFoundPage},
+  {path: "/:lang/404", component: NotFoundPage, exact: true},
   {path: "*", component: NotFoundPage}
 ];
 

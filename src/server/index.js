@@ -71,6 +71,11 @@ const routes = [
 
 // Process requests before hitting ssr React and cache
 app.use((req, res, next) => {
+  const defaultLang = 'en-AU';
+  
+  if (req.url.search('//') !== -1) {
+    req.url = `/${defaultLang}/404`;
+  }
   if (req.url.slice(-1) === '/') {
     req.url = req.url.slice(0, -1);
   }
@@ -80,7 +85,7 @@ app.use((req, res, next) => {
   let reqRest = reqRestTokens.join('/');
 
   if (!reqLang || !languages.find(language => language.id === reqLang)) {
-    reqLang = 'en-AU';
+    reqLang = defaultLang;
   }
   if (!reqRoute) {
     reqRoute = 'home';
