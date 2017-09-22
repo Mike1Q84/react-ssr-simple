@@ -417,7 +417,6 @@ var App = function (_Component) {
       if (!this.props.languages) {
         this.props.dispatch(App.initLanguages());
       }
-      // console.log(window.location.pathname);
     }
   }, {
     key: 'render',
@@ -433,7 +432,7 @@ var App = function (_Component) {
             return _react2.default.createElement(_reactRouterDom.Route, _extends({ key: i }, route));
           })
         ),
-        _react2.default.createElement(_Footer2.default, null)
+        _react2.default.createElement(_Footer2.default, { lang: this.props.lang })
       );
     }
   }], [{
@@ -453,7 +452,7 @@ var App = function (_Component) {
 
 App.propTypes = {
   // history: PropTypes.object.isRequired,
-  // noLang: PropTypes.bool.isRequired,
+  noLang: _propTypes2.default.bool.isRequired,
   lang: _propTypes2.default.object.isRequired,
   languages: _propTypes2.default.array.isRequired,
   dispatch: _propTypes2.default.func.isRequired
@@ -493,6 +492,10 @@ var _propTypes = __webpack_require__(4);
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
+var _lang = __webpack_require__(31);
+
+var _lang2 = _interopRequireDefault(_lang);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var Header = function Header(_ref) {
@@ -505,12 +508,13 @@ var Header = function Header(_ref) {
     _react2.default.createElement(
       'h1',
       { className: 'header__title' },
-      'Header'
+      _lang2.default[lang.id].name
     ),
     _react2.default.createElement(
       'p',
       { className: 'header__lang' },
-      'LANG: ',
+      _lang2.default[lang.id].lang,
+      ': ',
       lang.name
     ),
     _react2.default.createElement(
@@ -549,18 +553,32 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
+var _propTypes = __webpack_require__(4);
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
+var _lang = __webpack_require__(30);
+
+var _lang2 = _interopRequireDefault(_lang);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var Footer = function Footer() {
+var Footer = function Footer(_ref) {
+  var lang = _ref.lang;
+
   return _react2.default.createElement(
-    "div",
-    { className: "footer" },
+    'div',
+    { className: 'footer' },
     _react2.default.createElement(
-      "h1",
-      { className: "footer__title" },
-      "Footer"
+      'h1',
+      { className: 'footer__title' },
+      _lang2.default[lang.id].name
     )
   );
+};
+
+Footer.propTypes = {
+  lang: _propTypes2.default.object.isRequired
 };
 
 exports.default = Footer;
@@ -611,6 +629,16 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
+var _propTypes = __webpack_require__(4);
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
+var _reactRedux = __webpack_require__(5);
+
+var _lang = __webpack_require__(32);
+
+var _lang2 = _interopRequireDefault(_lang);
+
 __webpack_require__(17);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -620,9 +648,6 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-// import PropTypes from 'prop-types';
-// import { connect } from 'react-redux';
-
 
 var HomePage = function (_Component) {
   _inherits(HomePage, _Component);
@@ -636,7 +661,8 @@ var HomePage = function (_Component) {
   _createClass(HomePage, [{
     key: 'render',
     value: function render() {
-      // let { lang } = this.props;
+      var lang = this.props.lang;
+
 
       return _react2.default.createElement(
         'div',
@@ -644,7 +670,7 @@ var HomePage = function (_Component) {
         _react2.default.createElement(
           'h1',
           { className: 'home__title' },
-          'Home Page'
+          _lang2.default[lang.id].name
         )
       );
     }
@@ -653,20 +679,17 @@ var HomePage = function (_Component) {
   return HomePage;
 }(_react.Component);
 
-// HomePage.propTypes = {
-//   lang: PropTypes.string.isRequired
-// };
-//
-// function mapStateToProps(state) {
-//   return {
-//     lang: state.lang
-//   };
-// }
-//
-// export default connect(mapStateToProps)(HomePage);
+HomePage.propTypes = {
+  lang: _propTypes2.default.object.isRequired
+};
 
+function mapStateToProps(state) {
+  return {
+    lang: state.lang
+  };
+}
 
-exports.default = HomePage;
+exports.default = (0, _reactRedux.connect)(mapStateToProps)(HomePage);
 
 /***/ }),
 /* 17 */
@@ -691,6 +714,16 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
+var _propTypes = __webpack_require__(4);
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
+var _reactRedux = __webpack_require__(5);
+
+var _lang = __webpack_require__(34);
+
+var _lang2 = _interopRequireDefault(_lang);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -698,9 +731,6 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-// import PropTypes from 'prop-types';
-// import { connect } from 'react-redux';
 
 var AboutPage = function (_Component) {
   _inherits(AboutPage, _Component);
@@ -712,17 +742,18 @@ var AboutPage = function (_Component) {
   }
 
   _createClass(AboutPage, [{
-    key: "render",
+    key: 'render',
     value: function render() {
-      // let { lang } = this.props;
+      var lang = this.props.lang;
+
 
       return _react2.default.createElement(
-        "div",
-        { className: "about" },
+        'div',
+        { className: 'about' },
         _react2.default.createElement(
-          "h1",
-          { className: "about__title" },
-          "About Page"
+          'h1',
+          { className: 'about__title' },
+          _lang2.default[lang.id].name
         )
       );
     }
@@ -731,20 +762,17 @@ var AboutPage = function (_Component) {
   return AboutPage;
 }(_react.Component);
 
-// AboutPage.propTypes = {
-//   lang: PropTypes.string.isRequired
-// };
-//
-// function mapStateToProps(state) {
-//   return {
-//     lang: state.lang
-//   };
-// }
-//
-// export default connect(mapStateToProps)(AboutPage);
+AboutPage.propTypes = {
+  lang: _propTypes2.default.object.isRequired
+};
 
+function mapStateToProps(state) {
+  return {
+    lang: state.lang
+  };
+}
 
-exports.default = AboutPage;
+exports.default = (0, _reactRedux.connect)(mapStateToProps)(AboutPage);
 
 /***/ }),
 /* 19 */
@@ -762,6 +790,16 @@ var _createClass = function () { function defineProperties(target, props) { for 
 var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
+
+var _propTypes = __webpack_require__(4);
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
+var _reactRedux = __webpack_require__(5);
+
+var _lang = __webpack_require__(33);
+
+var _lang2 = _interopRequireDefault(_lang);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -781,15 +819,18 @@ var NotFoundPage = function (_Component) {
   }
 
   _createClass(NotFoundPage, [{
-    key: "render",
+    key: 'render',
     value: function render() {
+      var lang = this.props.lang;
+
+
       return _react2.default.createElement(
-        "div",
-        { className: "not-found" },
+        'div',
+        { className: 'not-found' },
         _react2.default.createElement(
-          "h1",
-          { className: "not-found__title" },
-          "404 Not Found"
+          'h1',
+          { className: 'not-found__title' },
+          _lang2.default[lang.id].name
         )
       );
     }
@@ -798,7 +839,17 @@ var NotFoundPage = function (_Component) {
   return NotFoundPage;
 }(_react.Component);
 
-exports.default = NotFoundPage;
+NotFoundPage.propTypes = {
+  lang: _propTypes2.default.object.isRequired
+};
+
+function mapStateToProps(state) {
+  return {
+    lang: state.lang
+  };
+}
+
+exports.default = (0, _reactRedux.connect)(mapStateToProps)(NotFoundPage);
 
 /***/ }),
 /* 20 */
@@ -1111,6 +1162,36 @@ module.exports = require("redux-thunk");
 /***/ (function(module, exports) {
 
 module.exports = require("serialize-javascript");
+
+/***/ }),
+/* 30 */
+/***/ (function(module, exports) {
+
+module.exports = {"en-AU":{"name":"Footer"},"zh-CN":{"name":"页脚"}}
+
+/***/ }),
+/* 31 */
+/***/ (function(module, exports) {
+
+module.exports = {"en-AU":{"name":"Header","lang":"Language"},"zh-CN":{"name":"页眉","lang":"当前语言"}}
+
+/***/ }),
+/* 32 */
+/***/ (function(module, exports) {
+
+module.exports = {"en-AU":{"name":"Home Page"},"zh-CN":{"name":"首页"}}
+
+/***/ }),
+/* 33 */
+/***/ (function(module, exports) {
+
+module.exports = {"en-AU":{"name":"404 Not Found"},"zh-CN":{"name":"404 请求的资源不存在"}}
+
+/***/ }),
+/* 34 */
+/***/ (function(module, exports) {
+
+module.exports = {"en-AU":{"name":"About Page"},"zh-CN":{"name":"关于页面"}}
 
 /***/ })
 /******/ ]);

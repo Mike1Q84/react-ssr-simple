@@ -30,7 +30,6 @@ class App extends Component {
     if (!this.props.languages) {
       this.props.dispatch(App.initLanguages());
     }
-    // console.log(window.location.pathname);
   }
 
   render() {
@@ -46,7 +45,7 @@ class App extends Component {
           <Route path="/:lang/404" component={NotFoundPage} />
           <Route path="*" component={NotFoundPage} /> */}
         </Switch>
-        <Footer />
+        <Footer lang={this.props.lang} />
       </div>
     );
   }
@@ -54,7 +53,7 @@ class App extends Component {
 
 App.propTypes = {
   // history: PropTypes.object.isRequired,
-  // noLang: PropTypes.bool.isRequired,
+  noLang: PropTypes.bool.isRequired,
   lang: PropTypes.object.isRequired,
   languages: PropTypes.array.isRequired,
   dispatch: PropTypes.func.isRequired

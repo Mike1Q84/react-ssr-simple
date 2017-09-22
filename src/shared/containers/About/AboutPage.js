@@ -1,28 +1,28 @@
 import React, { Component } from 'react';
-// import PropTypes from 'prop-types';
-// import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import t from './_lang.json';
 
 class AboutPage extends Component {
   render() {
-    // let { lang } = this.props;
+    let { lang } = this.props;
 
     return (
       <div className="about">
-        <h1 className="about__title">About Page</h1>
+        <h1 className="about__title">{t[lang.id].name}</h1>
       </div>
     )
   }
 }
 
-// AboutPage.propTypes = {
-//   lang: PropTypes.string.isRequired
-// };
-//
-// function mapStateToProps(state) {
-//   return {
-//     lang: state.lang
-//   };
-// }
-//
-// export default connect(mapStateToProps)(AboutPage);
-export default AboutPage;
+AboutPage.propTypes = {
+  lang: PropTypes.object.isRequired
+};
+
+function mapStateToProps(state) {
+  return {
+    lang: state.lang
+  };
+}
+
+export default connect(mapStateToProps)(AboutPage);

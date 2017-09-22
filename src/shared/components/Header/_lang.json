@@ -1,0 +1,10 @@
+{
+  "en-AU": {
+    "name": "Header",
+    "lang": "Language"
+  },
+  "zh-CN": {
+    "name": "页眉",
+    "lang": "当前语言"
+  }
+}
