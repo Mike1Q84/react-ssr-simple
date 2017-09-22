@@ -72,7 +72,7 @@ const routes = [
 // Process requests before hitting ssr React and cache
 app.use((req, res, next) => {
   const defaultLang = 'en-AU';
-  
+
   if (req.url.search('//') !== -1) {
     req.url = `/${defaultLang}/404`;
   }
@@ -118,6 +118,7 @@ app.get('*', (req, res) => {
   let url = req.url;
   let lang = url.split('/')[1];
   const store = configureStore();
+  store.dispatch(App.initUrl(url));
 
   client.get(url, (err, data) => { // redis client
     if (err) throw err;

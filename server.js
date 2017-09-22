@@ -79,6 +79,9 @@ module.exports = require("react");
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+var LOAD_URL_SUCCESS = exports.LOAD_URL_SUCCESS = 'LOAD_URL_SUCCESS';
+var LOAD_URL_FAILURE = exports.LOAD_URL_FAILURE = 'LOAD_URL_FAILURE';
+
 var LOAD_LANG_SUCCESS = exports.LOAD_LANG_SUCCESS = 'LOAD_LANG_SUCCESS';
 var LOAD_LANG_FAILURE = exports.LOAD_LANG_FAILURE = 'LOAD_LANG_FAILURE';
 var LOAD_LANGUAGES_SUCCESS = exports.LOAD_LANGUAGES_SUCCESS = 'LOAD_LANGUAGES_SUCCESS';
@@ -96,6 +99,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.default = {
+  url: '/en-AU/404',
   noLang: false,
   lang: {},
   languages: []
@@ -263,6 +267,7 @@ app.get('*', function (req, res) {
   var url = req.url;
   var lang = url.split('/')[1];
   var store = (0, _configureStore2.default)();
+  store.dispatch(_App2.default.initUrl(url));
 
   client.get(url, function (err, data) {
     // redis client
@@ -380,6 +385,8 @@ var _propTypes2 = _interopRequireDefault(_propTypes);
 
 var _reactRedux = __webpack_require__(5);
 
+var _urlActions = __webpack_require__(37);
+
 var _languageActions = __webpack_require__(20);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -389,10 +396,6 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-// import HomePage from './containers/Home/HomePage';
-// import AboutPage from './containers/About/AboutPage';
-// import NotFoundPage from './containers/404/NotFoundPage';
-
 
 var App = function (_Component) {
   _inherits(App, _Component);
@@ -404,15 +407,13 @@ var App = function (_Component) {
   }
 
   _createClass(App, [{
+    key: 'componentWillMount',
+    value: function componentWillMount() {
+      // Change client-side url to match node processed server-side url
+      this.props.history.push(this.props.url);
+    }
+  }, {
     key: 'componentDidMount',
-
-
-    // componentWillMount() {
-    //   if (this.props.noLang) {
-    //     this.props.history.push('/en-AU/404');
-    //   }
-    // }
-
     value: function componentDidMount() {
       if (!this.props.languages) {
         this.props.dispatch(App.initLanguages());
@@ -436,6 +437,11 @@ var App = function (_Component) {
       );
     }
   }], [{
+    key: 'initUrl',
+    value: function initUrl(url) {
+      return (0, _urlActions.loadUrl)(url);
+    }
+  }, {
     key: 'initLang',
     value: function initLang(lang) {
       return (0, _languageActions.loadLang)(lang);
@@ -451,27 +457,24 @@ var App = function (_Component) {
 }(_react.Component);
 
 App.propTypes = {
-  // history: PropTypes.object.isRequired,
+  url: _propTypes2.default.string.isRequired,
+  history: _propTypes2.default.object.isRequired,
   noLang: _propTypes2.default.bool.isRequired,
   lang: _propTypes2.default.object.isRequired,
   languages: _propTypes2.default.array.isRequired,
   dispatch: _propTypes2.default.func.isRequired
 };
 
-App.contextTypes = {
-  router: _propTypes2.default.object.isRequired
-};
-
 function mapStateToProps(state) {
   return {
+    url: state.url,
     noLang: state.noLang,
     lang: state.lang,
     languages: state.languages
   };
 }
 
-exports.default = (0, _reactRedux.connect)(mapStateToProps)(App);
-// export default withRouter(connect(mapStateToProps)(App));
+exports.default = (0, _reactRouterDom.withRouter)((0, _reactRedux.connect)(mapStateToProps)(App));
 
 /***/ }),
 /* 13 */
@@ -1021,6 +1024,10 @@ Object.defineProperty(exports, "__esModule", {
 
 var _redux = __webpack_require__(6);
 
+var _urlReducer = __webpack_require__(38);
+
+var _urlReducer2 = _interopRequireDefault(_urlReducer);
+
 var _noLangReducer = __webpack_require__(25);
 
 var _noLangReducer2 = _interopRequireDefault(_noLangReducer);
@@ -1036,6 +1043,7 @@ var _languageReducer2 = _interopRequireDefault(_languageReducer);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var rootReducer = (0, _redux.combineReducers)({
+  url: _urlReducer2.default,
   noLang: _noLangReducer2.default,
   lang: _langReducer2.default,
   languages: _languageReducer2.default
@@ -1192,6 +1200,78 @@ module.exports = {"en-AU":{"name":"404 Not Found"},"zh-CN":{"name":"404 请求�
 /***/ (function(module, exports) {
 
 module.exports = {"en-AU":{"name":"About Page"},"zh-CN":{"name":"关于页面"}}
+
+/***/ }),
+/* 35 */,
+/* 36 */,
+/* 37 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.loadUrlSuccess = loadUrlSuccess;
+exports.loadUrlFailure = loadUrlFailure;
+exports.loadUrl = loadUrl;
+
+var _actionTypes = __webpack_require__(1);
+
+var types = _interopRequireWildcard(_actionTypes);
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+
+function loadUrlSuccess(url) {
+  return { type: types.LOAD_URL_SUCCESS, url: url };
+}
+
+function loadUrlFailure() {
+  return { type: types.LOAD_URL_FAILURE };
+}
+
+function loadUrl(url) {
+  return function (dispatch) {
+    dispatch(loadUrlSuccess(url));
+  };
+}
+
+/***/ }),
+/* 38 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = urlReducer;
+
+var _actionTypes = __webpack_require__(1);
+
+var types = _interopRequireWildcard(_actionTypes);
+
+var _initState = __webpack_require__(2);
+
+var _initState2 = _interopRequireDefault(_initState);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+
+function urlReducer() {
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : _initState2.default.url;
+  var action = arguments[1];
+
+  switch (action.type) {
+    case types.LOAD_URL_SUCCESS:
+      return action.url;
+    default:
+      return state;
+  }
+}
 
 /***/ })
 /******/ ]);
