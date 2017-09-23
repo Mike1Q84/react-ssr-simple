@@ -15,7 +15,7 @@ describe('Header', () => {
   let wrapper;
 
   beforeEach(() => {
-    wrapper = shallow(<Header {...props} />);
+    wrapper = shallow(<Header {...props}/>);
   });
 
   it("should be rendered", () => {

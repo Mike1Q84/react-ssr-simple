@@ -4,10 +4,14 @@ import { shallow } from 'enzyme';
 import Footer from './Footer';
 
 describe('Footer', () => {
+  const props = {
+    'lang': { id: 'en-AU', name: 'English(AU)' }
+  };
+
   let wrapper;
 
   beforeEach(() => {
-    wrapper = shallow(<Footer />);
+    wrapper = shallow(<Footer {...props}/>);
   });
 
   it("should be rendered", () => {

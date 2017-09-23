@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import t from './_lang.json';
 
-class AboutPage extends Component {
+export class AboutPage extends Component {
   render() {
     let { lang } = this.props;
 

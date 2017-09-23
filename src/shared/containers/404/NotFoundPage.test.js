@@ -1,13 +1,17 @@
 import React from 'react';
 import { expect } from 'chai';
 import { shallow } from 'enzyme';
-import NotFoundPage from './NotFoundPage';
+import { NotFoundPage } from './NotFoundPage';
 
 describe('NotFoundPage', () => {
+  const props = {
+    'lang': { id: 'en-AU', name: 'English(AU)' }
+  };
+
   let wrapper;
 
   beforeEach(() => {
-    wrapper = shallow(<NotFoundPage />);
+    wrapper = shallow(<NotFoundPage {...props}/>);
   });
 
   it("should be rendered", () => {

@@ -1,13 +1,17 @@
 import React from 'react';
 import { expect } from 'chai';
 import { shallow } from 'enzyme';
-import AboutPage from './AboutPage';
+import { AboutPage } from './AboutPage';
 
 describe('AboutPage', () => {
+  const props = {
+    'lang': { id: 'en-AU', name: 'English(AU)' }
+  };
+
   let wrapper;
 
   beforeEach(() => {
-    wrapper = shallow(<AboutPage />);
+    wrapper = shallow(<AboutPage {...props}/>);
   });
 
   it("should be rendered", () => {

@@ -10,7 +10,7 @@ import { connect } from 'react-redux';
 import { loadUrl } from '../actions/urlActions';
 import { loadLang, loadLanguages } from '../actions/languageActions';
 
-class App extends Component {
+export class App extends Component {
   static initUrl(url) {
     return loadUrl(url);
   }
@@ -35,11 +35,11 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <Header lang={this.props.lang} languages={this.props.languages} />
+        <Header lang={this.props.lang} languages={this.props.languages}/>
         <Switch>
-          {routes.map((route, i) => <Route key={i} {...route} />)}
+          {routes.map((route, i) => <Route key={i} {...route}/>)}
         </Switch>
-        <Footer lang={this.props.lang} />
+        <Footer lang={this.props.lang}/>
       </div>
     );
   }

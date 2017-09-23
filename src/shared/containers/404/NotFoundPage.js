@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import t from './_lang.json';
 
-class NotFoundPage extends Component {
+export class NotFoundPage extends Component {
   render() {
     let { lang } = this.props;
 

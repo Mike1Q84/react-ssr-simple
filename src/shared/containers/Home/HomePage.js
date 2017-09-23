@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import t from './_lang.json';
 import './HomePage.sass';
 
-class HomePage extends Component {
+export class HomePage extends Component {
   render() {
     let { lang } = this.props;
 
