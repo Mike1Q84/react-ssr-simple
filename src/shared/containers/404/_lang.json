@@ -1,8 +1,8 @@
 {
   "en-AU": {
-    "name": "404 Not Found"
+    "title": "404 Not Found"
   },
   "zh-CN": {
-    "name": "404 请求的资源不存在"
+    "title": "404 请求的资源不存在"
   }
 }

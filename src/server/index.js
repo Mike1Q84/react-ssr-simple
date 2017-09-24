@@ -3,6 +3,7 @@ import redis from 'redis';
 import React from 'react';
 import { renderToString } from 'react-dom/server';
 import { StaticRouter } from 'react-router-dom';
+import { Helmet } from "react-helmet";
 import App from '../shared/App';
 
 import { Provider } from "react-redux";
@@ -42,10 +43,12 @@ function renderMarkup(url, store) {
       </StaticRouter>
     </Provider>
   );
+  const helmet = Helmet.renderStatic();
 
   const markup = `<!DOCTYPE html>
   <head>
-    <title>React SSR Simple</title>
+    ${helmet.meta.toString()}
+    ${helmet.title.toString()}
     <link rel="stylesheet" href="/css/main.css">
     <script src="/bundle.js" defer></script>
     <script>window.__initialData__ = ${serialize(initialData)}</script>

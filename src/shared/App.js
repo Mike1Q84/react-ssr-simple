@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 import { Switch, Route, withRouter } from 'react-router-dom';
+import { Helmet } from "react-helmet";
+import t from './_lang.json';
+
 import Header from './components/Header/Header';
 import Footer from './components/Footer/Footer';
 import routes from './routes';
@@ -33,8 +36,15 @@ export class App extends Component {
   }
 
   render() {
+    let { lang } = this.props;
+    
     return (
       <div className="App">
+        <Helmet
+          titleTemplate={"%s | " + t[lang.id].title}
+        >
+          <meta charSet="utf-8" />
+        </Helmet>
         <Header lang={this.props.lang} languages={this.props.languages}/>
         <Switch>
           {routes.map((route, i) => <Route key={i} {...route}/>)}
