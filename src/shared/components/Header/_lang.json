@@ -1,10 +1,18 @@
 {
   "en-AU": {
     "name": "Header",
-    "lang": "Language"
+    "lang": "Language",
+    "nav": {
+      "home": { "id": "home", "name": "Home Page" },
+      "about": { "id": "about", "name": "About Page" }
+    }
   },
   "zh-CN": {
     "name": "页眉",
-    "lang": "当前语言"
+    "lang": "当前语言",
+    "nav": {
+      "home": { "id": "home", "name": "网站主页" },
+      "about": { "id": "about", "name": "关于我们" }
+    }
   }
 }

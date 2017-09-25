@@ -519,6 +519,8 @@ var _lang = __webpack_require__(14);
 
 var _lang2 = _interopRequireDefault(_lang);
 
+var _reactRouterDom = __webpack_require__(5);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var Header = function Header(_ref) {
@@ -532,6 +534,32 @@ var Header = function Header(_ref) {
       'h1',
       { className: 'header__title' },
       _lang2.default[lang.id].name
+    ),
+    _react2.default.createElement(
+      'nav',
+      { className: 'navbar' },
+      _react2.default.createElement(
+        'ul',
+        { className: 'navlink' },
+        _react2.default.createElement(
+          'li',
+          { className: 'navlink__item' },
+          _react2.default.createElement(
+            _reactRouterDom.Link,
+            { to: '/' + lang.id + '/' + _lang2.default[lang.id].nav.home.id },
+            _lang2.default[lang.id].nav.home.name
+          )
+        ),
+        _react2.default.createElement(
+          'li',
+          { className: 'navlink__item' },
+          _react2.default.createElement(
+            _reactRouterDom.Link,
+            { to: '/' + lang.id + '/' + _lang2.default[lang.id].nav.about.id },
+            _lang2.default[lang.id].nav.about.name
+          )
+        )
+      )
     ),
     _react2.default.createElement(
       'p',
@@ -565,7 +593,7 @@ exports.default = Header;
 /* 14 */
 /***/ (function(module, exports) {
 
-module.exports = {"en-AU":{"name":"Header","lang":"Language"},"zh-CN":{"name":"页眉","lang":"当前语言"}}
+module.exports = {"en-AU":{"name":"Header","lang":"Language","nav":{"home":{"id":"home","name":"Home Page"},"about":{"id":"about","name":"About Page"}}},"zh-CN":{"name":"页眉","lang":"当前语言","nav":{"home":{"id":"home","name":"网站主页"},"about":{"id":"about","name":"关于我们"}}}}
 
 /***/ }),
 /* 15 */
