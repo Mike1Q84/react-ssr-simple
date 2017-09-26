@@ -4,22 +4,22 @@ import { connect } from 'react-redux';
 import { Helmet } from "react-helmet";
 import t from './_lang.json';
 
-export class SysAdminPage extends Component {
+export class WebDesignPage extends Component {
   render() {
     let { lang } = this.props;
 
     return (
-      <div className="sysadmin">
+      <div className="webdesign">
         <Helmet>
           <title>{t[lang.id].title}</title>
         </Helmet>
-        <h1 className="sysadmin__title">{t[lang.id].title}</h1>
+        <h1 className="webdesign__title">{t[lang.id].title}</h1>
       </div>
     )
   }
 }
 
-SysAdminPage.propTypes = {
+WebDesignPage.propTypes = {
   lang: PropTypes.object.isRequired
 };
 
@@ -29,4 +29,4 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps)(SysAdminPage);
+export default connect(mapStateToProps)(WebDesignPage);

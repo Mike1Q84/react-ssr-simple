@@ -1,7 +1,7 @@
 import React from 'react';
 import { expect } from 'chai';
 import { shallow } from 'enzyme';
-import DevOpsPage from './DevOpsPage';
+import { DevOpsPage } from './DevOpsPage';
 
 describe('DevOps Page', () => {
   const props = {

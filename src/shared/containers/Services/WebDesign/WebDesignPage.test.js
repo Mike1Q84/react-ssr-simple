@@ -1,9 +1,9 @@
 import React from 'react';
 import { expect } from 'chai';
 import { shallow } from 'enzyme';
-import { SysAdminPage } from './SysAdminPage';
+import { WebDesignPage } from './WebDesignPage';
 
-describe('SysAdmin Page', () => {
+describe('WebDesign Page', () => {
   const props = {
     'lang': { id: 'en-AU', name: 'English(AU)' }
   };
@@ -11,13 +11,13 @@ describe('SysAdmin Page', () => {
   let wrapper;
 
   beforeEach(() => {
-    wrapper = shallow(<SysAdminPage {...props}/>);
+    wrapper = shallow(<WebDesignPage {...props}/>);
   });
 
   it("should be rendered", () => {
-      expect(wrapper.find('.sysadmin')).to.have.length(1);
+      expect(wrapper.find('.webdesign')).to.have.length(1);
   });
   it("should display title", () => {
-    expect(wrapper.find('.sysadmin__title')).to.have.length(1);
+    expect(wrapper.find('.webdesign__title')).to.have.length(1);
   });
 });

@@ -226,7 +226,7 @@ var routes = [{ route: 'home', hasChildren: false }, { route: 'services', hasChi
 
 // Process requests before hitting ssr React and cache
 app.use(function (req, res, next) {
-  console.log(req.url);
+  // console.log(req.url);
   var defaultLang = 'en-AU';
 
   if (req.url.search('//') !== -1) {
@@ -239,6 +239,7 @@ app.use(function (req, res, next) {
   var reqRoute = req.url.split('/')[2];
   var reqRestTokens = req.url.split('/').slice(3);
   var reqRest = reqRestTokens.join('/');
+  // console.log(reqRest);
 
   if (!reqLang || !languages.find(function (language) {
     return language.id === reqLang;
@@ -251,22 +252,23 @@ app.use(function (req, res, next) {
   var matchedRoute = routes.find(function (route) {
     return route.route === reqRoute;
   });
+  // console.log(matchedRoute);
 
   if (matchedRoute) {
-    if (reqRoute.hasChildren) {
-      console.log('200 Pass Route with Children');
+    if (matchedRoute.hasChildren) {
+      // console.log('200 Pass Route with Children');
       req.url = '/' + reqLang + '/' + reqRoute + '/' + reqRest;
     } else {
       if (!reqRest) {
-        console.log('200 Pass Route without Children');
+        // console.log('200 Pass Route without Children');
         req.url = '/' + reqLang + '/' + reqRoute;
       } else {
-        console.log('404 Extra Routes');
+        // console.log('404 Extra Routes');
         req.url = '/' + reqLang + '/404';
       }
     }
   } else {
-    console.log('404 No Matched Routes');
+    // console.log('404 No Matched Routes');
     req.url = '/' + reqLang + '/404';
   }
 
@@ -679,6 +681,18 @@ var _ServicesPage = __webpack_require__(39);
 
 var _ServicesPage2 = _interopRequireDefault(_ServicesPage);
 
+var _DevOpsPage = __webpack_require__(42);
+
+var _DevOpsPage2 = _interopRequireDefault(_DevOpsPage);
+
+var _SysAdminPage = __webpack_require__(43);
+
+var _SysAdminPage2 = _interopRequireDefault(_SysAdminPage);
+
+var _WebDesignPage = __webpack_require__(46);
+
+var _WebDesignPage2 = _interopRequireDefault(_WebDesignPage);
+
 var _AboutPage = __webpack_require__(23);
 
 var _AboutPage2 = _interopRequireDefault(_AboutPage);
@@ -689,7 +703,7 @@ var _NotFoundPage2 = _interopRequireDefault(_NotFoundPage);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var routes = [{ path: "/", component: _HomePage2.default, exact: true }, { path: "/:lang/", component: _HomePage2.default, exact: true }, { path: "/:lang/home", component: _HomePage2.default, exact: true }, { path: "/:lang/services", component: _ServicesPage2.default, exact: true }, { path: "/:lang/about", component: _AboutPage2.default, exact: true }, { path: "/:lang/404", component: _NotFoundPage2.default, exact: true }, { path: "*", component: _NotFoundPage2.default }];
+var routes = [{ path: "/", component: _HomePage2.default, exact: true }, { path: "/:lang/", component: _HomePage2.default, exact: true }, { path: "/:lang/home", component: _HomePage2.default, exact: true }, { path: "/:lang/services", component: _ServicesPage2.default, exact: true }, { path: "/:lang/service/devops", component: _DevOpsPage2.default, exact: true }, { path: "/:lang/service/sysadmin", component: _SysAdminPage2.default, exact: true }, { path: "/:lang/service/webdesign", component: _WebDesignPage2.default, exact: true }, { path: "/:lang/about", component: _AboutPage2.default, exact: true }, { path: "/:lang/404", component: _NotFoundPage2.default, exact: true }, { path: "*", component: _NotFoundPage2.default }];
 
 exports.default = routes;
 
@@ -1385,8 +1399,6 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.ServicesPage = undefined;
 
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 var _react = __webpack_require__(0);
@@ -1404,12 +1416,6 @@ var _reactHelmet = __webpack_require__(3);
 var _lang = __webpack_require__(40);
 
 var _lang2 = _interopRequireDefault(_lang);
-
-var _reactRouterDom = __webpack_require__(6);
-
-var _routes = __webpack_require__(41);
-
-var _routes2 = _interopRequireDefault(_routes);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -1450,10 +1456,7 @@ var ServicesPage = exports.ServicesPage = function (_Component) {
           'h1',
           { className: 'services__title' },
           _lang2.default[lang.id].title
-        ),
-        _routes2.default.map(function (route, i) {
-          return _react2.default.createElement(_reactRouterDom.Route, _extends({ key: i }, route));
-        })
+        )
       );
     }
   }]);
@@ -1480,31 +1483,7 @@ exports.default = (0, _reactRedux.connect)(mapStateToProps)(ServicesPage);
 module.exports = {"en-AU":{"title":"Services Page"},"zh-CN":{"title":"服务页面"}}
 
 /***/ }),
-/* 41 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _DevOpsPage = __webpack_require__(42);
-
-var _DevOpsPage2 = _interopRequireDefault(_DevOpsPage);
-
-var _SysAdminPage = __webpack_require__(43);
-
-var _SysAdminPage2 = _interopRequireDefault(_SysAdminPage);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var routes = [{ path: "/:lang/service/devops", component: _DevOpsPage2.default, exact: true }, { path: "/:lang/service/sysadmin", component: _SysAdminPage2.default, exact: true }];
-
-exports.default = routes;
-
-/***/ }),
+/* 41 */,
 /* 42 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -1514,6 +1493,9 @@ exports.default = routes;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+exports.DevOpsPage = undefined;
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 var _react = __webpack_require__(0);
 
@@ -1523,29 +1505,72 @@ var _propTypes = __webpack_require__(1);
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
+var _reactRedux = __webpack_require__(4);
+
+var _reactHelmet = __webpack_require__(3);
+
+var _lang = __webpack_require__(45);
+
+var _lang2 = _interopRequireDefault(_lang);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-// import t from './_lang.json';
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-var DevOpsPage = function DevOpsPage(_ref) {
-  var lang = _ref.lang;
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
-  return _react2.default.createElement(
-    'div',
-    { className: 'devops' },
-    _react2.default.createElement(
-      'h1',
-      { className: 'devops__title' },
-      'DevOps Page'
-    )
-  );
-};
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var DevOpsPage = exports.DevOpsPage = function (_Component) {
+  _inherits(DevOpsPage, _Component);
+
+  function DevOpsPage() {
+    _classCallCheck(this, DevOpsPage);
+
+    return _possibleConstructorReturn(this, (DevOpsPage.__proto__ || Object.getPrototypeOf(DevOpsPage)).apply(this, arguments));
+  }
+
+  _createClass(DevOpsPage, [{
+    key: 'render',
+    value: function render() {
+      var lang = this.props.lang;
+
+
+      return _react2.default.createElement(
+        'div',
+        { className: 'devops' },
+        _react2.default.createElement(
+          _reactHelmet.Helmet,
+          null,
+          _react2.default.createElement(
+            'title',
+            null,
+            _lang2.default[lang.id].title
+          )
+        ),
+        _react2.default.createElement(
+          'h1',
+          { className: 'devops__title' },
+          _lang2.default[lang.id].title
+        )
+      );
+    }
+  }]);
+
+  return DevOpsPage;
+}(_react.Component);
 
 DevOpsPage.propTypes = {
   lang: _propTypes2.default.object.isRequired
 };
 
-exports.default = DevOpsPage;
+function mapStateToProps(state) {
+  return {
+    lang: state.lang
+  };
+}
+
+exports.default = (0, _reactRedux.connect)(mapStateToProps)(DevOpsPage);
 
 /***/ }),
 /* 43 */
@@ -1557,6 +1582,9 @@ exports.default = DevOpsPage;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+exports.SysAdminPage = undefined;
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 var _react = __webpack_require__(0);
 
@@ -1566,29 +1594,179 @@ var _propTypes = __webpack_require__(1);
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
+var _reactRedux = __webpack_require__(4);
+
+var _reactHelmet = __webpack_require__(3);
+
+var _lang = __webpack_require__(44);
+
+var _lang2 = _interopRequireDefault(_lang);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-// import t from './_lang.json';
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-var SysAdminPage = function SysAdminPage(_ref) {
-  var lang = _ref.lang;
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
-  return _react2.default.createElement(
-    'div',
-    { className: 'sysadmin' },
-    _react2.default.createElement(
-      'h1',
-      { className: 'sysadmin__title' },
-      'SysAdmin Page'
-    )
-  );
-};
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var SysAdminPage = exports.SysAdminPage = function (_Component) {
+  _inherits(SysAdminPage, _Component);
+
+  function SysAdminPage() {
+    _classCallCheck(this, SysAdminPage);
+
+    return _possibleConstructorReturn(this, (SysAdminPage.__proto__ || Object.getPrototypeOf(SysAdminPage)).apply(this, arguments));
+  }
+
+  _createClass(SysAdminPage, [{
+    key: 'render',
+    value: function render() {
+      var lang = this.props.lang;
+
+
+      return _react2.default.createElement(
+        'div',
+        { className: 'sysadmin' },
+        _react2.default.createElement(
+          _reactHelmet.Helmet,
+          null,
+          _react2.default.createElement(
+            'title',
+            null,
+            _lang2.default[lang.id].title
+          )
+        ),
+        _react2.default.createElement(
+          'h1',
+          { className: 'sysadmin__title' },
+          _lang2.default[lang.id].title
+        )
+      );
+    }
+  }]);
+
+  return SysAdminPage;
+}(_react.Component);
 
 SysAdminPage.propTypes = {
   lang: _propTypes2.default.object.isRequired
 };
 
-exports.default = SysAdminPage;
+function mapStateToProps(state) {
+  return {
+    lang: state.lang
+  };
+}
+
+exports.default = (0, _reactRedux.connect)(mapStateToProps)(SysAdminPage);
+
+/***/ }),
+/* 44 */
+/***/ (function(module, exports) {
+
+module.exports = {"en-AU":{"title":"SysAdmin Service"},"zh-CN":{"title":"系统管理服务"}}
+
+/***/ }),
+/* 45 */
+/***/ (function(module, exports) {
+
+module.exports = {"en-AU":{"title":"DevOps Service"},"zh-CN":{"title":"开发运维服务"}}
+
+/***/ }),
+/* 46 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.WebDesignPage = undefined;
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _propTypes = __webpack_require__(1);
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
+var _reactRedux = __webpack_require__(4);
+
+var _reactHelmet = __webpack_require__(3);
+
+var _lang = __webpack_require__(47);
+
+var _lang2 = _interopRequireDefault(_lang);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var WebDesignPage = exports.WebDesignPage = function (_Component) {
+  _inherits(WebDesignPage, _Component);
+
+  function WebDesignPage() {
+    _classCallCheck(this, WebDesignPage);
+
+    return _possibleConstructorReturn(this, (WebDesignPage.__proto__ || Object.getPrototypeOf(WebDesignPage)).apply(this, arguments));
+  }
+
+  _createClass(WebDesignPage, [{
+    key: 'render',
+    value: function render() {
+      var lang = this.props.lang;
+
+
+      return _react2.default.createElement(
+        'div',
+        { className: 'webdesign' },
+        _react2.default.createElement(
+          _reactHelmet.Helmet,
+          null,
+          _react2.default.createElement(
+            'title',
+            null,
+            _lang2.default[lang.id].title
+          )
+        ),
+        _react2.default.createElement(
+          'h1',
+          { className: 'webdesign__title' },
+          _lang2.default[lang.id].title
+        )
+      );
+    }
+  }]);
+
+  return WebDesignPage;
+}(_react.Component);
+
+WebDesignPage.propTypes = {
+  lang: _propTypes2.default.object.isRequired
+};
+
+function mapStateToProps(state) {
+  return {
+    lang: state.lang
+  };
+}
+
+exports.default = (0, _reactRedux.connect)(mapStateToProps)(WebDesignPage);
+
+/***/ }),
+/* 47 */
+/***/ (function(module, exports) {
+
+module.exports = {"en-AU":{"title":"Web Design Service"},"zh-CN":{"title":"网页设计服务"}}
 
 /***/ })
 /******/ ]);

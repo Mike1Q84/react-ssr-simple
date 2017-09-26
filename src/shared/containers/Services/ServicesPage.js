@@ -4,9 +4,6 @@ import { connect } from 'react-redux';
 import { Helmet } from "react-helmet";
 import t from './_lang.json';
 
-import { Route } from 'react-router-dom';
-import routes from './routes';
-
 export class ServicesPage extends Component {
   render() {
     let { lang } = this.props;
@@ -17,7 +14,6 @@ export class ServicesPage extends Component {
           <title>{t[lang.id].title}</title>
         </Helmet>
         <h1 className="services__title">{t[lang.id].title}</h1>
-        {routes.map((route, i) => <Route key={i} {...route}/>)}
       </div>
     )
   }

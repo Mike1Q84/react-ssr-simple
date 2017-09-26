@@ -76,7 +76,7 @@ const routes = [
 
 // Process requests before hitting ssr React and cache
 app.use((req, res, next) => {
-  console.log(req.url);
+  // console.log(req.url);
   const defaultLang = 'en-AU';
 
   if (req.url.search('//') !== -1) {
@@ -89,6 +89,7 @@ app.use((req, res, next) => {
   let reqRoute = req.url.split('/')[2];
   let reqRestTokens = req.url.split('/').slice(3);
   let reqRest = reqRestTokens.join('/');
+  // console.log(reqRest);
 
   if (!reqLang || !languages.find(language => language.id === reqLang)) {
     reqLang = defaultLang;
@@ -97,22 +98,23 @@ app.use((req, res, next) => {
     reqRoute = 'home';
   }
   let matchedRoute = routes.find(route => route.route === reqRoute);
+  // console.log(matchedRoute);
 
   if (matchedRoute) {
-    if (reqRoute.hasChildren) {
-      console.log('200 Pass Route with Children');
+    if (matchedRoute.hasChildren) {
+      // console.log('200 Pass Route with Children');
       req.url = `/${reqLang}/${reqRoute}/${reqRest}`;
     } else {
       if (!reqRest) {
-        console.log('200 Pass Route without Children');
+        // console.log('200 Pass Route without Children');
         req.url = `/${reqLang}/${reqRoute}`;
       } else {
-        console.log('404 Extra Routes');
+        // console.log('404 Extra Routes');
         req.url = `/${reqLang}/404`;
       }
     }
   } else {
-    console.log('404 No Matched Routes');
+    // console.log('404 No Matched Routes');
     req.url = `/${reqLang}/404`;
   }
 
