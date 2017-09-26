@@ -60,7 +60,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 7);
+/******/ 	return __webpack_require__(__webpack_require__.s = 8);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -98,10 +98,16 @@ var SWITCH_LANGUAGE = exports.SWITCH_LANGUAGE = 'SWITCH_LANGUAGE';
 /* 3 */
 /***/ (function(module, exports) {
 
-module.exports = require("react-redux");
+module.exports = require("react-helmet");
 
 /***/ }),
 /* 4 */
+/***/ (function(module, exports) {
+
+module.exports = require("react-redux");
+
+/***/ }),
+/* 5 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -118,19 +124,19 @@ exports.default = {
 };
 
 /***/ }),
-/* 5 */
+/* 6 */
 /***/ (function(module, exports) {
 
 module.exports = require("react-router-dom");
 
 /***/ }),
-/* 6 */
+/* 7 */
 /***/ (function(module, exports) {
 
 module.exports = require("redux");
 
 /***/ }),
-/* 7 */
+/* 8 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -140,11 +146,11 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _express = __webpack_require__(9);
+var _express = __webpack_require__(10);
 
 var _express2 = _interopRequireDefault(_express);
 
-var _redis = __webpack_require__(10);
+var _redis = __webpack_require__(11);
 
 var _redis2 = _interopRequireDefault(_redis);
 
@@ -152,23 +158,23 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _server = __webpack_require__(11);
+var _server = __webpack_require__(12);
 
-var _reactRouterDom = __webpack_require__(5);
+var _reactRouterDom = __webpack_require__(6);
 
-var _reactHelmet = __webpack_require__(37);
+var _reactHelmet = __webpack_require__(3);
 
-var _App = __webpack_require__(12);
+var _App = __webpack_require__(13);
 
 var _App2 = _interopRequireDefault(_App);
 
-var _reactRedux = __webpack_require__(3);
+var _reactRedux = __webpack_require__(4);
 
-var _configureStore = __webpack_require__(29);
+var _configureStore = __webpack_require__(31);
 
 var _configureStore2 = _interopRequireDefault(_configureStore);
 
-var _serializeJavascript = __webpack_require__(36);
+var _serializeJavascript = __webpack_require__(38);
 
 var _serializeJavascript2 = _interopRequireDefault(_serializeJavascript);
 
@@ -216,10 +222,11 @@ function renderMarkup(url, store) {
 
 var languages = [{ id: 'en-AU', name: 'English(AU)' }, { id: 'zh-CN', name: '中文（简体）' }];
 
-var routes = [{ route: 'home', hasChildren: false }, { route: '404', hasChildren: false }, { route: 'about', hasChildren: false }];
+var routes = [{ route: 'home', hasChildren: false }, { route: 'services', hasChildren: false }, { route: 'service', hasChildren: true }, { route: 'about', hasChildren: false }, { route: '404', hasChildren: false }];
 
 // Process requests before hitting ssr React and cache
 app.use(function (req, res, next) {
+  console.log(req.url);
   var defaultLang = 'en-AU';
 
   if (req.url.search('//') !== -1) {
@@ -247,19 +254,19 @@ app.use(function (req, res, next) {
 
   if (matchedRoute) {
     if (reqRoute.hasChildren) {
-      // console.log('200 Pass Route with Children');
+      console.log('200 Pass Route with Children');
       req.url = '/' + reqLang + '/' + reqRoute + '/' + reqRest;
     } else {
       if (!reqRest) {
-        // console.log('200 Pass Route without Children');
+        console.log('200 Pass Route without Children');
         req.url = '/' + reqLang + '/' + reqRoute;
       } else {
-        // console.log('404 Extra Routes');
+        console.log('404 Extra Routes');
         req.url = '/' + reqLang + '/404';
       }
     }
   } else {
-    // console.log('404 No Matched Routes');
+    console.log('404 No Matched Routes');
     req.url = '/' + reqLang + '/404';
   }
 
@@ -286,6 +293,7 @@ app.get('*', function (req, res) {
             newUrl = _renderMarkup.newUrl,
             markup = _renderMarkup.markup;
 
+        console.log(newUrl);
         res.send(markup); // send ssr markup result to browser
         client.set(newUrl, markup); // store ssr markup result in redis cache
       });
@@ -301,10 +309,10 @@ if (!module.parent) {
 }
 
 exports.default = app;
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(8)(module)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(9)(module)))
 
 /***/ }),
-/* 8 */
+/* 9 */
 /***/ (function(module, exports) {
 
 module.exports = function(module) {
@@ -332,25 +340,25 @@ module.exports = function(module) {
 
 
 /***/ }),
-/* 9 */
+/* 10 */
 /***/ (function(module, exports) {
 
 module.exports = require("express");
 
 /***/ }),
-/* 10 */
+/* 11 */
 /***/ (function(module, exports) {
 
 module.exports = require("redis");
 
 /***/ }),
-/* 11 */
+/* 12 */
 /***/ (function(module, exports) {
 
 module.exports = require("react-dom/server");
 
 /***/ }),
-/* 12 */
+/* 13 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -369,23 +377,23 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactRouterDom = __webpack_require__(5);
+var _reactRouterDom = __webpack_require__(6);
 
-var _reactHelmet = __webpack_require__(37);
+var _reactHelmet = __webpack_require__(3);
 
-var _lang = __webpack_require__(38);
+var _lang = __webpack_require__(14);
 
 var _lang2 = _interopRequireDefault(_lang);
 
-var _Header = __webpack_require__(13);
+var _Header = __webpack_require__(15);
 
 var _Header2 = _interopRequireDefault(_Header);
 
-var _Footer = __webpack_require__(15);
+var _Footer = __webpack_require__(17);
 
 var _Footer2 = _interopRequireDefault(_Footer);
 
-var _routes = __webpack_require__(17);
+var _routes = __webpack_require__(19);
 
 var _routes2 = _interopRequireDefault(_routes);
 
@@ -393,11 +401,11 @@ var _propTypes = __webpack_require__(1);
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
-var _reactRedux = __webpack_require__(3);
+var _reactRedux = __webpack_require__(4);
 
-var _urlActions = __webpack_require__(25);
+var _urlActions = __webpack_require__(27);
 
-var _languageActions = __webpack_require__(26);
+var _languageActions = __webpack_require__(28);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -497,7 +505,13 @@ function mapStateToProps(state) {
 exports.default = (0, _reactRouterDom.withRouter)((0, _reactRedux.connect)(mapStateToProps)(App));
 
 /***/ }),
-/* 13 */
+/* 14 */
+/***/ (function(module, exports) {
+
+module.exports = {"en-AU":{"title":"AI Data"},"zh-CN":{"title":"爱数据"}}
+
+/***/ }),
+/* 15 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -515,11 +529,11 @@ var _propTypes = __webpack_require__(1);
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
-var _lang = __webpack_require__(14);
+var _lang = __webpack_require__(16);
 
 var _lang2 = _interopRequireDefault(_lang);
 
-var _reactRouterDom = __webpack_require__(5);
+var _reactRouterDom = __webpack_require__(6);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -590,13 +604,13 @@ Header.propTypes = {
 exports.default = Header;
 
 /***/ }),
-/* 14 */
+/* 16 */
 /***/ (function(module, exports) {
 
 module.exports = {"en-AU":{"name":"Header","lang":"Language","nav":{"home":{"id":"home","name":"Home Page"},"about":{"id":"about","name":"About Page"}}},"zh-CN":{"name":"页眉","lang":"当前语言","nav":{"home":{"id":"home","name":"网站主页"},"about":{"id":"about","name":"关于我们"}}}}
 
 /***/ }),
-/* 15 */
+/* 17 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -614,7 +628,7 @@ var _propTypes = __webpack_require__(1);
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
-var _lang = __webpack_require__(16);
+var _lang = __webpack_require__(18);
 
 var _lang2 = _interopRequireDefault(_lang);
 
@@ -641,13 +655,13 @@ Footer.propTypes = {
 exports.default = Footer;
 
 /***/ }),
-/* 16 */
+/* 18 */
 /***/ (function(module, exports) {
 
 module.exports = {"en-AU":{"name":"Footer"},"zh-CN":{"name":"页脚"}}
 
 /***/ }),
-/* 17 */
+/* 19 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -657,26 +671,30 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _HomePage = __webpack_require__(18);
+var _HomePage = __webpack_require__(20);
 
 var _HomePage2 = _interopRequireDefault(_HomePage);
 
-var _AboutPage = __webpack_require__(21);
+var _ServicesPage = __webpack_require__(39);
+
+var _ServicesPage2 = _interopRequireDefault(_ServicesPage);
+
+var _AboutPage = __webpack_require__(23);
 
 var _AboutPage2 = _interopRequireDefault(_AboutPage);
 
-var _NotFoundPage = __webpack_require__(23);
+var _NotFoundPage = __webpack_require__(25);
 
 var _NotFoundPage2 = _interopRequireDefault(_NotFoundPage);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var routes = [{ path: "/", component: _HomePage2.default, exact: true }, { path: "/:lang/", component: _HomePage2.default, exact: true }, { path: "/:lang/home", component: _HomePage2.default, exact: true }, { path: "/:lang/about", component: _AboutPage2.default, exact: true }, { path: "/:lang/404", component: _NotFoundPage2.default, exact: true }, { path: "*", component: _NotFoundPage2.default }];
+var routes = [{ path: "/", component: _HomePage2.default, exact: true }, { path: "/:lang/", component: _HomePage2.default, exact: true }, { path: "/:lang/home", component: _HomePage2.default, exact: true }, { path: "/:lang/services", component: _ServicesPage2.default, exact: true }, { path: "/:lang/about", component: _AboutPage2.default, exact: true }, { path: "/:lang/404", component: _NotFoundPage2.default, exact: true }, { path: "*", component: _NotFoundPage2.default }];
 
 exports.default = routes;
 
 /***/ }),
-/* 18 */
+/* 20 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -697,15 +715,15 @@ var _propTypes = __webpack_require__(1);
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
-var _reactRedux = __webpack_require__(3);
+var _reactRedux = __webpack_require__(4);
 
-var _reactHelmet = __webpack_require__(37);
+var _reactHelmet = __webpack_require__(3);
 
-var _lang = __webpack_require__(19);
+var _lang = __webpack_require__(21);
 
 var _lang2 = _interopRequireDefault(_lang);
 
-__webpack_require__(20);
+__webpack_require__(22);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -767,19 +785,19 @@ function mapStateToProps(state) {
 exports.default = (0, _reactRedux.connect)(mapStateToProps)(HomePage);
 
 /***/ }),
-/* 19 */
+/* 21 */
 /***/ (function(module, exports) {
 
 module.exports = {"en-AU":{"title":"Home Page"},"zh-CN":{"title":"网站首页"}}
 
 /***/ }),
-/* 20 */
+/* 22 */
 /***/ (function(module, exports) {
 
 
 
 /***/ }),
-/* 21 */
+/* 23 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -800,11 +818,11 @@ var _propTypes = __webpack_require__(1);
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
-var _reactRedux = __webpack_require__(3);
+var _reactRedux = __webpack_require__(4);
 
-var _reactHelmet = __webpack_require__(37);
+var _reactHelmet = __webpack_require__(3);
 
-var _lang = __webpack_require__(22);
+var _lang = __webpack_require__(24);
 
 var _lang2 = _interopRequireDefault(_lang);
 
@@ -868,13 +886,13 @@ function mapStateToProps(state) {
 exports.default = (0, _reactRedux.connect)(mapStateToProps)(AboutPage);
 
 /***/ }),
-/* 22 */
+/* 24 */
 /***/ (function(module, exports) {
 
 module.exports = {"en-AU":{"title":"About Page"},"zh-CN":{"title":"关于页面"}}
 
 /***/ }),
-/* 23 */
+/* 25 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -895,11 +913,11 @@ var _propTypes = __webpack_require__(1);
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
-var _reactRedux = __webpack_require__(3);
+var _reactRedux = __webpack_require__(4);
 
-var _reactHelmet = __webpack_require__(37);
+var _reactHelmet = __webpack_require__(3);
 
-var _lang = __webpack_require__(24);
+var _lang = __webpack_require__(26);
 
 var _lang2 = _interopRequireDefault(_lang);
 
@@ -963,13 +981,13 @@ function mapStateToProps(state) {
 exports.default = (0, _reactRedux.connect)(mapStateToProps)(NotFoundPage);
 
 /***/ }),
-/* 24 */
+/* 26 */
 /***/ (function(module, exports) {
 
 module.exports = {"en-AU":{"title":"404 Not Found"},"zh-CN":{"title":"404 请求的资源不存在"}}
 
 /***/ }),
-/* 25 */
+/* 27 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1003,7 +1021,7 @@ function loadUrl(url) {
 }
 
 /***/ }),
-/* 26 */
+/* 28 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1022,7 +1040,7 @@ var _actionTypes = __webpack_require__(2);
 
 var types = _interopRequireWildcard(_actionTypes);
 
-var _mockLanguageApi = __webpack_require__(27);
+var _mockLanguageApi = __webpack_require__(29);
 
 var _mockLanguageApi2 = _interopRequireDefault(_mockLanguageApi);
 
@@ -1064,7 +1082,7 @@ function loadLanguages() {
 }
 
 /***/ }),
-/* 27 */
+/* 29 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1076,7 +1094,7 @@ Object.defineProperty(exports, "__esModule", {
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _delay = __webpack_require__(28);
+var _delay = __webpack_require__(30);
 
 var _delay2 = _interopRequireDefault(_delay);
 
@@ -1120,7 +1138,7 @@ var LanguageApi = function () {
 exports.default = LanguageApi;
 
 /***/ }),
-/* 28 */
+/* 30 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1132,7 +1150,7 @@ Object.defineProperty(exports, "__esModule", {
 exports.default = 1200;
 
 /***/ }),
-/* 29 */
+/* 31 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1143,13 +1161,13 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = configureStore;
 
-var _redux = __webpack_require__(6);
+var _redux = __webpack_require__(7);
 
-var _reducers = __webpack_require__(30);
+var _reducers = __webpack_require__(32);
 
 var _reducers2 = _interopRequireDefault(_reducers);
 
-var _reduxThunk = __webpack_require__(35);
+var _reduxThunk = __webpack_require__(37);
 
 var _reduxThunk2 = _interopRequireDefault(_reduxThunk);
 
@@ -1160,7 +1178,7 @@ function configureStore(preloadedState) {
 }
 
 /***/ }),
-/* 30 */
+/* 32 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1170,21 +1188,21 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _redux = __webpack_require__(6);
+var _redux = __webpack_require__(7);
 
-var _urlReducer = __webpack_require__(31);
+var _urlReducer = __webpack_require__(33);
 
 var _urlReducer2 = _interopRequireDefault(_urlReducer);
 
-var _noLangReducer = __webpack_require__(32);
+var _noLangReducer = __webpack_require__(34);
 
 var _noLangReducer2 = _interopRequireDefault(_noLangReducer);
 
-var _langReducer = __webpack_require__(33);
+var _langReducer = __webpack_require__(35);
 
 var _langReducer2 = _interopRequireDefault(_langReducer);
 
-var _languageReducer = __webpack_require__(34);
+var _languageReducer = __webpack_require__(36);
 
 var _languageReducer2 = _interopRequireDefault(_languageReducer);
 
@@ -1200,7 +1218,7 @@ var rootReducer = (0, _redux.combineReducers)({
 exports.default = rootReducer;
 
 /***/ }),
-/* 31 */
+/* 33 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1215,7 +1233,7 @@ var _actionTypes = __webpack_require__(2);
 
 var types = _interopRequireWildcard(_actionTypes);
 
-var _initState = __webpack_require__(4);
+var _initState = __webpack_require__(5);
 
 var _initState2 = _interopRequireDefault(_initState);
 
@@ -1236,7 +1254,7 @@ function urlReducer() {
 }
 
 /***/ }),
-/* 32 */
+/* 34 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1251,7 +1269,7 @@ var _actionTypes = __webpack_require__(2);
 
 var types = _interopRequireWildcard(_actionTypes);
 
-var _initState = __webpack_require__(4);
+var _initState = __webpack_require__(5);
 
 var _initState2 = _interopRequireDefault(_initState);
 
@@ -1272,7 +1290,7 @@ function noLangReducer() {
 }
 
 /***/ }),
-/* 33 */
+/* 35 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1287,7 +1305,7 @@ var _actionTypes = __webpack_require__(2);
 
 var types = _interopRequireWildcard(_actionTypes);
 
-var _initState = __webpack_require__(4);
+var _initState = __webpack_require__(5);
 
 var _initState2 = _interopRequireDefault(_initState);
 
@@ -1308,7 +1326,7 @@ function langReducer() {
 }
 
 /***/ }),
-/* 34 */
+/* 36 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1323,7 +1341,7 @@ var _actionTypes = __webpack_require__(2);
 
 var types = _interopRequireWildcard(_actionTypes);
 
-var _initState = __webpack_require__(4);
+var _initState = __webpack_require__(5);
 
 var _initState2 = _interopRequireDefault(_initState);
 
@@ -1344,28 +1362,233 @@ function languageReducer() {
 }
 
 /***/ }),
-/* 35 */
+/* 37 */
 /***/ (function(module, exports) {
 
 module.exports = require("redux-thunk");
 
 /***/ }),
-/* 36 */
+/* 38 */
 /***/ (function(module, exports) {
 
 module.exports = require("serialize-javascript");
 
 /***/ }),
-/* 37 */
-/***/ (function(module, exports) {
+/* 39 */
+/***/ (function(module, exports, __webpack_require__) {
 
-module.exports = require("react-helmet");
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.ServicesPage = undefined;
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _propTypes = __webpack_require__(1);
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
+var _reactRedux = __webpack_require__(4);
+
+var _reactHelmet = __webpack_require__(3);
+
+var _lang = __webpack_require__(40);
+
+var _lang2 = _interopRequireDefault(_lang);
+
+var _reactRouterDom = __webpack_require__(6);
+
+var _routes = __webpack_require__(41);
+
+var _routes2 = _interopRequireDefault(_routes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var ServicesPage = exports.ServicesPage = function (_Component) {
+  _inherits(ServicesPage, _Component);
+
+  function ServicesPage() {
+    _classCallCheck(this, ServicesPage);
+
+    return _possibleConstructorReturn(this, (ServicesPage.__proto__ || Object.getPrototypeOf(ServicesPage)).apply(this, arguments));
+  }
+
+  _createClass(ServicesPage, [{
+    key: 'render',
+    value: function render() {
+      var lang = this.props.lang;
+
+
+      return _react2.default.createElement(
+        'div',
+        { className: 'services' },
+        _react2.default.createElement(
+          _reactHelmet.Helmet,
+          null,
+          _react2.default.createElement(
+            'title',
+            null,
+            _lang2.default[lang.id].title
+          )
+        ),
+        _react2.default.createElement(
+          'h1',
+          { className: 'services__title' },
+          _lang2.default[lang.id].title
+        ),
+        _routes2.default.map(function (route, i) {
+          return _react2.default.createElement(_reactRouterDom.Route, _extends({ key: i }, route));
+        })
+      );
+    }
+  }]);
+
+  return ServicesPage;
+}(_react.Component);
+
+ServicesPage.propTypes = {
+  lang: _propTypes2.default.object.isRequired
+};
+
+function mapStateToProps(state) {
+  return {
+    lang: state.lang
+  };
+}
+
+exports.default = (0, _reactRedux.connect)(mapStateToProps)(ServicesPage);
 
 /***/ }),
-/* 38 */
+/* 40 */
 /***/ (function(module, exports) {
 
-module.exports = {"en-AU":{"title":"AI Data"},"zh-CN":{"title":"爱数据"}}
+module.exports = {"en-AU":{"title":"Services Page"},"zh-CN":{"title":"服务页面"}}
+
+/***/ }),
+/* 41 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _DevOpsPage = __webpack_require__(42);
+
+var _DevOpsPage2 = _interopRequireDefault(_DevOpsPage);
+
+var _SysAdminPage = __webpack_require__(43);
+
+var _SysAdminPage2 = _interopRequireDefault(_SysAdminPage);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var routes = [{ path: "/:lang/service/devops", component: _DevOpsPage2.default, exact: true }, { path: "/:lang/service/sysadmin", component: _SysAdminPage2.default, exact: true }];
+
+exports.default = routes;
+
+/***/ }),
+/* 42 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _propTypes = __webpack_require__(1);
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+// import t from './_lang.json';
+
+var DevOpsPage = function DevOpsPage(_ref) {
+  var lang = _ref.lang;
+
+  return _react2.default.createElement(
+    'div',
+    { className: 'devops' },
+    _react2.default.createElement(
+      'h1',
+      { className: 'devops__title' },
+      'DevOps Page'
+    )
+  );
+};
+
+DevOpsPage.propTypes = {
+  lang: _propTypes2.default.object.isRequired
+};
+
+exports.default = DevOpsPage;
+
+/***/ }),
+/* 43 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _propTypes = __webpack_require__(1);
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+// import t from './_lang.json';
+
+var SysAdminPage = function SysAdminPage(_ref) {
+  var lang = _ref.lang;
+
+  return _react2.default.createElement(
+    'div',
+    { className: 'sysadmin' },
+    _react2.default.createElement(
+      'h1',
+      { className: 'sysadmin__title' },
+      'SysAdmin Page'
+    )
+  );
+};
+
+SysAdminPage.propTypes = {
+  lang: _propTypes2.default.object.isRequired
+};
+
+exports.default = SysAdminPage;
 
 /***/ })
 /******/ ]);

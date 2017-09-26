@@ -68,12 +68,15 @@ const languages = [
 
 const routes = [
   { route: 'home', hasChildren: false },
-  { route: '404', hasChildren: false },
-  { route: 'about', hasChildren: false }
+  { route: 'services', hasChildren: false },
+  { route: 'service', hasChildren: true },
+  { route: 'about', hasChildren: false },
+  { route: '404', hasChildren: false }
 ];
 
 // Process requests before hitting ssr React and cache
 app.use((req, res, next) => {
+  console.log(req.url);
   const defaultLang = 'en-AU';
 
   if (req.url.search('//') !== -1) {
@@ -97,19 +100,19 @@ app.use((req, res, next) => {
 
   if (matchedRoute) {
     if (reqRoute.hasChildren) {
-      // console.log('200 Pass Route with Children');
+      console.log('200 Pass Route with Children');
       req.url = `/${reqLang}/${reqRoute}/${reqRest}`;
     } else {
       if (!reqRest) {
-        // console.log('200 Pass Route without Children');
+        console.log('200 Pass Route without Children');
         req.url = `/${reqLang}/${reqRoute}`;
       } else {
-        // console.log('404 Extra Routes');
+        console.log('404 Extra Routes');
         req.url = `/${reqLang}/404`;
       }
     }
   } else {
-    // console.log('404 No Matched Routes');
+    console.log('404 No Matched Routes');
     req.url = `/${reqLang}/404`;
   }
 
@@ -132,6 +135,7 @@ app.get('*', (req, res) => {
       store.dispatch(initAllLangActions(lang))
         .then(() => {
           const {newUrl, markup} = renderMarkup(url, store);
+          console.log(newUrl);
           res.send(markup); // send ssr markup result to browser
           client.set(newUrl, markup); // store ssr markup result in redis cache
         });

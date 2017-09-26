@@ -1,4 +1,5 @@
 import HomePage from './containers/Home/HomePage';
+import ServicesPage from './containers/Services/ServicesPage';
 import AboutPage from './containers/About/AboutPage';
 import NotFoundPage from './containers/404/NotFoundPage';
 
@@ -6,6 +7,7 @@ const routes = [
   {path: "/", component: HomePage, exact: true},
   {path: "/:lang/", component: HomePage, exact: true},
   {path: "/:lang/home", component: HomePage, exact: true},
+  {path: "/:lang/services", component: ServicesPage, exact: true},
   {path: "/:lang/about", component: AboutPage, exact: true},
   {path: "/:lang/404", component: NotFoundPage, exact: true},
   {path: "*", component: NotFoundPage}
