@@ -178,14 +178,19 @@ var _serializeJavascript = __webpack_require__(38);
 
 var _serializeJavascript2 = _interopRequireDefault(_serializeJavascript);
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+var _mockUrlApi = __webpack_require__(48);
 
-// import languageApi from '../api/mockLanguageApi';
+var _mockUrlApi2 = _interopRequireDefault(_mockUrlApi);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /* eslint-disable no-console */
 
 var NODE_PORT = 3000;
 // const REDIS_PORT = 6379;
+
+
+// import languageApi from '../api/mockLanguageApi';
 var app = (0, _express2.default)();
 var client = _redis2.default.createClient({
   host: 'redis' // ECONNREFUSED https://github.com/docker-library/redis/issues/45
@@ -201,7 +206,6 @@ function initAllLangActions(lang) {
 
 function renderMarkup(url, store) {
   var initialData = store.getState();
-  var newUrl = url;
   var context = {};
 
   var rendered = (0, _server.renderToString)(_react2.default.createElement(
@@ -209,7 +213,7 @@ function renderMarkup(url, store) {
     { store: store },
     _react2.default.createElement(
       _reactRouterDom.StaticRouter,
-      { location: newUrl, context: context },
+      { location: url, context: context },
       _react2.default.createElement(_App2.default, null)
     )
   ));
@@ -217,66 +221,65 @@ function renderMarkup(url, store) {
 
   var markup = '<!DOCTYPE html>\n  <head>\n    ' + helmet.meta.toString() + '\n    ' + helmet.title.toString() + '\n    <link rel="stylesheet" href="/css/main.css">\n    <script src="/bundle.js" defer></script>\n    <script>window.__initialData__ = ' + (0, _serializeJavascript2.default)(initialData) + '</script>\n  </head>\n  <body>\n    <div id="root">' + rendered + '</div>\n  </body>\n</html>';
 
-  return { newUrl: newUrl, markup: markup };
+  return markup;
 }
 
-var languages = [{ id: 'en-AU', name: 'English(AU)' }, { id: 'zh-CN', name: '中文（简体）' }];
-
-var routes = [{ route: 'home', hasChildren: false }, { route: 'services', hasChildren: false }, { route: 'service', hasChildren: true }, { route: 'about', hasChildren: false }, { route: '404', hasChildren: false }];
-
-// Process requests before hitting ssr React and cache
-app.use(function (req, res, next) {
-  // console.log(req.url);
+function processReqUrl(reqUrl, urls) {
   var defaultLang = 'en-AU';
 
-  if (req.url.search('//') !== -1) {
-    req.url = '/' + defaultLang + '/404';
+  if (reqUrl.search('//') !== -1) {
+    reqUrl = '/' + defaultLang + '/404';
+    return reqUrl;
   }
-  if (req.url.slice(-1) === '/') {
-    req.url = req.url.slice(0, -1);
+  if (reqUrl.slice(-1) === '/') {
+    reqUrl = reqUrl.slice(0, -1);
   }
-  var reqLang = req.url.split('/')[1];
-  var reqRoute = req.url.split('/')[2];
-  var reqRestTokens = req.url.split('/').slice(3);
-  var reqRest = reqRestTokens.join('/');
-  // console.log(reqRest);
-
-  if (!reqLang || !languages.find(function (language) {
-    return language.id === reqLang;
-  })) {
+  var reqLang = reqUrl.split('/')[1];
+  var reqRoute = reqUrl.split('/')[2];
+  if (!reqLang) {
     reqLang = defaultLang;
   }
   if (!reqRoute) {
     reqRoute = 'home';
   }
-  var matchedRoute = routes.find(function (route) {
-    return route.route === reqRoute;
+  var matchedUrl = urls.find(function (url) {
+    return url === '/' + reqLang + '/' + reqRoute;
   });
-  // console.log(matchedRoute);
-
-  if (matchedRoute) {
-    if (matchedRoute.hasChildren) {
-      // console.log('200 Pass Route with Children');
-      req.url = '/' + reqLang + '/' + reqRoute + '/' + reqRest;
-    } else {
-      if (!reqRest) {
-        // console.log('200 Pass Route without Children');
-        req.url = '/' + reqLang + '/' + reqRoute;
-      } else {
-        // console.log('404 Extra Routes');
-        req.url = '/' + reqLang + '/404';
-      }
-    }
+  if (matchedUrl) {
+    return matchedUrl;
   } else {
-    // console.log('404 No Matched Routes');
-    req.url = '/' + reqLang + '/404';
+    return '/' + defaultLang + '/404';
   }
+}
 
-  next();
+// Process requests before hitting ssr React and cache
+app.use(function (req, res, next) {
+  client.hgetall("urls", function (err, res) {
+    if (err) throw err;
+
+    if (res == null) {
+      // check available urls cache in redis first
+      Promise.resolve(_mockUrlApi2.default.getAllUrls()).then(function (resUrls) {
+        resUrls.map(function (url) {
+          client.hset("urls", url, url);
+        });
+        req.url = processReqUrl(req.url, resUrls);
+        next();
+      });
+    } else {
+      var urls = [];
+      for (var url in res) {
+        urls.push(res[url]);
+      }
+      req.url = processReqUrl(req.url, urls);
+      next();
+    }
+  });
 });
 
 app.get('*', function (req, res) {
   var url = req.url;
+  console.log(url);
   var lang = url.split('/')[1];
   var store = (0, _configureStore2.default)();
   store.dispatch(_App2.default.initUrl(url));
@@ -291,13 +294,9 @@ app.get('*', function (req, res) {
     } else {
       // server-side rendering through React's renderToString
       store.dispatch(initAllLangActions(lang)).then(function () {
-        var _renderMarkup = renderMarkup(url, store),
-            newUrl = _renderMarkup.newUrl,
-            markup = _renderMarkup.markup;
-
-        console.log(newUrl);
+        var markup = renderMarkup(url, store);
         res.send(markup); // send ssr markup result to browser
-        client.set(newUrl, markup); // store ssr markup result in redis cache
+        client.set(url, markup); // store ssr markup result in redis cache
       });
     } // server-side rendering through React's renderToString
   }); // redis client
@@ -1161,7 +1160,7 @@ exports.default = LanguageApi;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.default = 1200;
+exports.default = 600;
 
 /***/ }),
 /* 31 */
@@ -1767,6 +1766,50 @@ exports.default = (0, _reactRedux.connect)(mapStateToProps)(WebDesignPage);
 /***/ (function(module, exports) {
 
 module.exports = {"en-AU":{"title":"Web Design Service"},"zh-CN":{"title":"网页设计服务"}}
+
+/***/ }),
+/* 48 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _delay = __webpack_require__(30);
+
+var _delay2 = _interopRequireDefault(_delay);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var urls = ['/en-AU/home', '/zh-CN/home', '/en-AU/about', '/zh-CN/about', '/en-AU/404', '/zh-CN/404', '/en-AU/services', '/zh-CN/services', '/en-AU/service/devops', '/zh-CN/service/devops', '/en-AU/service/sysadmin', '/zh-CN/service/sysadmin', '/en-AU/service/webdesign', '/zh-CN/service/webdesign'];
+
+var UrlApi = function () {
+  function UrlApi() {
+    _classCallCheck(this, UrlApi);
+  }
+
+  _createClass(UrlApi, null, [{
+    key: 'getAllUrls',
+    value: function getAllUrls() {
+      return new Promise(function (resolve) {
+        setTimeout(function () {
+          resolve(Object.assign([], urls));
+        }, _delay2.default);
+      });
+    }
+  }]);
+
+  return UrlApi;
+}();
+
+exports.default = UrlApi;
 
 /***/ })
 /******/ ]);

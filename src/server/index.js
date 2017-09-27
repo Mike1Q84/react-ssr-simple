@@ -12,6 +12,7 @@ import configureStore from "../store/configureStore";
 import serialize from "serialize-javascript";
 
 // import languageApi from '../api/mockLanguageApi';
+import urlApi from '../api/mockUrlApi';
 
 /* eslint-disable no-console */
 
@@ -33,12 +34,11 @@ function initAllLangActions(lang) {
 
 function renderMarkup(url, store) {
   const initialData = store.getState();
-  let newUrl = url;
   const context = {};
 
   const rendered = renderToString(
     <Provider store={store}>
-      <StaticRouter location={newUrl} context={context}>
+      <StaticRouter location={url} context={context}>
         <App />
       </StaticRouter>
     </Provider>
@@ -58,72 +58,65 @@ function renderMarkup(url, store) {
   </body>
 </html>`;
 
-  return {newUrl, markup};
+  return markup;
 }
 
-const languages = [
-  { id: 'en-AU', name: 'English(AU)' },
-  { id: 'zh-CN', name: '中文（简体）' }
-];
 
-const routes = [
-  { route: 'home', hasChildren: false },
-  { route: 'services', hasChildren: false },
-  { route: 'service', hasChildren: true },
-  { route: 'about', hasChildren: false },
-  { route: '404', hasChildren: false }
-];
-
-// Process requests before hitting ssr React and cache
-app.use((req, res, next) => {
-  // console.log(req.url);
+function processReqUrl(reqUrl, urls) {
   const defaultLang = 'en-AU';
 
-  if (req.url.search('//') !== -1) {
-    req.url = `/${defaultLang}/404`;
+  if (reqUrl.search('//') !== -1) {
+    reqUrl = `/${defaultLang}/404`;
+    return reqUrl;
   }
-  if (req.url.slice(-1) === '/') {
-    req.url = req.url.slice(0, -1);
+  if (reqUrl.slice(-1) === '/') {
+    reqUrl = reqUrl.slice(0, -1);
   }
-  let reqLang = req.url.split('/')[1];
-  let reqRoute = req.url.split('/')[2];
-  let reqRestTokens = req.url.split('/').slice(3);
-  let reqRest = reqRestTokens.join('/');
-  // console.log(reqRest);
-
-  if (!reqLang || !languages.find(language => language.id === reqLang)) {
+  let reqLang = reqUrl.split('/')[1];
+  let reqRoute = reqUrl.split('/')[2];
+  if (!reqLang) {
     reqLang = defaultLang;
   }
   if (!reqRoute) {
     reqRoute = 'home';
   }
-  let matchedRoute = routes.find(route => route.route === reqRoute);
-  // console.log(matchedRoute);
-
-  if (matchedRoute) {
-    if (matchedRoute.hasChildren) {
-      // console.log('200 Pass Route with Children');
-      req.url = `/${reqLang}/${reqRoute}/${reqRest}`;
-    } else {
-      if (!reqRest) {
-        // console.log('200 Pass Route without Children');
-        req.url = `/${reqLang}/${reqRoute}`;
-      } else {
-        // console.log('404 Extra Routes');
-        req.url = `/${reqLang}/404`;
-      }
-    }
+  let matchedUrl = urls.find(url => url === `/${reqLang}/${reqRoute}`);
+  if (matchedUrl) {
+    return matchedUrl;
   } else {
-    // console.log('404 No Matched Routes');
-    req.url = `/${reqLang}/404`;
+    return `/${defaultLang}/404`;
   }
+}
 
-  next();
+// Process requests before hitting ssr React and cache
+app.use((req, res, next) => {
+  client.hgetall("urls", (err, res) => {
+    if (err) throw err;
+
+    if (res == null) { // check available urls cache in redis first
+      Promise.resolve(urlApi.getAllUrls())
+        .then((resUrls) => {
+          resUrls.map((url) => {
+            client.hset("urls", url, url);
+          });
+          req.url = processReqUrl(req.url, resUrls);
+          next();
+        });
+    } else {
+      let urls = []
+      for (let url in res) {
+        urls.push(res[url]);
+      }
+      req.url = processReqUrl(req.url, urls);
+      next();
+    }
+  });
 });
 
 
 app.get('*', (req, res) => {
   let url = req.url;
+  console.log(url);
   let lang = url.split('/')[1];
   const store = configureStore();
   store.dispatch(App.initUrl(url));
@@ -136,10 +129,9 @@ app.get('*', (req, res) => {
     } else { // server-side rendering through React's renderToString
       store.dispatch(initAllLangActions(lang))
         .then(() => {
-          const {newUrl, markup} = renderMarkup(url, store);
-          console.log(newUrl);
+          const markup = renderMarkup(url, store);
           res.send(markup); // send ssr markup result to browser
-          client.set(newUrl, markup); // store ssr markup result in redis cache
+          client.set(url, markup); // store ssr markup result in redis cache
         });
     } // server-side rendering through React's renderToString
   }); // redis client
