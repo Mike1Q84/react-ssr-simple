@@ -235,15 +235,16 @@ function processReqUrl(reqUrl, urls) {
     reqUrl = reqUrl.slice(0, -1);
   }
   var reqLang = reqUrl.split('/')[1];
-  var reqRoute = reqUrl.split('/')[2];
+  var reqRestTokens = reqUrl.split('/').slice(2);
+  var reqRest = reqRestTokens.join('/');
   if (!reqLang) {
     reqLang = defaultLang;
   }
-  if (!reqRoute) {
-    reqRoute = 'home';
+  if (!reqRest) {
+    reqRest = 'home';
   }
   var matchedUrl = urls.find(function (url) {
-    return url === '/' + reqLang + '/' + reqRoute;
+    return url === '/' + reqLang + '/' + reqRest;
   });
   if (matchedUrl) {
     return matchedUrl;
@@ -279,7 +280,6 @@ app.use(function (req, res, next) {
 
 app.get('*', function (req, res) {
   var url = req.url;
-  console.log(url);
   var lang = url.split('/')[1];
   var store = (0, _configureStore2.default)();
   store.dispatch(_App2.default.initUrl(url));

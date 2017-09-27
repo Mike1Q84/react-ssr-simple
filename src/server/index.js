@@ -73,14 +73,15 @@ function processReqUrl(reqUrl, urls) {
     reqUrl = reqUrl.slice(0, -1);
   }
   let reqLang = reqUrl.split('/')[1];
-  let reqRoute = reqUrl.split('/')[2];
+  let reqRestTokens = reqUrl.split('/').slice(2);
+  let reqRest = reqRestTokens.join('/');
   if (!reqLang) {
     reqLang = defaultLang;
   }
-  if (!reqRoute) {
-    reqRoute = 'home';
+  if (!reqRest) {
+    reqRest = 'home';
   }
-  let matchedUrl = urls.find(url => url === `/${reqLang}/${reqRoute}`);
+  let matchedUrl = urls.find(url => url === `/${reqLang}/${reqRest}`);
   if (matchedUrl) {
     return matchedUrl;
   } else {
@@ -116,7 +117,6 @@ app.use((req, res, next) => {
 
 app.get('*', (req, res) => {
   let url = req.url;
-  console.log(url);
   let lang = url.split('/')[1];
   const store = configureStore();
   store.dispatch(App.initUrl(url));
