@@ -22,9 +22,9 @@ export class BlogsPage extends Component {
         <h1 className="blogs__title">{t[lang.id].title}</h1>
         <Switch>
           <Route path='/:lang/blog'
-            render={() => <BlogCategoryPage />} exact />
+            render={() => <BlogCategoryPage lang={lang} />} exact />
           <Route path='/:lang/blog/:entry'
-            render={() => <BlogDetailPage />} />
+            render={() => <BlogDetailPage lang={lang} />} />
         </Switch>
       </div>
     )

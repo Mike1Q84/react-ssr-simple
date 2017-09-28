@@ -1,21 +1,21 @@
 import React from 'react';
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import { Helmet } from "react-helmet";
-// import t from './_lang.json';
+import t from './_lang.json';
 
-const BlogDetailPage = () => {
+const BlogDetailPage = ({lang}) => {
   return (
     <div className="blog-detail">
       <Helmet>
-        <title>Blog Detail Page</title>
+        <title>{t[lang.id].title}</title>
       </Helmet>
-      <h1 className="blog-detail__title">Blog Detail Page</h1>
+      <h1 className="blog-detail__title">{t[lang.id].title}</h1>
     </div>
   );
 };
 
-// BlogDetailPage.propTypes = {
-//   lang: PropTypes.object.isRequired
-// };
+BlogDetailPage.propTypes = {
+  lang: PropTypes.object.isRequired
+};
 
 export default BlogDetailPage;

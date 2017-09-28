@@ -1904,11 +1904,11 @@ var BlogsPage = exports.BlogsPage = function (_Component) {
           null,
           _react2.default.createElement(_reactRouterDom.Route, { path: '/:lang/blog',
             render: function render() {
-              return _react2.default.createElement(_BlogCategoryPage2.default, null);
+              return _react2.default.createElement(_BlogCategoryPage2.default, { lang: lang });
             }, exact: true }),
           _react2.default.createElement(_reactRouterDom.Route, { path: '/:lang/blog/:entry',
             render: function render() {
-              return _react2.default.createElement(_BlogDetailPage2.default, null);
+              return _react2.default.createElement(_BlogDetailPage2.default, { lang: lang });
             } })
         )
       );
@@ -1947,38 +1947,45 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
+var _propTypes = __webpack_require__(1);
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
 var _reactHelmet = __webpack_require__(3);
+
+var _lang = __webpack_require__(54);
+
+var _lang2 = _interopRequireDefault(_lang);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-// import t from './_lang.json';
+var BlogCategoryPage = function BlogCategoryPage(_ref) {
+  var lang = _ref.lang;
 
-var BlogCategoryPage = function BlogCategoryPage() {
   return _react2.default.createElement(
-    "div",
-    { className: "blog-category" },
+    'div',
+    { className: 'blog-category' },
     _react2.default.createElement(
       _reactHelmet.Helmet,
       null,
       _react2.default.createElement(
-        "title",
+        'title',
         null,
-        "Blog Category Page"
+        _lang2.default[lang.id].title
       )
     ),
     _react2.default.createElement(
-      "h1",
-      { className: "blog-category__title" },
-      "Blog Category Page"
+      'h1',
+      { className: 'blog-category__title' },
+      _lang2.default[lang.id].title
     )
   );
 };
 
-// BlogCategoryPage.propTypes = {
-//   lang: PropTypes.object.isRequired
-// };
+BlogCategoryPage.propTypes = {
+  lang: _propTypes2.default.object.isRequired
+};
 
-// import PropTypes from 'prop-types';
 exports.default = BlogCategoryPage;
 
 /***/ }),
@@ -1996,38 +2003,45 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
+var _propTypes = __webpack_require__(1);
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
 var _reactHelmet = __webpack_require__(3);
+
+var _lang = __webpack_require__(53);
+
+var _lang2 = _interopRequireDefault(_lang);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-// import t from './_lang.json';
+var BlogDetailPage = function BlogDetailPage(_ref) {
+  var lang = _ref.lang;
 
-var BlogDetailPage = function BlogDetailPage() {
   return _react2.default.createElement(
-    "div",
-    { className: "blog-detail" },
+    'div',
+    { className: 'blog-detail' },
     _react2.default.createElement(
       _reactHelmet.Helmet,
       null,
       _react2.default.createElement(
-        "title",
+        'title',
         null,
-        "Blog Detail Page"
+        _lang2.default[lang.id].title
       )
     ),
     _react2.default.createElement(
-      "h1",
-      { className: "blog-detail__title" },
-      "Blog Detail Page"
+      'h1',
+      { className: 'blog-detail__title' },
+      _lang2.default[lang.id].title
     )
   );
 };
 
-// BlogDetailPage.propTypes = {
-//   lang: PropTypes.object.isRequired
-// };
+BlogDetailPage.propTypes = {
+  lang: _propTypes2.default.object.isRequired
+};
 
-// import PropTypes from 'prop-types';
 exports.default = BlogDetailPage;
 
 /***/ }),
@@ -2035,6 +2049,18 @@ exports.default = BlogDetailPage;
 /***/ (function(module, exports) {
 
 module.exports = {"en-AU":{"title":"Blogs Page"},"zh-CN":{"title":"博客页面"}}
+
+/***/ }),
+/* 53 */
+/***/ (function(module, exports) {
+
+module.exports = {"en-AU":{"title":"Blog Detail Page"},"zh-CN":{"title":"博客详情页面"}}
+
+/***/ }),
+/* 54 */
+/***/ (function(module, exports) {
+
+module.exports = {"en-AU":{"title":"Blog Category Page"},"zh-CN":{"title":"博客分类页面"}}
 
 /***/ })
 /******/ ]);
