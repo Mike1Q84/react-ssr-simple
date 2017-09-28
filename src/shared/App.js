@@ -37,7 +37,7 @@ export class App extends Component {
 
   render() {
     let { lang } = this.props;
-    
+
     return (
       <div className="App">
         <Helmet

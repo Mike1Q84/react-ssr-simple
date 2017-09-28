@@ -676,6 +676,10 @@ var _HomePage = __webpack_require__(20);
 
 var _HomePage2 = _interopRequireDefault(_HomePage);
 
+var _AboutPage = __webpack_require__(23);
+
+var _AboutPage2 = _interopRequireDefault(_AboutPage);
+
 var _ServicesPage = __webpack_require__(39);
 
 var _ServicesPage2 = _interopRequireDefault(_ServicesPage);
@@ -692,9 +696,9 @@ var _WebDesignPage = __webpack_require__(46);
 
 var _WebDesignPage2 = _interopRequireDefault(_WebDesignPage);
 
-var _AboutPage = __webpack_require__(23);
+var _BlogsPage = __webpack_require__(49);
 
-var _AboutPage2 = _interopRequireDefault(_AboutPage);
+var _BlogsPage2 = _interopRequireDefault(_BlogsPage);
 
 var _NotFoundPage = __webpack_require__(25);
 
@@ -702,7 +706,7 @@ var _NotFoundPage2 = _interopRequireDefault(_NotFoundPage);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var routes = [{ path: "/", component: _HomePage2.default, exact: true }, { path: "/:lang/", component: _HomePage2.default, exact: true }, { path: "/:lang/home", component: _HomePage2.default, exact: true }, { path: "/:lang/services", component: _ServicesPage2.default, exact: true }, { path: "/:lang/service/devops", component: _DevOpsPage2.default, exact: true }, { path: "/:lang/service/sysadmin", component: _SysAdminPage2.default, exact: true }, { path: "/:lang/service/webdesign", component: _WebDesignPage2.default, exact: true }, { path: "/:lang/about", component: _AboutPage2.default, exact: true }, { path: "/:lang/404", component: _NotFoundPage2.default, exact: true }, { path: "*", component: _NotFoundPage2.default }];
+var routes = [{ path: "/", component: _HomePage2.default, exact: true }, { path: "/:lang/", component: _HomePage2.default, exact: true }, { path: "/:lang/home", component: _HomePage2.default, exact: true }, { path: "/:lang/about", component: _AboutPage2.default, exact: true }, { path: "/:lang/blog", component: _BlogsPage2.default }, { path: "/:lang/services", component: _ServicesPage2.default, exact: true }, { path: "/:lang/service/devops", component: _DevOpsPage2.default, exact: true }, { path: "/:lang/service/sysadmin", component: _SysAdminPage2.default, exact: true }, { path: "/:lang/service/webdesign", component: _WebDesignPage2.default, exact: true }, { path: "/:lang/404", component: _NotFoundPage2.default, exact: true }, { path: "*", component: _NotFoundPage2.default }];
 
 exports.default = routes;
 
@@ -1788,7 +1792,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-var urls = ['/en-AU/home', '/zh-CN/home', '/en-AU/about', '/zh-CN/about', '/en-AU/404', '/zh-CN/404', '/en-AU/services', '/zh-CN/services', '/en-AU/service/devops', '/zh-CN/service/devops', '/en-AU/service/sysadmin', '/zh-CN/service/sysadmin', '/en-AU/service/webdesign', '/zh-CN/service/webdesign'];
+var urls = ['/en-AU/home', '/zh-CN/home', '/en-AU/about', '/zh-CN/about', '/en-AU/blogs', '/zh-CN/blogs', '/en-AU/blog', '/zh-CN/blog', '/en-AU/blog/1', '/zh-CN/blog/1', '/en-AU/blog/2', '/zh-CN/blog/2', '/en-AU/blog/3', '/zh-CN/blog/3', '/en-AU/services', '/zh-CN/services', '/en-AU/service/devops', '/zh-CN/service/devops', '/en-AU/service/sysadmin', '/zh-CN/service/sysadmin', '/en-AU/service/webdesign', '/zh-CN/service/webdesign', '/en-AU/404', '/zh-CN/404'];
 
 var UrlApi = function () {
   function UrlApi() {
@@ -1810,6 +1814,227 @@ var UrlApi = function () {
 }();
 
 exports.default = UrlApi;
+
+/***/ }),
+/* 49 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.BlogsPage = undefined;
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactRouterDom = __webpack_require__(6);
+
+var _propTypes = __webpack_require__(1);
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
+var _reactRedux = __webpack_require__(4);
+
+var _reactHelmet = __webpack_require__(3);
+
+var _lang = __webpack_require__(52);
+
+var _lang2 = _interopRequireDefault(_lang);
+
+var _BlogCategoryPage = __webpack_require__(50);
+
+var _BlogCategoryPage2 = _interopRequireDefault(_BlogCategoryPage);
+
+var _BlogDetailPage = __webpack_require__(51);
+
+var _BlogDetailPage2 = _interopRequireDefault(_BlogDetailPage);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var BlogsPage = exports.BlogsPage = function (_Component) {
+  _inherits(BlogsPage, _Component);
+
+  function BlogsPage() {
+    _classCallCheck(this, BlogsPage);
+
+    return _possibleConstructorReturn(this, (BlogsPage.__proto__ || Object.getPrototypeOf(BlogsPage)).apply(this, arguments));
+  }
+
+  _createClass(BlogsPage, [{
+    key: 'render',
+    value: function render() {
+      var _props = this.props,
+          url = _props.url,
+          lang = _props.lang;
+
+      var n = url.lastIndexOf('/');
+      var is404 = url.substring(n + 1) === '404';
+
+      return _react2.default.createElement(
+        'div',
+        { className: 'blogs' },
+        _react2.default.createElement(
+          _reactHelmet.Helmet,
+          null,
+          _react2.default.createElement(
+            'title',
+            null,
+            _lang2.default[lang.id].title
+          )
+        ),
+        _react2.default.createElement(
+          'h1',
+          { className: 'blogs__title' },
+          _lang2.default[lang.id].title
+        ),
+        _react2.default.createElement(
+          _reactRouterDom.Switch,
+          null,
+          _react2.default.createElement(_reactRouterDom.Route, { path: '/:lang/blog',
+            render: function render() {
+              return _react2.default.createElement(_BlogCategoryPage2.default, null);
+            }, exact: true }),
+          _react2.default.createElement(_reactRouterDom.Route, { path: '/:lang/blog/:entry',
+            render: function render() {
+              return _react2.default.createElement(_BlogDetailPage2.default, null);
+            } })
+        )
+      );
+    }
+  }]);
+
+  return BlogsPage;
+}(_react.Component);
+
+BlogsPage.propTypes = {
+  url: _propTypes2.default.string.isRequired,
+  lang: _propTypes2.default.object.isRequired
+};
+
+function mapStateToProps(state) {
+  return {
+    url: state.url,
+    lang: state.lang
+  };
+}
+
+exports.default = (0, _reactRedux.connect)(mapStateToProps)(BlogsPage);
+
+/***/ }),
+/* 50 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactHelmet = __webpack_require__(3);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+// import t from './_lang.json';
+
+var BlogCategoryPage = function BlogCategoryPage() {
+  return _react2.default.createElement(
+    "div",
+    { className: "blog-category" },
+    _react2.default.createElement(
+      _reactHelmet.Helmet,
+      null,
+      _react2.default.createElement(
+        "title",
+        null,
+        "Blog Category Page"
+      )
+    ),
+    _react2.default.createElement(
+      "h1",
+      { className: "blog-category__title" },
+      "Blog Category Page"
+    )
+  );
+};
+
+// BlogCategoryPage.propTypes = {
+//   lang: PropTypes.object.isRequired
+// };
+
+// import PropTypes from 'prop-types';
+exports.default = BlogCategoryPage;
+
+/***/ }),
+/* 51 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactHelmet = __webpack_require__(3);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+// import t from './_lang.json';
+
+var BlogDetailPage = function BlogDetailPage() {
+  return _react2.default.createElement(
+    "div",
+    { className: "blog-detail" },
+    _react2.default.createElement(
+      _reactHelmet.Helmet,
+      null,
+      _react2.default.createElement(
+        "title",
+        null,
+        "Blog Detail Page"
+      )
+    ),
+    _react2.default.createElement(
+      "h1",
+      { className: "blog-detail__title" },
+      "Blog Detail Page"
+    )
+  );
+};
+
+// BlogDetailPage.propTypes = {
+//   lang: PropTypes.object.isRequired
+// };
+
+// import PropTypes from 'prop-types';
+exports.default = BlogDetailPage;
+
+/***/ }),
+/* 52 */
+/***/ (function(module, exports) {
+
+module.exports = {"en-AU":{"title":"Blogs Page"},"zh-CN":{"title":"博客页面"}}
 
 /***/ })
 /******/ ]);

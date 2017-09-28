@@ -5,8 +5,16 @@ const urls = [
   '/zh-CN/home',
   '/en-AU/about',
   '/zh-CN/about',
-  '/en-AU/404',
-  '/zh-CN/404',
+  '/en-AU/blogs',
+  '/zh-CN/blogs',
+  '/en-AU/blog',
+  '/zh-CN/blog',
+  '/en-AU/blog/1',
+  '/zh-CN/blog/1',
+  '/en-AU/blog/2',
+  '/zh-CN/blog/2',
+  '/en-AU/blog/3',
+  '/zh-CN/blog/3',
   '/en-AU/services',
   '/zh-CN/services',
   '/en-AU/service/devops',
@@ -14,7 +22,9 @@ const urls = [
   '/en-AU/service/sysadmin',
   '/zh-CN/service/sysadmin',
   '/en-AU/service/webdesign',
-  '/zh-CN/service/webdesign'
+  '/zh-CN/service/webdesign',
+  '/en-AU/404',
+  '/zh-CN/404'
 ];
 
 class UrlApi {
