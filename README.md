@@ -1,7 +1,7 @@
 # react-ssr-simple
 Simple server-side rendering React with Redux
 
-TDD/BDD in both [React](https://github.com/facebook/react) and [Sass](https://github.com/sass/sass) with [Webpack](https://github.com/webpack/webpack), [Karma](https://github.com/karma-runner/karma), [Mocha](https://github.com/mochajs/mocha), [Chai](https://github.com/chaijs/chai), [Enzyme](https://github.com/airbnb/enzyme), [Quixote](https://github.com/jamesshore/quixote), [react-i18next](https://github.com/i18next/react-i18next) and [Docker Compose](https://github.com/docker/compose)
+TDD/BDD in both [React](https://github.com/facebook/react) and [Sass](https://github.com/sass/sass) with [Webpack](https://github.com/webpack/webpack), [Karma](https://github.com/karma-runner/karma), [Mocha](https://github.com/mochajs/mocha), [Chai](https://github.com/chaijs/chai), [Enzyme](https://github.com/airbnb/enzyme), [Quixote](https://github.com/jamesshore/quixote), and [Docker Compose](https://github.com/docker/compose)
 
 ### link host's yarn cache dir to project's .yarn-cache
 `ln -s ~/.cache/yarn/v1 .yarn-cache`
@@ -10,9 +10,15 @@ TDD/BDD in both [React](https://github.com/facebook/react) and [Sass](https://gi
 ### start the development environment
 `sudo docker-compose up -d`
 ### login into the docker container
-`sudo docker exec -it react-ssr-simple_yarn_1 /bin/ash`
+`sudo docker exec -it ssr_app_1 /bin/ash`
 ### start the Karma environment and log the testing outputs
 `npm run test`
+### add alias to /etc/hosts
+`127.0.0.1 ssr.dev`
+feel free to change `ssr.dev` to your liking
+### browser
+`http://ssr.dev` for normal browsing
+`http://ssr.dev:9876` for Karma
 
 ![alt text](https://github.com/Mike1Q84/react-ssr-simple/raw/master/Karma.Mocha.Chai.Enzyme.Quixote.output.png)
 
