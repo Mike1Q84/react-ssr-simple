@@ -5,6 +5,7 @@ import { BlogsPage } from './BlogsPage';
 
 describe('Blogs Page', () => {
   const props = {
+    'url': 'en-AU/blog',
     'lang': { id: 'en-AU', name: 'English(AU)' }
   };
 

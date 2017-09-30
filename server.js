@@ -60,7 +60,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 8);
+/******/ 	return __webpack_require__(__webpack_require__.s = 9);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -77,6 +77,18 @@ module.exports = require("prop-types");
 
 /***/ }),
 /* 2 */
+/***/ (function(module, exports) {
+
+module.exports = require("react-helmet");
+
+/***/ }),
+/* 3 */
+/***/ (function(module, exports) {
+
+module.exports = require("react-redux");
+
+/***/ }),
+/* 4 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -95,19 +107,13 @@ var LOAD_LANGUAGES_SUCCESS = exports.LOAD_LANGUAGES_SUCCESS = 'LOAD_LANGUAGES_SU
 var SWITCH_LANGUAGE = exports.SWITCH_LANGUAGE = 'SWITCH_LANGUAGE';
 
 /***/ }),
-/* 3 */
-/***/ (function(module, exports) {
-
-module.exports = require("react-helmet");
-
-/***/ }),
-/* 4 */
-/***/ (function(module, exports) {
-
-module.exports = require("react-redux");
-
-/***/ }),
 /* 5 */
+/***/ (function(module, exports) {
+
+module.exports = require("react-router-dom");
+
+/***/ }),
+/* 6 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -124,19 +130,25 @@ exports.default = {
 };
 
 /***/ }),
-/* 6 */
-/***/ (function(module, exports) {
+/* 7 */
+/***/ (function(module, exports, __webpack_require__) {
 
-module.exports = require("react-router-dom");
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = 600;
 
 /***/ }),
-/* 7 */
+/* 8 */
 /***/ (function(module, exports) {
 
 module.exports = require("redux");
 
 /***/ }),
-/* 8 */
+/* 9 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -146,11 +158,11 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _express = __webpack_require__(10);
+var _express = __webpack_require__(11);
 
 var _express2 = _interopRequireDefault(_express);
 
-var _redis = __webpack_require__(11);
+var _redis = __webpack_require__(12);
 
 var _redis2 = _interopRequireDefault(_redis);
 
@@ -158,27 +170,27 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _server = __webpack_require__(12);
+var _server = __webpack_require__(13);
 
-var _reactRouterDom = __webpack_require__(6);
+var _reactRouterDom = __webpack_require__(5);
 
-var _reactHelmet = __webpack_require__(3);
+var _reactHelmet = __webpack_require__(2);
 
-var _App = __webpack_require__(13);
+var _App = __webpack_require__(14);
 
 var _App2 = _interopRequireDefault(_App);
 
-var _reactRedux = __webpack_require__(4);
+var _reactRedux = __webpack_require__(3);
 
-var _configureStore = __webpack_require__(31);
+var _configureStore = __webpack_require__(45);
 
 var _configureStore2 = _interopRequireDefault(_configureStore);
 
-var _serializeJavascript = __webpack_require__(38);
+var _serializeJavascript = __webpack_require__(52);
 
 var _serializeJavascript2 = _interopRequireDefault(_serializeJavascript);
 
-var _mockUrlApi = __webpack_require__(48);
+var _mockUrlApi = __webpack_require__(53);
 
 var _mockUrlApi2 = _interopRequireDefault(_mockUrlApi);
 
@@ -310,10 +322,10 @@ if (!module.parent) {
 }
 
 exports.default = app;
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(9)(module)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(10)(module)))
 
 /***/ }),
-/* 9 */
+/* 10 */
 /***/ (function(module, exports) {
 
 module.exports = function(module) {
@@ -341,25 +353,25 @@ module.exports = function(module) {
 
 
 /***/ }),
-/* 10 */
+/* 11 */
 /***/ (function(module, exports) {
 
 module.exports = require("express");
 
 /***/ }),
-/* 11 */
+/* 12 */
 /***/ (function(module, exports) {
 
 module.exports = require("redis");
 
 /***/ }),
-/* 12 */
+/* 13 */
 /***/ (function(module, exports) {
 
 module.exports = require("react-dom/server");
 
 /***/ }),
-/* 13 */
+/* 14 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -378,23 +390,23 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactRouterDom = __webpack_require__(6);
+var _reactRouterDom = __webpack_require__(5);
 
-var _reactHelmet = __webpack_require__(3);
+var _reactHelmet = __webpack_require__(2);
 
-var _lang = __webpack_require__(14);
+var _lang = __webpack_require__(15);
 
 var _lang2 = _interopRequireDefault(_lang);
 
-var _Header = __webpack_require__(15);
+var _Header = __webpack_require__(16);
 
 var _Header2 = _interopRequireDefault(_Header);
 
-var _Footer = __webpack_require__(17);
+var _Footer = __webpack_require__(18);
 
 var _Footer2 = _interopRequireDefault(_Footer);
 
-var _routes = __webpack_require__(19);
+var _routes = __webpack_require__(20);
 
 var _routes2 = _interopRequireDefault(_routes);
 
@@ -402,11 +414,11 @@ var _propTypes = __webpack_require__(1);
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
-var _reactRedux = __webpack_require__(4);
+var _reactRedux = __webpack_require__(3);
 
-var _urlActions = __webpack_require__(27);
+var _urlActions = __webpack_require__(42);
 
-var _languageActions = __webpack_require__(28);
+var _languageActions = __webpack_require__(43);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -506,13 +518,13 @@ function mapStateToProps(state) {
 exports.default = (0, _reactRouterDom.withRouter)((0, _reactRedux.connect)(mapStateToProps)(App));
 
 /***/ }),
-/* 14 */
+/* 15 */
 /***/ (function(module, exports) {
 
 module.exports = {"en-AU":{"title":"AI Data"},"zh-CN":{"title":"爱数据"}}
 
 /***/ }),
-/* 15 */
+/* 16 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -530,11 +542,11 @@ var _propTypes = __webpack_require__(1);
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
-var _lang = __webpack_require__(16);
+var _lang = __webpack_require__(17);
 
 var _lang2 = _interopRequireDefault(_lang);
 
-var _reactRouterDom = __webpack_require__(6);
+var _reactRouterDom = __webpack_require__(5);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -605,13 +617,13 @@ Header.propTypes = {
 exports.default = Header;
 
 /***/ }),
-/* 16 */
+/* 17 */
 /***/ (function(module, exports) {
 
 module.exports = {"en-AU":{"name":"Header","lang":"Language","nav":{"home":{"id":"home","name":"Home Page"},"about":{"id":"about","name":"About Page"}}},"zh-CN":{"name":"页眉","lang":"当前语言","nav":{"home":{"id":"home","name":"网站主页"},"about":{"id":"about","name":"关于我们"}}}}
 
 /***/ }),
-/* 17 */
+/* 18 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -629,7 +641,7 @@ var _propTypes = __webpack_require__(1);
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
-var _lang = __webpack_require__(18);
+var _lang = __webpack_require__(19);
 
 var _lang2 = _interopRequireDefault(_lang);
 
@@ -656,13 +668,13 @@ Footer.propTypes = {
 exports.default = Footer;
 
 /***/ }),
-/* 18 */
+/* 19 */
 /***/ (function(module, exports) {
 
 module.exports = {"en-AU":{"name":"Footer"},"zh-CN":{"name":"页脚"}}
 
 /***/ }),
-/* 19 */
+/* 20 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -672,35 +684,35 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _HomePage = __webpack_require__(20);
+var _HomePage = __webpack_require__(21);
 
 var _HomePage2 = _interopRequireDefault(_HomePage);
 
-var _AboutPage = __webpack_require__(23);
+var _AboutPage = __webpack_require__(24);
 
 var _AboutPage2 = _interopRequireDefault(_AboutPage);
 
-var _ServicesPage = __webpack_require__(39);
+var _ServicesPage = __webpack_require__(26);
 
 var _ServicesPage2 = _interopRequireDefault(_ServicesPage);
 
-var _DevOpsPage = __webpack_require__(42);
+var _DevOpsPage = __webpack_require__(28);
 
 var _DevOpsPage2 = _interopRequireDefault(_DevOpsPage);
 
-var _SysAdminPage = __webpack_require__(43);
+var _SysAdminPage = __webpack_require__(30);
 
 var _SysAdminPage2 = _interopRequireDefault(_SysAdminPage);
 
-var _WebDesignPage = __webpack_require__(46);
+var _WebDesignPage = __webpack_require__(32);
 
 var _WebDesignPage2 = _interopRequireDefault(_WebDesignPage);
 
-var _BlogsPage = __webpack_require__(49);
+var _BlogsPage = __webpack_require__(34);
 
 var _BlogsPage2 = _interopRequireDefault(_BlogsPage);
 
-var _NotFoundPage = __webpack_require__(25);
+var _NotFoundPage = __webpack_require__(40);
 
 var _NotFoundPage2 = _interopRequireDefault(_NotFoundPage);
 
@@ -711,7 +723,7 @@ var routes = [{ path: "/", component: _HomePage2.default, exact: true }, { path:
 exports.default = routes;
 
 /***/ }),
-/* 20 */
+/* 21 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -732,15 +744,15 @@ var _propTypes = __webpack_require__(1);
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
-var _reactRedux = __webpack_require__(4);
+var _reactRedux = __webpack_require__(3);
 
-var _reactHelmet = __webpack_require__(3);
+var _reactHelmet = __webpack_require__(2);
 
-var _lang = __webpack_require__(21);
+var _lang = __webpack_require__(22);
 
 var _lang2 = _interopRequireDefault(_lang);
 
-__webpack_require__(22);
+__webpack_require__(23);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -802,19 +814,19 @@ function mapStateToProps(state) {
 exports.default = (0, _reactRedux.connect)(mapStateToProps)(HomePage);
 
 /***/ }),
-/* 21 */
+/* 22 */
 /***/ (function(module, exports) {
 
 module.exports = {"en-AU":{"title":"Home Page"},"zh-CN":{"title":"网站首页"}}
 
 /***/ }),
-/* 22 */
+/* 23 */
 /***/ (function(module, exports) {
 
 
 
 /***/ }),
-/* 23 */
+/* 24 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -835,11 +847,11 @@ var _propTypes = __webpack_require__(1);
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
-var _reactRedux = __webpack_require__(4);
+var _reactRedux = __webpack_require__(3);
 
-var _reactHelmet = __webpack_require__(3);
+var _reactHelmet = __webpack_require__(2);
 
-var _lang = __webpack_require__(24);
+var _lang = __webpack_require__(25);
 
 var _lang2 = _interopRequireDefault(_lang);
 
@@ -903,495 +915,13 @@ function mapStateToProps(state) {
 exports.default = (0, _reactRedux.connect)(mapStateToProps)(AboutPage);
 
 /***/ }),
-/* 24 */
+/* 25 */
 /***/ (function(module, exports) {
 
 module.exports = {"en-AU":{"title":"About Page"},"zh-CN":{"title":"关于页面"}}
 
 /***/ }),
-/* 25 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.NotFoundPage = undefined;
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _react = __webpack_require__(0);
-
-var _react2 = _interopRequireDefault(_react);
-
-var _propTypes = __webpack_require__(1);
-
-var _propTypes2 = _interopRequireDefault(_propTypes);
-
-var _reactRedux = __webpack_require__(4);
-
-var _reactHelmet = __webpack_require__(3);
-
-var _lang = __webpack_require__(26);
-
-var _lang2 = _interopRequireDefault(_lang);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var NotFoundPage = exports.NotFoundPage = function (_Component) {
-  _inherits(NotFoundPage, _Component);
-
-  function NotFoundPage() {
-    _classCallCheck(this, NotFoundPage);
-
-    return _possibleConstructorReturn(this, (NotFoundPage.__proto__ || Object.getPrototypeOf(NotFoundPage)).apply(this, arguments));
-  }
-
-  _createClass(NotFoundPage, [{
-    key: 'render',
-    value: function render() {
-      var lang = this.props.lang;
-
-
-      return _react2.default.createElement(
-        'div',
-        { className: 'not-found' },
-        _react2.default.createElement(
-          _reactHelmet.Helmet,
-          null,
-          _react2.default.createElement(
-            'title',
-            null,
-            _lang2.default[lang.id].title
-          )
-        ),
-        _react2.default.createElement(
-          'h1',
-          { className: 'not-found__title' },
-          _lang2.default[lang.id].title
-        )
-      );
-    }
-  }]);
-
-  return NotFoundPage;
-}(_react.Component);
-
-NotFoundPage.propTypes = {
-  lang: _propTypes2.default.object.isRequired
-};
-
-function mapStateToProps(state) {
-  return {
-    lang: state.lang
-  };
-}
-
-exports.default = (0, _reactRedux.connect)(mapStateToProps)(NotFoundPage);
-
-/***/ }),
 /* 26 */
-/***/ (function(module, exports) {
-
-module.exports = {"en-AU":{"title":"404 Not Found"},"zh-CN":{"title":"404 请求的资源不存在"}}
-
-/***/ }),
-/* 27 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.loadUrlSuccess = loadUrlSuccess;
-exports.loadUrlFailure = loadUrlFailure;
-exports.loadUrl = loadUrl;
-
-var _actionTypes = __webpack_require__(2);
-
-var types = _interopRequireWildcard(_actionTypes);
-
-function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
-
-function loadUrlSuccess(url) {
-  return { type: types.LOAD_URL_SUCCESS, url: url };
-}
-
-function loadUrlFailure() {
-  return { type: types.LOAD_URL_FAILURE };
-}
-
-function loadUrl(url) {
-  return function (dispatch) {
-    dispatch(loadUrlSuccess(url));
-  };
-}
-
-/***/ }),
-/* 28 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.loadLangSuccess = loadLangSuccess;
-exports.loadLangFailure = loadLangFailure;
-exports.loadLanguagesSuccess = loadLanguagesSuccess;
-exports.loadLang = loadLang;
-exports.loadLanguages = loadLanguages;
-
-var _actionTypes = __webpack_require__(2);
-
-var types = _interopRequireWildcard(_actionTypes);
-
-var _mockLanguageApi = __webpack_require__(29);
-
-var _mockLanguageApi2 = _interopRequireDefault(_mockLanguageApi);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
-
-function loadLangSuccess(lang) {
-  return { type: types.LOAD_LANG_SUCCESS, lang: lang };
-}
-
-function loadLangFailure(noLang) {
-  return { type: types.LOAD_LANG_FAILURE, noLang: noLang };
-}
-
-function loadLanguagesSuccess(languages) {
-  return { type: types.LOAD_LANGUAGES_SUCCESS, languages: languages };
-}
-
-function loadLang(lang) {
-  return function (dispatch) {
-    return _mockLanguageApi2.default.getCurrentLang(lang).then(function (res) {
-      dispatch(loadLangSuccess(res));
-    }).catch(function () {
-      var noLang = true;
-      dispatch(loadLangFailure(noLang));
-    });
-  };
-}
-
-function loadLanguages() {
-  return function (dispatch) {
-    return _mockLanguageApi2.default.getAllLanguages().then(function (languages) {
-      dispatch(loadLanguagesSuccess(languages));
-    }).catch(function (err) {
-      throw err;
-    });
-  };
-}
-
-/***/ }),
-/* 29 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _delay = __webpack_require__(30);
-
-var _delay2 = _interopRequireDefault(_delay);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-var languages = [{ id: 'en-AU', name: 'English(AU)' }, { id: 'zh-CN', name: '中文（简体）' }];
-
-var LanguageApi = function () {
-  function LanguageApi() {
-    _classCallCheck(this, LanguageApi);
-  }
-
-  _createClass(LanguageApi, null, [{
-    key: 'getAllLanguages',
-    value: function getAllLanguages() {
-      return new Promise(function (resolve) {
-        setTimeout(function () {
-          resolve(Object.assign([], languages));
-        }, _delay2.default);
-      });
-    }
-  }, {
-    key: 'getCurrentLang',
-    value: function getCurrentLang(lang) {
-      return new Promise(function (resolve) {
-        setTimeout(function () {
-          // resolve(Object.assign({}, languages.find(language => language.id === lang)));
-          resolve(languages.find(function (language) {
-            return language.id === lang;
-          }));
-        }, _delay2.default);
-      });
-    }
-  }]);
-
-  return LanguageApi;
-}();
-
-exports.default = LanguageApi;
-
-/***/ }),
-/* 30 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = 600;
-
-/***/ }),
-/* 31 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = configureStore;
-
-var _redux = __webpack_require__(7);
-
-var _reducers = __webpack_require__(32);
-
-var _reducers2 = _interopRequireDefault(_reducers);
-
-var _reduxThunk = __webpack_require__(37);
-
-var _reduxThunk2 = _interopRequireDefault(_reduxThunk);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function configureStore(preloadedState) {
-  return (0, _redux.createStore)(_reducers2.default, preloadedState, (0, _redux.applyMiddleware)(_reduxThunk2.default));
-}
-
-/***/ }),
-/* 32 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _redux = __webpack_require__(7);
-
-var _urlReducer = __webpack_require__(33);
-
-var _urlReducer2 = _interopRequireDefault(_urlReducer);
-
-var _noLangReducer = __webpack_require__(34);
-
-var _noLangReducer2 = _interopRequireDefault(_noLangReducer);
-
-var _langReducer = __webpack_require__(35);
-
-var _langReducer2 = _interopRequireDefault(_langReducer);
-
-var _languageReducer = __webpack_require__(36);
-
-var _languageReducer2 = _interopRequireDefault(_languageReducer);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var rootReducer = (0, _redux.combineReducers)({
-  url: _urlReducer2.default,
-  noLang: _noLangReducer2.default,
-  lang: _langReducer2.default,
-  languages: _languageReducer2.default
-});
-
-exports.default = rootReducer;
-
-/***/ }),
-/* 33 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = urlReducer;
-
-var _actionTypes = __webpack_require__(2);
-
-var types = _interopRequireWildcard(_actionTypes);
-
-var _initState = __webpack_require__(5);
-
-var _initState2 = _interopRequireDefault(_initState);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
-
-function urlReducer() {
-  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : _initState2.default.url;
-  var action = arguments[1];
-
-  switch (action.type) {
-    case types.LOAD_URL_SUCCESS:
-      return action.url;
-    default:
-      return state;
-  }
-}
-
-/***/ }),
-/* 34 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = noLangReducer;
-
-var _actionTypes = __webpack_require__(2);
-
-var types = _interopRequireWildcard(_actionTypes);
-
-var _initState = __webpack_require__(5);
-
-var _initState2 = _interopRequireDefault(_initState);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
-
-function noLangReducer() {
-  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : _initState2.default.noLang;
-  var action = arguments[1];
-
-  switch (action.type) {
-    case types.LOAD_LANG_FAILURE:
-      return action.noLang;
-    default:
-      return state;
-  }
-}
-
-/***/ }),
-/* 35 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = langReducer;
-
-var _actionTypes = __webpack_require__(2);
-
-var types = _interopRequireWildcard(_actionTypes);
-
-var _initState = __webpack_require__(5);
-
-var _initState2 = _interopRequireDefault(_initState);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
-
-function langReducer() {
-  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : _initState2.default.lang;
-  var action = arguments[1];
-
-  switch (action.type) {
-    case types.LOAD_LANG_SUCCESS:
-      return action.lang;
-    default:
-      return state;
-  }
-}
-
-/***/ }),
-/* 36 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = languageReducer;
-
-var _actionTypes = __webpack_require__(2);
-
-var types = _interopRequireWildcard(_actionTypes);
-
-var _initState = __webpack_require__(5);
-
-var _initState2 = _interopRequireDefault(_initState);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
-
-function languageReducer() {
-  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : _initState2.default.languages;
-  var action = arguments[1];
-
-  switch (action.type) {
-    case types.LOAD_LANGUAGES_SUCCESS:
-      return action.languages;
-    default:
-      return state;
-  }
-}
-
-/***/ }),
-/* 37 */
-/***/ (function(module, exports) {
-
-module.exports = require("redux-thunk");
-
-/***/ }),
-/* 38 */
-/***/ (function(module, exports) {
-
-module.exports = require("serialize-javascript");
-
-/***/ }),
-/* 39 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1412,11 +942,11 @@ var _propTypes = __webpack_require__(1);
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
-var _reactRedux = __webpack_require__(4);
+var _reactRedux = __webpack_require__(3);
 
-var _reactHelmet = __webpack_require__(3);
+var _reactHelmet = __webpack_require__(2);
 
-var _lang = __webpack_require__(40);
+var _lang = __webpack_require__(27);
 
 var _lang2 = _interopRequireDefault(_lang);
 
@@ -1480,14 +1010,13 @@ function mapStateToProps(state) {
 exports.default = (0, _reactRedux.connect)(mapStateToProps)(ServicesPage);
 
 /***/ }),
-/* 40 */
+/* 27 */
 /***/ (function(module, exports) {
 
 module.exports = {"en-AU":{"title":"Services Page"},"zh-CN":{"title":"服务页面"}}
 
 /***/ }),
-/* 41 */,
-/* 42 */
+/* 28 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1508,11 +1037,11 @@ var _propTypes = __webpack_require__(1);
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
-var _reactRedux = __webpack_require__(4);
+var _reactRedux = __webpack_require__(3);
 
-var _reactHelmet = __webpack_require__(3);
+var _reactHelmet = __webpack_require__(2);
 
-var _lang = __webpack_require__(45);
+var _lang = __webpack_require__(29);
 
 var _lang2 = _interopRequireDefault(_lang);
 
@@ -1576,7 +1105,13 @@ function mapStateToProps(state) {
 exports.default = (0, _reactRedux.connect)(mapStateToProps)(DevOpsPage);
 
 /***/ }),
-/* 43 */
+/* 29 */
+/***/ (function(module, exports) {
+
+module.exports = {"en-AU":{"title":"DevOps Service"},"zh-CN":{"title":"开发运维服务"}}
+
+/***/ }),
+/* 30 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1597,11 +1132,11 @@ var _propTypes = __webpack_require__(1);
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
-var _reactRedux = __webpack_require__(4);
+var _reactRedux = __webpack_require__(3);
 
-var _reactHelmet = __webpack_require__(3);
+var _reactHelmet = __webpack_require__(2);
 
-var _lang = __webpack_require__(44);
+var _lang = __webpack_require__(31);
 
 var _lang2 = _interopRequireDefault(_lang);
 
@@ -1665,19 +1200,13 @@ function mapStateToProps(state) {
 exports.default = (0, _reactRedux.connect)(mapStateToProps)(SysAdminPage);
 
 /***/ }),
-/* 44 */
+/* 31 */
 /***/ (function(module, exports) {
 
 module.exports = {"en-AU":{"title":"SysAdmin Service"},"zh-CN":{"title":"系统管理服务"}}
 
 /***/ }),
-/* 45 */
-/***/ (function(module, exports) {
-
-module.exports = {"en-AU":{"title":"DevOps Service"},"zh-CN":{"title":"开发运维服务"}}
-
-/***/ }),
-/* 46 */
+/* 32 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1698,11 +1227,11 @@ var _propTypes = __webpack_require__(1);
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
-var _reactRedux = __webpack_require__(4);
+var _reactRedux = __webpack_require__(3);
 
-var _reactHelmet = __webpack_require__(3);
+var _reactHelmet = __webpack_require__(2);
 
-var _lang = __webpack_require__(47);
+var _lang = __webpack_require__(33);
 
 var _lang2 = _interopRequireDefault(_lang);
 
@@ -1766,57 +1295,13 @@ function mapStateToProps(state) {
 exports.default = (0, _reactRedux.connect)(mapStateToProps)(WebDesignPage);
 
 /***/ }),
-/* 47 */
+/* 33 */
 /***/ (function(module, exports) {
 
 module.exports = {"en-AU":{"title":"Web Design Service"},"zh-CN":{"title":"网页设计服务"}}
 
 /***/ }),
-/* 48 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _delay = __webpack_require__(30);
-
-var _delay2 = _interopRequireDefault(_delay);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-var urls = ['/en-AU/home', '/zh-CN/home', '/en-AU/about', '/zh-CN/about', '/en-AU/blogs', '/zh-CN/blogs', '/en-AU/blog', '/zh-CN/blog', '/en-AU/blog/1', '/zh-CN/blog/1', '/en-AU/blog/2', '/zh-CN/blog/2', '/en-AU/blog/3', '/zh-CN/blog/3', '/en-AU/services', '/zh-CN/services', '/en-AU/service/devops', '/zh-CN/service/devops', '/en-AU/service/sysadmin', '/zh-CN/service/sysadmin', '/en-AU/service/webdesign', '/zh-CN/service/webdesign', '/en-AU/404', '/zh-CN/404'];
-
-var UrlApi = function () {
-  function UrlApi() {
-    _classCallCheck(this, UrlApi);
-  }
-
-  _createClass(UrlApi, null, [{
-    key: 'getAllUrls',
-    value: function getAllUrls() {
-      return new Promise(function (resolve) {
-        setTimeout(function () {
-          resolve(Object.assign([], urls));
-        }, _delay2.default);
-      });
-    }
-  }]);
-
-  return UrlApi;
-}();
-
-exports.default = UrlApi;
-
-/***/ }),
-/* 49 */
+/* 34 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1833,25 +1318,25 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactRouterDom = __webpack_require__(6);
+var _reactRouterDom = __webpack_require__(5);
 
 var _propTypes = __webpack_require__(1);
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
-var _reactRedux = __webpack_require__(4);
+var _reactRedux = __webpack_require__(3);
 
-var _reactHelmet = __webpack_require__(3);
+var _reactHelmet = __webpack_require__(2);
 
-var _lang = __webpack_require__(52);
+var _lang = __webpack_require__(35);
 
 var _lang2 = _interopRequireDefault(_lang);
 
-var _BlogCategoryPage = __webpack_require__(50);
+var _BlogCategoryPage = __webpack_require__(36);
 
 var _BlogCategoryPage2 = _interopRequireDefault(_BlogCategoryPage);
 
-var _BlogDetailPage = __webpack_require__(51);
+var _BlogDetailPage = __webpack_require__(38);
 
 var _BlogDetailPage2 = _interopRequireDefault(_BlogDetailPage);
 
@@ -1933,7 +1418,13 @@ function mapStateToProps(state) {
 exports.default = (0, _reactRedux.connect)(mapStateToProps)(BlogsPage);
 
 /***/ }),
-/* 50 */
+/* 35 */
+/***/ (function(module, exports) {
+
+module.exports = {"en-AU":{"title":"Blogs Page"},"zh-CN":{"title":"博客页面"}}
+
+/***/ }),
+/* 36 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1951,9 +1442,9 @@ var _propTypes = __webpack_require__(1);
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
-var _reactHelmet = __webpack_require__(3);
+var _reactHelmet = __webpack_require__(2);
 
-var _lang = __webpack_require__(54);
+var _lang = __webpack_require__(37);
 
 var _lang2 = _interopRequireDefault(_lang);
 
@@ -1989,7 +1480,13 @@ BlogCategoryPage.propTypes = {
 exports.default = BlogCategoryPage;
 
 /***/ }),
-/* 51 */
+/* 37 */
+/***/ (function(module, exports) {
+
+module.exports = {"en-AU":{"title":"Blog Category Page"},"zh-CN":{"title":"博客分类页面"}}
+
+/***/ }),
+/* 38 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2007,9 +1504,9 @@ var _propTypes = __webpack_require__(1);
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
-var _reactHelmet = __webpack_require__(3);
+var _reactHelmet = __webpack_require__(2);
 
-var _lang = __webpack_require__(53);
+var _lang = __webpack_require__(39);
 
 var _lang2 = _interopRequireDefault(_lang);
 
@@ -2045,22 +1542,524 @@ BlogDetailPage.propTypes = {
 exports.default = BlogDetailPage;
 
 /***/ }),
-/* 52 */
-/***/ (function(module, exports) {
-
-module.exports = {"en-AU":{"title":"Blogs Page"},"zh-CN":{"title":"博客页面"}}
-
-/***/ }),
-/* 53 */
+/* 39 */
 /***/ (function(module, exports) {
 
 module.exports = {"en-AU":{"title":"Blog Detail Page"},"zh-CN":{"title":"博客详情页面"}}
 
 /***/ }),
-/* 54 */
+/* 40 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.NotFoundPage = undefined;
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _propTypes = __webpack_require__(1);
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
+var _reactRedux = __webpack_require__(3);
+
+var _reactHelmet = __webpack_require__(2);
+
+var _lang = __webpack_require__(41);
+
+var _lang2 = _interopRequireDefault(_lang);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var NotFoundPage = exports.NotFoundPage = function (_Component) {
+  _inherits(NotFoundPage, _Component);
+
+  function NotFoundPage() {
+    _classCallCheck(this, NotFoundPage);
+
+    return _possibleConstructorReturn(this, (NotFoundPage.__proto__ || Object.getPrototypeOf(NotFoundPage)).apply(this, arguments));
+  }
+
+  _createClass(NotFoundPage, [{
+    key: 'render',
+    value: function render() {
+      var lang = this.props.lang;
+
+
+      return _react2.default.createElement(
+        'div',
+        { className: 'not-found' },
+        _react2.default.createElement(
+          _reactHelmet.Helmet,
+          null,
+          _react2.default.createElement(
+            'title',
+            null,
+            _lang2.default[lang.id].title
+          )
+        ),
+        _react2.default.createElement(
+          'h1',
+          { className: 'not-found__title' },
+          _lang2.default[lang.id].title
+        )
+      );
+    }
+  }]);
+
+  return NotFoundPage;
+}(_react.Component);
+
+NotFoundPage.propTypes = {
+  lang: _propTypes2.default.object.isRequired
+};
+
+function mapStateToProps(state) {
+  return {
+    lang: state.lang
+  };
+}
+
+exports.default = (0, _reactRedux.connect)(mapStateToProps)(NotFoundPage);
+
+/***/ }),
+/* 41 */
 /***/ (function(module, exports) {
 
-module.exports = {"en-AU":{"title":"Blog Category Page"},"zh-CN":{"title":"博客分类页面"}}
+module.exports = {"en-AU":{"title":"404 Not Found"},"zh-CN":{"title":"404 请求的资源不存在"}}
+
+/***/ }),
+/* 42 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.loadUrlSuccess = loadUrlSuccess;
+exports.loadUrlFailure = loadUrlFailure;
+exports.loadUrl = loadUrl;
+
+var _actionTypes = __webpack_require__(4);
+
+var types = _interopRequireWildcard(_actionTypes);
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+
+function loadUrlSuccess(url) {
+  return { type: types.LOAD_URL_SUCCESS, url: url };
+}
+
+function loadUrlFailure() {
+  return { type: types.LOAD_URL_FAILURE };
+}
+
+function loadUrl(url) {
+  return function (dispatch) {
+    dispatch(loadUrlSuccess(url));
+  };
+}
+
+/***/ }),
+/* 43 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.loadLangSuccess = loadLangSuccess;
+exports.loadLangFailure = loadLangFailure;
+exports.loadLanguagesSuccess = loadLanguagesSuccess;
+exports.loadLang = loadLang;
+exports.loadLanguages = loadLanguages;
+
+var _actionTypes = __webpack_require__(4);
+
+var types = _interopRequireWildcard(_actionTypes);
+
+var _mockLanguageApi = __webpack_require__(44);
+
+var _mockLanguageApi2 = _interopRequireDefault(_mockLanguageApi);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+
+function loadLangSuccess(lang) {
+  return { type: types.LOAD_LANG_SUCCESS, lang: lang };
+}
+
+function loadLangFailure(noLang) {
+  return { type: types.LOAD_LANG_FAILURE, noLang: noLang };
+}
+
+function loadLanguagesSuccess(languages) {
+  return { type: types.LOAD_LANGUAGES_SUCCESS, languages: languages };
+}
+
+function loadLang(lang) {
+  return function (dispatch) {
+    return _mockLanguageApi2.default.getCurrentLang(lang).then(function (res) {
+      dispatch(loadLangSuccess(res));
+    }).catch(function () {
+      var noLang = true;
+      dispatch(loadLangFailure(noLang));
+    });
+  };
+}
+
+function loadLanguages() {
+  return function (dispatch) {
+    return _mockLanguageApi2.default.getAllLanguages().then(function (languages) {
+      dispatch(loadLanguagesSuccess(languages));
+    }).catch(function (err) {
+      throw err;
+    });
+  };
+}
+
+/***/ }),
+/* 44 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _delay = __webpack_require__(7);
+
+var _delay2 = _interopRequireDefault(_delay);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var languages = [{ id: 'en-AU', name: 'English(AU)' }, { id: 'zh-CN', name: '中文（简体）' }];
+
+var LanguageApi = function () {
+  function LanguageApi() {
+    _classCallCheck(this, LanguageApi);
+  }
+
+  _createClass(LanguageApi, null, [{
+    key: 'getAllLanguages',
+    value: function getAllLanguages() {
+      return new Promise(function (resolve) {
+        setTimeout(function () {
+          resolve(Object.assign([], languages));
+        }, _delay2.default);
+      });
+    }
+  }, {
+    key: 'getCurrentLang',
+    value: function getCurrentLang(lang) {
+      return new Promise(function (resolve) {
+        setTimeout(function () {
+          // resolve(Object.assign({}, languages.find(language => language.id === lang)));
+          resolve(languages.find(function (language) {
+            return language.id === lang;
+          }));
+        }, _delay2.default);
+      });
+    }
+  }]);
+
+  return LanguageApi;
+}();
+
+exports.default = LanguageApi;
+
+/***/ }),
+/* 45 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = configureStore;
+
+var _redux = __webpack_require__(8);
+
+var _reducers = __webpack_require__(46);
+
+var _reducers2 = _interopRequireDefault(_reducers);
+
+var _reduxThunk = __webpack_require__(51);
+
+var _reduxThunk2 = _interopRequireDefault(_reduxThunk);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function configureStore(preloadedState) {
+  return (0, _redux.createStore)(_reducers2.default, preloadedState, (0, _redux.applyMiddleware)(_reduxThunk2.default));
+}
+
+/***/ }),
+/* 46 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _redux = __webpack_require__(8);
+
+var _urlReducer = __webpack_require__(47);
+
+var _urlReducer2 = _interopRequireDefault(_urlReducer);
+
+var _noLangReducer = __webpack_require__(48);
+
+var _noLangReducer2 = _interopRequireDefault(_noLangReducer);
+
+var _langReducer = __webpack_require__(49);
+
+var _langReducer2 = _interopRequireDefault(_langReducer);
+
+var _languageReducer = __webpack_require__(50);
+
+var _languageReducer2 = _interopRequireDefault(_languageReducer);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var rootReducer = (0, _redux.combineReducers)({
+  url: _urlReducer2.default,
+  noLang: _noLangReducer2.default,
+  lang: _langReducer2.default,
+  languages: _languageReducer2.default
+});
+
+exports.default = rootReducer;
+
+/***/ }),
+/* 47 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = urlReducer;
+
+var _actionTypes = __webpack_require__(4);
+
+var types = _interopRequireWildcard(_actionTypes);
+
+var _initState = __webpack_require__(6);
+
+var _initState2 = _interopRequireDefault(_initState);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+
+function urlReducer() {
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : _initState2.default.url;
+  var action = arguments[1];
+
+  switch (action.type) {
+    case types.LOAD_URL_SUCCESS:
+      return action.url;
+    default:
+      return state;
+  }
+}
+
+/***/ }),
+/* 48 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = noLangReducer;
+
+var _actionTypes = __webpack_require__(4);
+
+var types = _interopRequireWildcard(_actionTypes);
+
+var _initState = __webpack_require__(6);
+
+var _initState2 = _interopRequireDefault(_initState);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+
+function noLangReducer() {
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : _initState2.default.noLang;
+  var action = arguments[1];
+
+  switch (action.type) {
+    case types.LOAD_LANG_FAILURE:
+      return action.noLang;
+    default:
+      return state;
+  }
+}
+
+/***/ }),
+/* 49 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = langReducer;
+
+var _actionTypes = __webpack_require__(4);
+
+var types = _interopRequireWildcard(_actionTypes);
+
+var _initState = __webpack_require__(6);
+
+var _initState2 = _interopRequireDefault(_initState);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+
+function langReducer() {
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : _initState2.default.lang;
+  var action = arguments[1];
+
+  switch (action.type) {
+    case types.LOAD_LANG_SUCCESS:
+      return action.lang;
+    default:
+      return state;
+  }
+}
+
+/***/ }),
+/* 50 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = languageReducer;
+
+var _actionTypes = __webpack_require__(4);
+
+var types = _interopRequireWildcard(_actionTypes);
+
+var _initState = __webpack_require__(6);
+
+var _initState2 = _interopRequireDefault(_initState);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+
+function languageReducer() {
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : _initState2.default.languages;
+  var action = arguments[1];
+
+  switch (action.type) {
+    case types.LOAD_LANGUAGES_SUCCESS:
+      return action.languages;
+    default:
+      return state;
+  }
+}
+
+/***/ }),
+/* 51 */
+/***/ (function(module, exports) {
+
+module.exports = require("redux-thunk");
+
+/***/ }),
+/* 52 */
+/***/ (function(module, exports) {
+
+module.exports = require("serialize-javascript");
+
+/***/ }),
+/* 53 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _delay = __webpack_require__(7);
+
+var _delay2 = _interopRequireDefault(_delay);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var urls = ['/en-AU/home', '/zh-CN/home', '/en-AU/about', '/zh-CN/about', '/en-AU/blogs', '/zh-CN/blogs', '/en-AU/blog', '/zh-CN/blog', '/en-AU/blog/1', '/zh-CN/blog/1', '/en-AU/blog/2', '/zh-CN/blog/2', '/en-AU/blog/3', '/zh-CN/blog/3', '/en-AU/services', '/zh-CN/services', '/en-AU/service/devops', '/zh-CN/service/devops', '/en-AU/service/sysadmin', '/zh-CN/service/sysadmin', '/en-AU/service/webdesign', '/zh-CN/service/webdesign', '/en-AU/404', '/zh-CN/404'];
+
+var UrlApi = function () {
+  function UrlApi() {
+    _classCallCheck(this, UrlApi);
+  }
+
+  _createClass(UrlApi, null, [{
+    key: 'getAllUrls',
+    value: function getAllUrls() {
+      return new Promise(function (resolve) {
+        setTimeout(function () {
+          resolve(Object.assign([], urls));
+        }, _delay2.default);
+      });
+    }
+  }]);
+
+  return UrlApi;
+}();
+
+exports.default = UrlApi;
 
 /***/ })
 /******/ ]);

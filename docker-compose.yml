@@ -1,6 +1,13 @@
 version: "3"
 
 services:
+  proxy:
+    image: jwilder/nginx-proxy
+    ports:
+      - "80:80"
+    volumes:
+      - /var/run/docker.sock:/tmp/docker.sock:ro
+
   app:
     # connect ECONNREFUSED https://github.com/docker-library/redis/issues/45
     links:
@@ -13,6 +20,9 @@ services:
     ports:
       - 3000:3000
       - 9876:9876
+    environment:
+      - VIRTUAL_HOST=ssr.dev
+      - VIRTUAL_PORT=3000
     volumes:
       # mount host yarn cache dir inside container for node user
       - .yarn-cache:/home/node/.cache/yarn/v1
