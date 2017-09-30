@@ -15,10 +15,12 @@ TDD/BDD in both [React](https://github.com/facebook/react) and [Sass](https://gi
 `npm run test`
 ### add alias to /etc/hosts
 `127.0.0.1 ssr.dev`
+
 feel free to change `ssr.dev` to your liking
 ### browser
-`http://ssr.dev` for normal browsing
-`http://ssr.dev:9876` for Karma
+[http://ssr.dev](http://ssr.dev) for normal browsing
+
+[http://ssr.dev:9876](http://ssr.dev:9876) for Karma
 
 ![alt text](https://github.com/Mike1Q84/react-ssr-simple/raw/master/Karma.Mocha.Chai.Enzyme.Quixote.output.png)
 
