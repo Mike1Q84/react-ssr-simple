@@ -7,18 +7,18 @@ module.exports = function(config) {
     singleRun: false,
     frameworks: [ 'mocha' ], //use the mocha test framework
     files: [
-      'src/**/*.test.js',
+      // 'src/**/*.test.js',
       'src/**/*.css_test.js',
       { pattern: 'src/**/*.sass', included: false },
       { pattern: 'dist/css/main.css', included: false }
     ],
     preprocessors: {
-      'src/**/*.test.js': [ 'webpack', 'sourcemap' ],
+      // 'src/**/*.test.js': [ 'webpack', 'sourcemap' ],
       'src/**/*.css_test.js': [ 'webpack', 'sourcemap' ]
     },
     reporters: [ 'mocha' ], //report results in this format
     webpack: { //kind of a copy of your webpack config
-      devtool: 'inline-source-map', //just do inline source maps instead of the default
+      devtool: 'inline-source-map', //just do inline source maps instead of default
       module: {
         rules: [
           {
@@ -29,7 +29,8 @@ module.exports = function(config) {
             test: /\.jsx?$/,
             loader: 'babel-loader',
             exclude: path.resolve(__dirname, 'node_modules'),
-            query: { presets: ['es2015', 'react'] }
+            // query: { presets: ['es2015', 'react'] }
+            query: { presets: ['es2015'] }
           }
         ]
       },

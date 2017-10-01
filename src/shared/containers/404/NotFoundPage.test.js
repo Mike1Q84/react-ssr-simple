@@ -15,9 +15,9 @@ describe('NotFoundPage', () => {
   });
 
   it("should be rendered", () => {
-      expect(wrapper.find('.not-found')).to.have.length(1);
+    expect(wrapper.find('.not-found')).to.have.length(1);
   });
   it("should display title", () => {
-      expect(wrapper.find('.not-found__title')).to.have.length(1);
+    expect(wrapper.find('.not-found__title')).to.have.length(1);
   });
 });

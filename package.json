@@ -10,7 +10,14 @@
     "dev:bundle": "webpack -w",
     "prod": "run-p clean prod:bundle",
     "prod:bundle": "NODE_ENV=production webpack -p",
+    "jest": "jest --watch",
     "test": "karma start"
+  },
+  "jest": {
+    "moduleNameMapper": {
+      "\\.(css|less|scss|sass)$": "identity-obj-proxy"
+    },
+    "testRegex": "\\.test\\.jsx?$"
   },
   "keywords": [
     "React",
@@ -25,6 +32,7 @@
   "devDependencies": {
     "babel-core": "^6.26.0",
     "babel-eslint": "^7.2.3",
+    "babel-jest": "^21.2.0",
     "babel-loader": "^7.1.2",
     "babel-preset-es2015": "^6.24.1",
     "babel-preset-react": "^6.24.1",
@@ -36,7 +44,9 @@
     "eslint-plugin-react": "^7.3.0",
     "extract-text-webpack-plugin": "^3.0.0",
     "file-loader": "^0.11.2",
+    "identity-obj-proxy": "^3.0.0",
     "ignore-styles": "^5.0.1",
+    "jest": "^21.2.1",
     "karma": "^1.7.1",
     "karma-mocha": "^1.3.0",
     "karma-mocha-reporter": "^2.2.4",

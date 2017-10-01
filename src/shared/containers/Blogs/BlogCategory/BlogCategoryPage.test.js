@@ -15,7 +15,7 @@ describe('Blog Category Page', () => {
   });
 
   it("should be rendered", () => {
-      expect(wrapper.find('.blog-category')).to.have.length(1);
+    expect(wrapper.find('.blog-category')).to.have.length(1);
   });
   it("should display title", () => {
     expect(wrapper.find('.blog-category__title')).to.have.length(1);

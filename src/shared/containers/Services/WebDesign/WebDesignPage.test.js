@@ -15,7 +15,7 @@ describe('WebDesign Page', () => {
   });
 
   it("should be rendered", () => {
-      expect(wrapper.find('.webdesign')).to.have.length(1);
+    expect(wrapper.find('.webdesign')).to.have.length(1);
   });
   it("should display title", () => {
     expect(wrapper.find('.webdesign__title')).to.have.length(1);

@@ -15,9 +15,9 @@ describe('Services Page', () => {
   });
 
   it("should be rendered", () => {
-      expect(wrapper.find('.services')).to.have.length(1);
+    expect(wrapper.find('.services')).to.have.length(1);
   });
   it("should display title", () => {
-      expect(wrapper.find('.services__title')).to.have.length(1);
+    expect(wrapper.find('.services__title')).to.have.length(1);
   });
 });

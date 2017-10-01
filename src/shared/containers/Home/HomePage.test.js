@@ -15,9 +15,9 @@ describe('HomePage', () => {
   });
 
   it("should be rendered", () => {
-      expect(wrapper.find('.home')).to.have.length(1);
+    expect(wrapper.find('.home')).to.have.length(1);
   });
   it("should display title", () => {
-      expect(wrapper.find('.home__title')).to.have.length(1);
+    expect(wrapper.find('.home__title')).to.have.length(1);
   });
 });

@@ -15,7 +15,7 @@ describe('SysAdmin Page', () => {
   });
 
   it("should be rendered", () => {
-      expect(wrapper.find('.sysadmin')).to.have.length(1);
+    expect(wrapper.find('.sysadmin')).to.have.length(1);
   });
   it("should display title", () => {
     expect(wrapper.find('.sysadmin__title')).to.have.length(1);

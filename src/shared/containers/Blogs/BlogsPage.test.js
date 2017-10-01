@@ -16,9 +16,9 @@ describe('Blogs Page', () => {
   });
 
   it("should be rendered", () => {
-      expect(wrapper.find('.blogs')).to.have.length(1);
+    expect(wrapper.find('.blogs')).to.have.length(1);
   });
   it("should display title", () => {
-      expect(wrapper.find('.blogs__title')).to.have.length(1);
+    expect(wrapper.find('.blogs__title')).to.have.length(1);
   });
 });

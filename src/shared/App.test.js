@@ -25,6 +25,6 @@ describe('App', () => {
   });
 
   it("should be rendered", () => {
-      expect(wrapper.find('.App')).to.have.length(1);
+    expect(wrapper.find('.App')).to.have.length(1);
   });
 });
