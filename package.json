@@ -10,7 +10,7 @@
     "dev:bundle": "webpack -w",
     "prod": "run-p clean prod:bundle",
     "prod:bundle": "NODE_ENV=production webpack -p",
-    "jest": "jest --watch",
+    "jest": "jest --coverage --watch",
     "test": "karma start"
   },
   "jest": {
@@ -67,8 +67,8 @@
   },
   "dependencies": {
     "express": "^4.15.4",
-    "react": "^15.6.1",
-    "react-dom": "^15.6.1",
+    "react": "^16.0.0",
+    "react-dom": "^16.0.0",
     "react-helmet": "^5.2.0",
     "react-redux": "^5.0.6",
     "react-router": "^4.2.0",

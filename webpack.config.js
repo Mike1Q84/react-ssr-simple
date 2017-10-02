@@ -12,6 +12,14 @@ const browserConfig = {
   module: {
     rules: [
       {
+        test: [/\.svg$/, /\.gif$/, /\.jpe?g$/, /\.png$/],
+        loader: 'file-loader',
+        options: {
+          name: "dist/img/[name].[ext]",
+          publicPath: url => url.replace(/dist/, "")
+        }
+      },
+      {
         test: /\.sass$/,
         use: ExtractTextPlugin.extract({
           use: [
@@ -46,6 +54,15 @@ const serverConfig = {
   },
   module: {
     rules: [
+      {
+        test: [/\.svg$/, /\.gif$/, /\.jpe?g$/, /\.png$/],
+        loader: 'file-loader',
+        options: {
+          name: "dist/img/[name].[ext]",
+          publicPath: url => url.replace(/dist/, ""),
+          emit: false
+        }
+      },
       {
         test: /\.sass$/,
         use: [
