@@ -20,6 +20,14 @@ const browserConfig = {
         }
       },
       {
+        test: /\.css$/,
+        use: ExtractTextPlugin.extract({
+          use: [
+            { loader: 'css-loader' }
+          ]
+        })
+      },
+      {
         test: /\.sass$/,
         use: ExtractTextPlugin.extract({
           use: [
@@ -62,6 +70,12 @@ const serverConfig = {
           publicPath: url => url.replace(/dist/, ""),
           emit: false
         }
+      },
+      {
+        test: /\.css$/,
+        use: [
+          { loader: 'css-loader/locals' }
+        ]
       },
       {
         test: /\.sass$/,

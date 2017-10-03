@@ -28,7 +28,7 @@ export class SysAdminPage extends Component {
           <source media="(min-width: 641px)"
             srcSet={`${hero960} 960w, ${hero1920} 1920w`} />
           <source media="(min-width: 1px)" srcSet={`${hero640} 640w`}/>
-          <img src={hero3840} alt="SysAdmin" />
+          <img src={hero1920} alt="SysAdmin" className="hero__img" />
         </picture>
       </div>
     )

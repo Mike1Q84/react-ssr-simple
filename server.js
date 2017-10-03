@@ -182,15 +182,15 @@ var _App2 = _interopRequireDefault(_App);
 
 var _reactRedux = __webpack_require__(3);
 
-var _configureStore = __webpack_require__(46);
+var _configureStore = __webpack_require__(64);
 
 var _configureStore2 = _interopRequireDefault(_configureStore);
 
-var _serializeJavascript = __webpack_require__(53);
+var _serializeJavascript = __webpack_require__(71);
 
 var _serializeJavascript2 = _interopRequireDefault(_serializeJavascript);
 
-var _mockUrlApi = __webpack_require__(54);
+var _mockUrlApi = __webpack_require__(72);
 
 var _mockUrlApi2 = _interopRequireDefault(_mockUrlApi);
 
@@ -398,15 +398,19 @@ var _lang = __webpack_require__(15);
 
 var _lang2 = _interopRequireDefault(_lang);
 
-var _Header = __webpack_require__(16);
+__webpack_require__(75);
+
+__webpack_require__(76);
+
+var _Header = __webpack_require__(17);
 
 var _Header2 = _interopRequireDefault(_Header);
 
-var _Footer = __webpack_require__(18);
+var _Footer = __webpack_require__(19);
 
 var _Footer2 = _interopRequireDefault(_Footer);
 
-var _routes = __webpack_require__(20);
+var _routes = __webpack_require__(21);
 
 var _routes2 = _interopRequireDefault(_routes);
 
@@ -416,9 +420,9 @@ var _propTypes2 = _interopRequireDefault(_propTypes);
 
 var _reactRedux = __webpack_require__(3);
 
-var _urlActions = __webpack_require__(43);
+var _urlActions = __webpack_require__(61);
 
-var _languageActions = __webpack_require__(44);
+var _languageActions = __webpack_require__(62);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -524,7 +528,8 @@ exports.default = (0, _reactRouterDom.withRouter)((0, _reactRedux.connect)(mapSt
 module.exports = {"en-AU":{"title":"AI Data"},"zh-CN":{"title":"爱数据"}}
 
 /***/ }),
-/* 16 */
+/* 16 */,
+/* 17 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -542,7 +547,7 @@ var _propTypes = __webpack_require__(1);
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
-var _lang = __webpack_require__(17);
+var _lang = __webpack_require__(18);
 
 var _lang2 = _interopRequireDefault(_lang);
 
@@ -617,13 +622,13 @@ Header.propTypes = {
 exports.default = Header;
 
 /***/ }),
-/* 17 */
+/* 18 */
 /***/ (function(module, exports) {
 
 module.exports = {"en-AU":{"name":"Header","lang":"Language","nav":{"home":{"id":"home","name":"Home Page"},"about":{"id":"about","name":"About Page"}}},"zh-CN":{"name":"页眉","lang":"当前语言","nav":{"home":{"id":"home","name":"网站主页"},"about":{"id":"about","name":"关于我们"}}}}
 
 /***/ }),
-/* 18 */
+/* 19 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -641,7 +646,7 @@ var _propTypes = __webpack_require__(1);
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
-var _lang = __webpack_require__(19);
+var _lang = __webpack_require__(20);
 
 var _lang2 = _interopRequireDefault(_lang);
 
@@ -668,13 +673,13 @@ Footer.propTypes = {
 exports.default = Footer;
 
 /***/ }),
-/* 19 */
+/* 20 */
 /***/ (function(module, exports) {
 
 module.exports = {"en-AU":{"name":"Footer"},"zh-CN":{"name":"页脚"}}
 
 /***/ }),
-/* 20 */
+/* 21 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -684,35 +689,35 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _HomePage = __webpack_require__(21);
+var _HomePage = __webpack_require__(22);
 
 var _HomePage2 = _interopRequireDefault(_HomePage);
 
-var _AboutPage = __webpack_require__(24);
+var _AboutPage = __webpack_require__(25);
 
 var _AboutPage2 = _interopRequireDefault(_AboutPage);
 
-var _ServicesPage = __webpack_require__(26);
+var _ServicesPage = __webpack_require__(27);
 
 var _ServicesPage2 = _interopRequireDefault(_ServicesPage);
 
-var _DevOpsPage = __webpack_require__(28);
+var _DevOpsPage = __webpack_require__(29);
 
 var _DevOpsPage2 = _interopRequireDefault(_DevOpsPage);
 
-var _SysAdminPage = __webpack_require__(30);
+var _SysAdminPage = __webpack_require__(37);
 
 var _SysAdminPage2 = _interopRequireDefault(_SysAdminPage);
 
-var _WebDesignPage = __webpack_require__(33);
+var _WebDesignPage = __webpack_require__(45);
 
 var _WebDesignPage2 = _interopRequireDefault(_WebDesignPage);
 
-var _BlogsPage = __webpack_require__(35);
+var _BlogsPage = __webpack_require__(53);
 
 var _BlogsPage2 = _interopRequireDefault(_BlogsPage);
 
-var _NotFoundPage = __webpack_require__(41);
+var _NotFoundPage = __webpack_require__(59);
 
 var _NotFoundPage2 = _interopRequireDefault(_NotFoundPage);
 
@@ -723,7 +728,7 @@ var routes = [{ path: "/", component: _HomePage2.default, exact: true }, { path:
 exports.default = routes;
 
 /***/ }),
-/* 21 */
+/* 22 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -748,11 +753,11 @@ var _reactRedux = __webpack_require__(3);
 
 var _reactHelmet = __webpack_require__(2);
 
-var _lang = __webpack_require__(22);
+var _lang = __webpack_require__(23);
 
 var _lang2 = _interopRequireDefault(_lang);
 
-__webpack_require__(23);
+__webpack_require__(24);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -814,19 +819,19 @@ function mapStateToProps(state) {
 exports.default = (0, _reactRedux.connect)(mapStateToProps)(HomePage);
 
 /***/ }),
-/* 22 */
+/* 23 */
 /***/ (function(module, exports) {
 
 module.exports = {"en-AU":{"title":"Home Page"},"zh-CN":{"title":"网站首页"}}
 
 /***/ }),
-/* 23 */
+/* 24 */
 /***/ (function(module, exports) {
 
 
 
 /***/ }),
-/* 24 */
+/* 25 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -851,7 +856,7 @@ var _reactRedux = __webpack_require__(3);
 
 var _reactHelmet = __webpack_require__(2);
 
-var _lang = __webpack_require__(25);
+var _lang = __webpack_require__(26);
 
 var _lang2 = _interopRequireDefault(_lang);
 
@@ -915,13 +920,13 @@ function mapStateToProps(state) {
 exports.default = (0, _reactRedux.connect)(mapStateToProps)(AboutPage);
 
 /***/ }),
-/* 25 */
+/* 26 */
 /***/ (function(module, exports) {
 
 module.exports = {"en-AU":{"title":"About Page"},"zh-CN":{"title":"关于页面"}}
 
 /***/ }),
-/* 26 */
+/* 27 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -946,7 +951,7 @@ var _reactRedux = __webpack_require__(3);
 
 var _reactHelmet = __webpack_require__(2);
 
-var _lang = __webpack_require__(27);
+var _lang = __webpack_require__(28);
 
 var _lang2 = _interopRequireDefault(_lang);
 
@@ -1010,13 +1015,13 @@ function mapStateToProps(state) {
 exports.default = (0, _reactRedux.connect)(mapStateToProps)(ServicesPage);
 
 /***/ }),
-/* 27 */
+/* 28 */
 /***/ (function(module, exports) {
 
 module.exports = {"en-AU":{"title":"Services Page"},"zh-CN":{"title":"服务页面"}}
 
 /***/ }),
-/* 28 */
+/* 29 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1041,31 +1046,31 @@ var _reactRedux = __webpack_require__(3);
 
 var _reactHelmet = __webpack_require__(2);
 
-var _lang = __webpack_require__(29);
+var _lang = __webpack_require__(30);
 
 var _lang2 = _interopRequireDefault(_lang);
 
-var _devops640w = __webpack_require__(68);
+var _devops640w = __webpack_require__(31);
 
 var _devops640w2 = _interopRequireDefault(_devops640w);
 
-var _devops960w = __webpack_require__(69);
+var _devops960w = __webpack_require__(32);
 
 var _devops960w2 = _interopRequireDefault(_devops960w);
 
-var _devops1280w = __webpack_require__(70);
+var _devops1280w = __webpack_require__(33);
 
 var _devops1280w2 = _interopRequireDefault(_devops1280w);
 
-var _devops1920w = __webpack_require__(71);
+var _devops1920w = __webpack_require__(34);
 
 var _devops1920w2 = _interopRequireDefault(_devops1920w);
 
-var _devops2560w = __webpack_require__(72);
+var _devops2560w = __webpack_require__(35);
 
 var _devops2560w2 = _interopRequireDefault(_devops2560w);
 
-var _devops3840w = __webpack_require__(73);
+var _devops3840w = __webpack_require__(36);
 
 var _devops3840w2 = _interopRequireDefault(_devops3840w);
 
@@ -1119,7 +1124,7 @@ var DevOpsPage = exports.DevOpsPage = function (_Component) {
           _react2.default.createElement('source', { media: '(min-width: 641px)',
             srcSet: _devops960w2.default + ' 960w, ' + _devops1920w2.default + ' 1920w' }),
           _react2.default.createElement('source', { media: '(min-width: 1px)', srcSet: _devops640w2.default + ' 640w' }),
-          _react2.default.createElement('img', { src: _devops3840w2.default, alt: 'DevOps' })
+          _react2.default.createElement('img', { src: _devops1920w2.default, alt: 'DevOps', className: 'hero__img' })
         )
       );
     }
@@ -1141,13 +1146,49 @@ function mapStateToProps(state) {
 exports.default = (0, _reactRedux.connect)(mapStateToProps)(DevOpsPage);
 
 /***/ }),
-/* 29 */
+/* 30 */
 /***/ (function(module, exports) {
 
 module.exports = {"en-AU":{"title":"DevOps Service"},"zh-CN":{"title":"开发运维服务"}}
 
 /***/ }),
-/* 30 */
+/* 31 */
+/***/ (function(module, exports) {
+
+module.exports = "/img/devops-640w.jpg";
+
+/***/ }),
+/* 32 */
+/***/ (function(module, exports) {
+
+module.exports = "/img/devops-960w.jpg";
+
+/***/ }),
+/* 33 */
+/***/ (function(module, exports) {
+
+module.exports = "/img/devops-1280w.jpg";
+
+/***/ }),
+/* 34 */
+/***/ (function(module, exports) {
+
+module.exports = "/img/devops-1920w.jpg";
+
+/***/ }),
+/* 35 */
+/***/ (function(module, exports) {
+
+module.exports = "/img/devops-2560w.jpg";
+
+/***/ }),
+/* 36 */
+/***/ (function(module, exports) {
+
+module.exports = "/img/devops-3840w.jpg";
+
+/***/ }),
+/* 37 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1172,31 +1213,31 @@ var _reactRedux = __webpack_require__(3);
 
 var _reactHelmet = __webpack_require__(2);
 
-var _lang = __webpack_require__(31);
+var _lang = __webpack_require__(38);
 
 var _lang2 = _interopRequireDefault(_lang);
 
-var _sysadmin640w = __webpack_require__(66);
+var _sysadmin640w = __webpack_require__(39);
 
 var _sysadmin640w2 = _interopRequireDefault(_sysadmin640w);
 
-var _sysadmin960w = __webpack_require__(67);
+var _sysadmin960w = __webpack_require__(40);
 
 var _sysadmin960w2 = _interopRequireDefault(_sysadmin960w);
 
-var _sysadmin1280w = __webpack_require__(62);
+var _sysadmin1280w = __webpack_require__(41);
 
 var _sysadmin1280w2 = _interopRequireDefault(_sysadmin1280w);
 
-var _sysadmin1920w = __webpack_require__(63);
+var _sysadmin1920w = __webpack_require__(42);
 
 var _sysadmin1920w2 = _interopRequireDefault(_sysadmin1920w);
 
-var _sysadmin2560w = __webpack_require__(64);
+var _sysadmin2560w = __webpack_require__(43);
 
 var _sysadmin2560w2 = _interopRequireDefault(_sysadmin2560w);
 
-var _sysadmin3840w = __webpack_require__(65);
+var _sysadmin3840w = __webpack_require__(44);
 
 var _sysadmin3840w2 = _interopRequireDefault(_sysadmin3840w);
 
@@ -1250,7 +1291,7 @@ var SysAdminPage = exports.SysAdminPage = function (_Component) {
           _react2.default.createElement('source', { media: '(min-width: 641px)',
             srcSet: _sysadmin960w2.default + ' 960w, ' + _sysadmin1920w2.default + ' 1920w' }),
           _react2.default.createElement('source', { media: '(min-width: 1px)', srcSet: _sysadmin640w2.default + ' 640w' }),
-          _react2.default.createElement('img', { src: _sysadmin3840w2.default, alt: 'SysAdmin' })
+          _react2.default.createElement('img', { src: _sysadmin1920w2.default, alt: 'SysAdmin', className: 'hero__img' })
         )
       );
     }
@@ -1272,14 +1313,49 @@ function mapStateToProps(state) {
 exports.default = (0, _reactRedux.connect)(mapStateToProps)(SysAdminPage);
 
 /***/ }),
-/* 31 */
+/* 38 */
 /***/ (function(module, exports) {
 
 module.exports = {"en-AU":{"title":"SysAdmin Service"},"zh-CN":{"title":"系统管理服务"}}
 
 /***/ }),
-/* 32 */,
-/* 33 */
+/* 39 */
+/***/ (function(module, exports) {
+
+module.exports = "/img/sysadmin-640w.jpg";
+
+/***/ }),
+/* 40 */
+/***/ (function(module, exports) {
+
+module.exports = "/img/sysadmin-960w.jpg";
+
+/***/ }),
+/* 41 */
+/***/ (function(module, exports) {
+
+module.exports = "/img/sysadmin-1280w.jpg";
+
+/***/ }),
+/* 42 */
+/***/ (function(module, exports) {
+
+module.exports = "/img/sysadmin-1920w.jpg";
+
+/***/ }),
+/* 43 */
+/***/ (function(module, exports) {
+
+module.exports = "/img/sysadmin-2560w.jpg";
+
+/***/ }),
+/* 44 */
+/***/ (function(module, exports) {
+
+module.exports = "/img/sysadmin-3840w.jpg";
+
+/***/ }),
+/* 45 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1304,31 +1380,31 @@ var _reactRedux = __webpack_require__(3);
 
 var _reactHelmet = __webpack_require__(2);
 
-var _lang = __webpack_require__(34);
+var _lang = __webpack_require__(46);
 
 var _lang2 = _interopRequireDefault(_lang);
 
-var _webdesign640w = __webpack_require__(74);
+var _webdesign640w = __webpack_require__(47);
 
 var _webdesign640w2 = _interopRequireDefault(_webdesign640w);
 
-var _webdesign960w = __webpack_require__(75);
+var _webdesign960w = __webpack_require__(48);
 
 var _webdesign960w2 = _interopRequireDefault(_webdesign960w);
 
-var _webdesign1280w = __webpack_require__(76);
+var _webdesign1280w = __webpack_require__(49);
 
 var _webdesign1280w2 = _interopRequireDefault(_webdesign1280w);
 
-var _webdesign1920w = __webpack_require__(77);
+var _webdesign1920w = __webpack_require__(50);
 
 var _webdesign1920w2 = _interopRequireDefault(_webdesign1920w);
 
-var _webdesign2560w = __webpack_require__(78);
+var _webdesign2560w = __webpack_require__(51);
 
 var _webdesign2560w2 = _interopRequireDefault(_webdesign2560w);
 
-var _webdesign3840w = __webpack_require__(79);
+var _webdesign3840w = __webpack_require__(52);
 
 var _webdesign3840w2 = _interopRequireDefault(_webdesign3840w);
 
@@ -1382,7 +1458,7 @@ var WebDesignPage = exports.WebDesignPage = function (_Component) {
           _react2.default.createElement('source', { media: '(min-width: 641px)',
             srcSet: _webdesign960w2.default + ' 960w, ' + _webdesign1920w2.default + ' 1920w' }),
           _react2.default.createElement('source', { media: '(min-width: 1px)', srcSet: _webdesign640w2.default + ' 640w' }),
-          _react2.default.createElement('img', { src: _webdesign3840w2.default, alt: 'WebDesign' })
+          _react2.default.createElement('img', { src: _webdesign1920w2.default, alt: 'WebDesign', className: 'hero__img' })
         )
       );
     }
@@ -1404,13 +1480,49 @@ function mapStateToProps(state) {
 exports.default = (0, _reactRedux.connect)(mapStateToProps)(WebDesignPage);
 
 /***/ }),
-/* 34 */
+/* 46 */
 /***/ (function(module, exports) {
 
 module.exports = {"en-AU":{"title":"Web Design Service"},"zh-CN":{"title":"网页设计服务"}}
 
 /***/ }),
-/* 35 */
+/* 47 */
+/***/ (function(module, exports) {
+
+module.exports = "/img/webdesign-640w.jpg";
+
+/***/ }),
+/* 48 */
+/***/ (function(module, exports) {
+
+module.exports = "/img/webdesign-960w.jpg";
+
+/***/ }),
+/* 49 */
+/***/ (function(module, exports) {
+
+module.exports = "/img/webdesign-1280w.jpg";
+
+/***/ }),
+/* 50 */
+/***/ (function(module, exports) {
+
+module.exports = "/img/webdesign-1920w.jpg";
+
+/***/ }),
+/* 51 */
+/***/ (function(module, exports) {
+
+module.exports = "/img/webdesign-2560w.jpg";
+
+/***/ }),
+/* 52 */
+/***/ (function(module, exports) {
+
+module.exports = "/img/webdesign-3840w.jpg";
+
+/***/ }),
+/* 53 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1437,15 +1549,15 @@ var _reactRedux = __webpack_require__(3);
 
 var _reactHelmet = __webpack_require__(2);
 
-var _lang = __webpack_require__(36);
+var _lang = __webpack_require__(54);
 
 var _lang2 = _interopRequireDefault(_lang);
 
-var _BlogCategoryPage = __webpack_require__(37);
+var _BlogCategoryPage = __webpack_require__(55);
 
 var _BlogCategoryPage2 = _interopRequireDefault(_BlogCategoryPage);
 
-var _BlogDetailPage = __webpack_require__(39);
+var _BlogDetailPage = __webpack_require__(57);
 
 var _BlogDetailPage2 = _interopRequireDefault(_BlogDetailPage);
 
@@ -1527,13 +1639,13 @@ function mapStateToProps(state) {
 exports.default = (0, _reactRedux.connect)(mapStateToProps)(BlogsPage);
 
 /***/ }),
-/* 36 */
+/* 54 */
 /***/ (function(module, exports) {
 
 module.exports = {"en-AU":{"title":"Blogs Page"},"zh-CN":{"title":"博客页面"}}
 
 /***/ }),
-/* 37 */
+/* 55 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1553,7 +1665,7 @@ var _propTypes2 = _interopRequireDefault(_propTypes);
 
 var _reactHelmet = __webpack_require__(2);
 
-var _lang = __webpack_require__(38);
+var _lang = __webpack_require__(56);
 
 var _lang2 = _interopRequireDefault(_lang);
 
@@ -1589,13 +1701,13 @@ BlogCategoryPage.propTypes = {
 exports.default = BlogCategoryPage;
 
 /***/ }),
-/* 38 */
+/* 56 */
 /***/ (function(module, exports) {
 
 module.exports = {"en-AU":{"title":"Blog Category Page"},"zh-CN":{"title":"博客分类页面"}}
 
 /***/ }),
-/* 39 */
+/* 57 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1615,7 +1727,7 @@ var _propTypes2 = _interopRequireDefault(_propTypes);
 
 var _reactHelmet = __webpack_require__(2);
 
-var _lang = __webpack_require__(40);
+var _lang = __webpack_require__(58);
 
 var _lang2 = _interopRequireDefault(_lang);
 
@@ -1651,13 +1763,13 @@ BlogDetailPage.propTypes = {
 exports.default = BlogDetailPage;
 
 /***/ }),
-/* 40 */
+/* 58 */
 /***/ (function(module, exports) {
 
 module.exports = {"en-AU":{"title":"Blog Detail Page"},"zh-CN":{"title":"博客详情页面"}}
 
 /***/ }),
-/* 41 */
+/* 59 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1682,7 +1794,7 @@ var _reactRedux = __webpack_require__(3);
 
 var _reactHelmet = __webpack_require__(2);
 
-var _lang = __webpack_require__(42);
+var _lang = __webpack_require__(60);
 
 var _lang2 = _interopRequireDefault(_lang);
 
@@ -1746,13 +1858,13 @@ function mapStateToProps(state) {
 exports.default = (0, _reactRedux.connect)(mapStateToProps)(NotFoundPage);
 
 /***/ }),
-/* 42 */
+/* 60 */
 /***/ (function(module, exports) {
 
 module.exports = {"en-AU":{"title":"404 Not Found"},"zh-CN":{"title":"404 请求的资源不存在"}}
 
 /***/ }),
-/* 43 */
+/* 61 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1786,7 +1898,7 @@ function loadUrl(url) {
 }
 
 /***/ }),
-/* 44 */
+/* 62 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1805,7 +1917,7 @@ var _actionTypes = __webpack_require__(4);
 
 var types = _interopRequireWildcard(_actionTypes);
 
-var _mockLanguageApi = __webpack_require__(45);
+var _mockLanguageApi = __webpack_require__(63);
 
 var _mockLanguageApi2 = _interopRequireDefault(_mockLanguageApi);
 
@@ -1847,7 +1959,7 @@ function loadLanguages() {
 }
 
 /***/ }),
-/* 45 */
+/* 63 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1903,7 +2015,7 @@ var LanguageApi = function () {
 exports.default = LanguageApi;
 
 /***/ }),
-/* 46 */
+/* 64 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1916,11 +2028,11 @@ exports.default = configureStore;
 
 var _redux = __webpack_require__(8);
 
-var _reducers = __webpack_require__(47);
+var _reducers = __webpack_require__(65);
 
 var _reducers2 = _interopRequireDefault(_reducers);
 
-var _reduxThunk = __webpack_require__(52);
+var _reduxThunk = __webpack_require__(70);
 
 var _reduxThunk2 = _interopRequireDefault(_reduxThunk);
 
@@ -1931,7 +2043,7 @@ function configureStore(preloadedState) {
 }
 
 /***/ }),
-/* 47 */
+/* 65 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1943,19 +2055,19 @@ Object.defineProperty(exports, "__esModule", {
 
 var _redux = __webpack_require__(8);
 
-var _urlReducer = __webpack_require__(48);
+var _urlReducer = __webpack_require__(66);
 
 var _urlReducer2 = _interopRequireDefault(_urlReducer);
 
-var _noLangReducer = __webpack_require__(49);
+var _noLangReducer = __webpack_require__(67);
 
 var _noLangReducer2 = _interopRequireDefault(_noLangReducer);
 
-var _langReducer = __webpack_require__(50);
+var _langReducer = __webpack_require__(68);
 
 var _langReducer2 = _interopRequireDefault(_langReducer);
 
-var _languageReducer = __webpack_require__(51);
+var _languageReducer = __webpack_require__(69);
 
 var _languageReducer2 = _interopRequireDefault(_languageReducer);
 
@@ -1971,7 +2083,7 @@ var rootReducer = (0, _redux.combineReducers)({
 exports.default = rootReducer;
 
 /***/ }),
-/* 48 */
+/* 66 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2007,7 +2119,7 @@ function urlReducer() {
 }
 
 /***/ }),
-/* 49 */
+/* 67 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2043,7 +2155,7 @@ function noLangReducer() {
 }
 
 /***/ }),
-/* 50 */
+/* 68 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2079,7 +2191,7 @@ function langReducer() {
 }
 
 /***/ }),
-/* 51 */
+/* 69 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2115,19 +2227,19 @@ function languageReducer() {
 }
 
 /***/ }),
-/* 52 */
+/* 70 */
 /***/ (function(module, exports) {
 
 module.exports = require("redux-thunk");
 
 /***/ }),
-/* 53 */
+/* 71 */
 /***/ (function(module, exports) {
 
 module.exports = require("serialize-javascript");
 
 /***/ }),
-/* 54 */
+/* 72 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2171,119 +2283,18 @@ var UrlApi = function () {
 exports.default = UrlApi;
 
 /***/ }),
-/* 55 */,
-/* 56 */,
-/* 57 */,
-/* 58 */,
-/* 59 */,
-/* 60 */,
-/* 61 */,
-/* 62 */
-/***/ (function(module, exports) {
-
-module.exports = "/img/sysadmin-1280w.jpg";
-
-/***/ }),
-/* 63 */
-/***/ (function(module, exports) {
-
-module.exports = "/img/sysadmin-1920w.jpg";
-
-/***/ }),
-/* 64 */
-/***/ (function(module, exports) {
-
-module.exports = "/img/sysadmin-2560w.jpg";
-
-/***/ }),
-/* 65 */
-/***/ (function(module, exports) {
-
-module.exports = "/img/sysadmin-3840w.jpg";
-
-/***/ }),
-/* 66 */
-/***/ (function(module, exports) {
-
-module.exports = "/img/sysadmin-640w.jpg";
-
-/***/ }),
-/* 67 */
-/***/ (function(module, exports) {
-
-module.exports = "/img/sysadmin-960w.jpg";
-
-/***/ }),
-/* 68 */
-/***/ (function(module, exports) {
-
-module.exports = "/img/devops-640w.jpg";
-
-/***/ }),
-/* 69 */
-/***/ (function(module, exports) {
-
-module.exports = "/img/devops-960w.jpg";
-
-/***/ }),
-/* 70 */
-/***/ (function(module, exports) {
-
-module.exports = "/img/devops-1280w.jpg";
-
-/***/ }),
-/* 71 */
-/***/ (function(module, exports) {
-
-module.exports = "/img/devops-1920w.jpg";
-
-/***/ }),
-/* 72 */
-/***/ (function(module, exports) {
-
-module.exports = "/img/devops-2560w.jpg";
-
-/***/ }),
-/* 73 */
-/***/ (function(module, exports) {
-
-module.exports = "/img/devops-3840w.jpg";
-
-/***/ }),
-/* 74 */
-/***/ (function(module, exports) {
-
-module.exports = "/img/webdesign-640w.jpg";
-
-/***/ }),
+/* 73 */,
+/* 74 */,
 /* 75 */
 /***/ (function(module, exports) {
 
-module.exports = "/img/webdesign-960w.jpg";
+
 
 /***/ }),
 /* 76 */
 /***/ (function(module, exports) {
 
-module.exports = "/img/webdesign-1280w.jpg";
 
-/***/ }),
-/* 77 */
-/***/ (function(module, exports) {
-
-module.exports = "/img/webdesign-1920w.jpg";
-
-/***/ }),
-/* 78 */
-/***/ (function(module, exports) {
-
-module.exports = "/img/webdesign-2560w.jpg";
-
-/***/ }),
-/* 79 */
-/***/ (function(module, exports) {
-
-module.exports = "/img/webdesign-3840w.jpg";
 
 /***/ })
 /******/ ]);

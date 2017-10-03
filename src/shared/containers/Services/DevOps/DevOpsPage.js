@@ -28,7 +28,7 @@ export class DevOpsPage extends Component {
           <source media="(min-width: 641px)"
             srcSet={`${hero960} 960w, ${hero1920} 1920w`} />
           <source media="(min-width: 1px)" srcSet={`${hero640} 640w`}/>
-          <img src={hero3840} alt="DevOps" />
+          <img src={hero1920} alt="DevOps" className="hero__img" />
         </picture>
       </div>
     )

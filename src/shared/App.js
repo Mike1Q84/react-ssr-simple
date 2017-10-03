@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { Switch, Route, withRouter } from 'react-router-dom';
 import { Helmet } from "react-helmet";
 import t from './_lang.json';
+import './styles/normalize.css';
+import './styles/hero.sass';
 
 import Header from './components/Header/Header';
 import Footer from './components/Footer/Footer';
