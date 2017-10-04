@@ -20,16 +20,19 @@ export class SysAdminPage extends Component {
           <title>{t[lang.id].title}</title>
         </Helmet>
         <h1 className="sysadmin__title">{t[lang.id].title}</h1>
-        <picture>
-          <source media="(min-width: 1281px)"
-            srcSet={`${hero1920} 1920w, ${hero3840} 3840w`} />
-          <source media="(min-width: 961px)"
-            srcSet={`${hero1280} 1280w, ${hero2560} 2560w`} />
-          <source media="(min-width: 641px)"
-            srcSet={`${hero960} 960w, ${hero1920} 1920w`} />
-          <source media="(min-width: 1px)" srcSet={`${hero640} 640w`}/>
-          <img src={hero1920} alt="SysAdmin" className="hero__img" />
-        </picture>
+        <div className="hero">
+          <picture className="hero__img-div">
+            <source media="(min-width: 2561px)" srcSet={`${hero3840}`} />
+            <source media="(min-width: 1921px)" srcSet={`${hero2560}`} />
+            <source media="(min-width: 1281px)" srcSet={`${hero1920}`} />
+            <source media="(min-width: 961px)" srcSet={`${hero1280}`} />
+            <source media="(min-width: 641px)" srcSet={`${hero960}`} />
+            <img src={hero640} alt={t[lang.id].title} className="hero__image" />
+          </picture>
+          <div className="hero__txt-div">
+            <h1 className="hero__title">{t[lang.id].title}</h1>
+          </div>
+        </div>
       </div>
     )
   }

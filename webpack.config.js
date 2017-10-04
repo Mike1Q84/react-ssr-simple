@@ -1,5 +1,6 @@
 const path = require('path');
 const nodeExternals = require('webpack-node-externals'); // Exclude node_modules
+const autoprefixer = require('autoprefixer');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 const browserConfig = {
@@ -32,6 +33,14 @@ const browserConfig = {
         use: ExtractTextPlugin.extract({
           use: [
             { loader: 'css-loader' },
+            {
+              loader: 'postcss-loader',
+              options: {
+                plugins: function() {
+                  return [autoprefixer('last 4 versions', 'ie 9')]
+                }
+              }
+            },
             { loader: 'sass-loader' }
           ]
         })
@@ -81,6 +90,14 @@ const serverConfig = {
         test: /\.sass$/,
         use: [
           { loader: 'css-loader/locals' },
+          {
+            loader: 'postcss-loader',
+            options: {
+              plugins: function() {
+                return [autoprefixer('last 4 versions', 'ie 9')]
+              }
+            }
+          },
           { loader: 'sass-loader' }
         ]
       },

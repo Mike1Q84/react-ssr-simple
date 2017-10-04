@@ -1,6 +1,14 @@
 @import './mixins'
 
 .hero
+  position: relative
 
-  +e('img')
+  +e('image')
     width: 100%
+
+  +e('txt-div')
+    position: absolute
+    top: 50%
+    transform: translateY(-50%)
+    width: 100%
+    text-align: center
