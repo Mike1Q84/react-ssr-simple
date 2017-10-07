@@ -1,7 +1,7 @@
 import { assert } from 'chai';
 import quixote from 'quixote';
 
-describe("DevOps Page", () => {
+describe("Service Page", () => {
   let frame;
   let container;
   let image;

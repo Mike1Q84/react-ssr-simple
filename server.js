@@ -1085,6 +1085,10 @@ var _devops3840w = __webpack_require__(37);
 
 var _devops3840w2 = _interopRequireDefault(_devops3840w);
 
+var _Hero = __webpack_require__(74);
+
+var _Hero2 = _interopRequireDefault(_Hero);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -1120,34 +1124,9 @@ var DevOpsPage = exports.DevOpsPage = function (_Component) {
             _lang2.default[lang.id].title
           )
         ),
-        _react2.default.createElement(
-          'h1',
-          { className: 'devops__title' },
-          _lang2.default[lang.id].title
-        ),
-        _react2.default.createElement(
-          'div',
-          { className: 'hero' },
-          _react2.default.createElement(
-            'picture',
-            { className: 'hero__img-div' },
-            _react2.default.createElement('source', { media: '(min-width: 2561px)', srcSet: '' + _devops3840w2.default }),
-            _react2.default.createElement('source', { media: '(min-width: 1921px)', srcSet: '' + _devops2560w2.default }),
-            _react2.default.createElement('source', { media: '(min-width: 1281px)', srcSet: '' + _devops1920w2.default }),
-            _react2.default.createElement('source', { media: '(min-width: 961px)', srcSet: '' + _devops1280w2.default }),
-            _react2.default.createElement('source', { media: '(min-width: 641px)', srcSet: '' + _devops960w2.default }),
-            _react2.default.createElement('img', { src: _devops640w2.default, alt: _lang2.default[lang.id].title, className: 'hero__image' })
-          ),
-          _react2.default.createElement(
-            'div',
-            { className: 'hero__txt-div' },
-            _react2.default.createElement(
-              'h1',
-              { className: 'hero__title' },
-              _lang2.default[lang.id].title
-            )
-          )
-        )
+        _react2.default.createElement(_Hero2.default, { lang: lang, title: _lang2.default[lang.id].title,
+          hero640: _devops640w2.default, hero960: _devops960w2.default, hero1280: _devops1280w2.default,
+          hero1920: _devops1920w2.default, hero2560: _devops2560w2.default, hero3840: _devops3840w2.default })
       );
     }
   }]);
@@ -1263,6 +1242,10 @@ var _sysadmin3840w = __webpack_require__(45);
 
 var _sysadmin3840w2 = _interopRequireDefault(_sysadmin3840w);
 
+var _Hero = __webpack_require__(74);
+
+var _Hero2 = _interopRequireDefault(_Hero);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -1298,34 +1281,9 @@ var SysAdminPage = exports.SysAdminPage = function (_Component) {
             _lang2.default[lang.id].title
           )
         ),
-        _react2.default.createElement(
-          'h1',
-          { className: 'sysadmin__title' },
-          _lang2.default[lang.id].title
-        ),
-        _react2.default.createElement(
-          'div',
-          { className: 'hero' },
-          _react2.default.createElement(
-            'picture',
-            { className: 'hero__img-div' },
-            _react2.default.createElement('source', { media: '(min-width: 2561px)', srcSet: '' + _sysadmin3840w2.default }),
-            _react2.default.createElement('source', { media: '(min-width: 1921px)', srcSet: '' + _sysadmin2560w2.default }),
-            _react2.default.createElement('source', { media: '(min-width: 1281px)', srcSet: '' + _sysadmin1920w2.default }),
-            _react2.default.createElement('source', { media: '(min-width: 961px)', srcSet: '' + _sysadmin1280w2.default }),
-            _react2.default.createElement('source', { media: '(min-width: 641px)', srcSet: '' + _sysadmin960w2.default }),
-            _react2.default.createElement('img', { src: _sysadmin640w2.default, alt: _lang2.default[lang.id].title, className: 'hero__image' })
-          ),
-          _react2.default.createElement(
-            'div',
-            { className: 'hero__txt-div' },
-            _react2.default.createElement(
-              'h1',
-              { className: 'hero__title' },
-              _lang2.default[lang.id].title
-            )
-          )
-        )
+        _react2.default.createElement(_Hero2.default, { lang: lang, title: _lang2.default[lang.id].title,
+          hero640: _sysadmin640w2.default, hero960: _sysadmin960w2.default, hero1280: _sysadmin1280w2.default,
+          hero1920: _sysadmin1920w2.default, hero2560: _sysadmin2560w2.default, hero3840: _sysadmin3840w2.default })
       );
     }
   }]);
@@ -1441,6 +1399,10 @@ var _webdesign3840w = __webpack_require__(53);
 
 var _webdesign3840w2 = _interopRequireDefault(_webdesign3840w);
 
+var _Hero = __webpack_require__(74);
+
+var _Hero2 = _interopRequireDefault(_Hero);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -1476,34 +1438,9 @@ var WebDesignPage = exports.WebDesignPage = function (_Component) {
             _lang2.default[lang.id].title
           )
         ),
-        _react2.default.createElement(
-          'h1',
-          { className: 'webdesign__title' },
-          _lang2.default[lang.id].title
-        ),
-        _react2.default.createElement(
-          'div',
-          { className: 'hero' },
-          _react2.default.createElement(
-            'picture',
-            { className: 'hero__img-div' },
-            _react2.default.createElement('source', { media: '(min-width: 2561px)', srcSet: '' + _webdesign3840w2.default }),
-            _react2.default.createElement('source', { media: '(min-width: 1921px)', srcSet: '' + _webdesign2560w2.default }),
-            _react2.default.createElement('source', { media: '(min-width: 1281px)', srcSet: '' + _webdesign1920w2.default }),
-            _react2.default.createElement('source', { media: '(min-width: 961px)', srcSet: '' + _webdesign1280w2.default }),
-            _react2.default.createElement('source', { media: '(min-width: 641px)', srcSet: '' + _webdesign960w2.default }),
-            _react2.default.createElement('img', { src: _webdesign640w2.default, alt: _lang2.default[lang.id].title, className: 'hero__image' })
-          ),
-          _react2.default.createElement(
-            'div',
-            { className: 'hero__txt-div' },
-            _react2.default.createElement(
-              'h1',
-              { className: 'hero__title' },
-              _lang2.default[lang.id].title
-            )
-          )
-        )
+        _react2.default.createElement(_Hero2.default, { lang: lang, title: _lang2.default[lang.id].title,
+          hero640: _webdesign640w2.default, hero960: _webdesign960w2.default, hero1280: _webdesign1280w2.default,
+          hero1920: _webdesign1920w2.default, hero2560: _webdesign2560w2.default, hero3840: _webdesign3840w2.default })
       );
     }
   }]);
@@ -2325,6 +2262,75 @@ var UrlApi = function () {
 }();
 
 exports.default = UrlApi;
+
+/***/ }),
+/* 74 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _propTypes = __webpack_require__(1);
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var Hero = function Hero(_ref) {
+  var lang = _ref.lang,
+      title = _ref.title,
+      hero640 = _ref.hero640,
+      hero960 = _ref.hero960,
+      hero1280 = _ref.hero1280,
+      hero1920 = _ref.hero1920,
+      hero2560 = _ref.hero2560,
+      hero3840 = _ref.hero3840;
+
+  return _react2.default.createElement(
+    'div',
+    { className: 'hero' },
+    _react2.default.createElement(
+      'picture',
+      { className: 'hero__img-div' },
+      _react2.default.createElement('source', { media: '(min-width: 2561px)', srcSet: '' + hero3840 }),
+      _react2.default.createElement('source', { media: '(min-width: 1921px)', srcSet: '' + hero2560 }),
+      _react2.default.createElement('source', { media: '(min-width: 1281px)', srcSet: '' + hero1920 }),
+      _react2.default.createElement('source', { media: '(min-width: 961px)', srcSet: '' + hero1280 }),
+      _react2.default.createElement('source', { media: '(min-width: 641px)', srcSet: '' + hero960 }),
+      _react2.default.createElement('img', { src: hero640, alt: title, className: 'hero__image' })
+    ),
+    _react2.default.createElement(
+      'div',
+      { className: 'hero__txt-div' },
+      _react2.default.createElement(
+        'h1',
+        { className: 'hero__title' },
+        title
+      )
+    )
+  );
+};
+
+Hero.propTypes = {
+  lang: _propTypes2.default.object.isRequired,
+  title: _propTypes2.default.string.isRequired,
+  hero640: _propTypes2.default.string.isRequired,
+  hero960: _propTypes2.default.string.isRequired,
+  hero1280: _propTypes2.default.string.isRequired,
+  hero1920: _propTypes2.default.string.isRequired,
+  hero2560: _propTypes2.default.string.isRequired,
+  hero3840: _propTypes2.default.string.isRequired
+};
+
+exports.default = Hero;
 
 /***/ })
 /******/ ]);

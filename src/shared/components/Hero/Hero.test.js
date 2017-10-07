@@ -1,28 +1,12 @@
 import React from 'react';
 import { expect } from 'chai';
-import { shallow, mount, configure } from 'enzyme';
+import { shallow, configure } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 configure({ adapter: new Adapter() });
 
-import { SysAdminPage } from './SysAdminPage';
+import Hero from './Hero';
 
-describe('SysAdmin Page', () => {
-  const props = {
-    'lang': { id: 'en-AU', name: 'English(AU)' }
-  };
-
-  let wrapper;
-
-  beforeEach(() => {
-    wrapper = shallow(<SysAdminPage {...props}/>);
-  });
-
-  it("should be rendered", () => {
-    expect(wrapper.find('.sysadmin')).to.have.length(1);
-  });
-});
-
-describe('SysAdmin Page Hero', () => {
+describe('Hero', () => {
   const props = {
     'lang': { id: 'en-AU', name: 'English(AU)' },
     'title': 'Test Service',
@@ -37,11 +21,14 @@ describe('SysAdmin Page Hero', () => {
   let wrapper;
 
   beforeEach(() => {
-    wrapper = mount(<SysAdminPage {...props}/>);
+    wrapper = shallow(<Hero {...props}/>);
   });
 
-  it("should be mounted", () => {
+  it("should be rendered", () => {
     expect(wrapper.find('.hero')).to.have.length(1);
+  });
+  it("should display image", () => {
+    expect(wrapper.find('.hero__image')).to.have.length(1);
   });
   it("should display title", () => {
     expect(wrapper.find('.hero__title')).to.have.length(1);
