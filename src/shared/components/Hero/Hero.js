@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import './Hero.sass';
 
 const Hero = ({lang, title,
   hero640, hero960, hero1280, hero1920, hero2560, hero3840}) => {
