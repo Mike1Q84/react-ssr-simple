@@ -4,12 +4,10 @@ import { shallow, mount, configure } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 configure({ adapter: new Adapter() });
 
-import { App } from './App';
+import { Provider } from "react-redux";
+import configureStore from 'redux-mock-store';
 import { BrowserRouter } from 'react-router-dom';
-// import { Provider } from "react-redux";
-// import configureStore from "../store/configureStore";
-// const store = configureStore(window.__initialData__);
-
+import { App } from './App';
 
 describe('App', () => {
   const props = {
@@ -37,34 +35,51 @@ describe('App', () => {
   });
 });
 
-// describe('App', () => {
-//   const props = {
-//     'url': '/en-AU/home',
-//     'history': {
-//       'push': () => {return null;}
-//     },
-//     'noLang': false,
-//     'lang': { id: 'en-AU', name: 'English(AU)' },
-//     'languages': [
-//       { id: 'en-AU', name: 'English(AU)' },
-//       { id: 'zh-CN', name: '中文（简体）' }
-//     ],
-//     'dispatch': () => {return null;}
-//   };
-//
-//   let wrapper;
-//
-//   beforeEach(() => {
-//     wrapper = mount(
-//       // <Provider store={store}>
-//       //   <BrowserRouter>
-//           <App {...props}/>
-//       //   </BrowserRouter>
-//       // </Provider>
-//     );
-//   });
-//
-//   it("should be rendered", () => {
-//     expect(wrapper.find('.App')).to.have.length(1);
-//   });
-// });
+describe('App', () => {
+  const initialState = {
+    'url': '/en-AU/home',
+    'history': {
+      'push': () => {return null;}
+    },
+    'noLang': false,
+    'lang': { id: 'en-AU', name: 'English(AU)' },
+    'languages': [
+      { id: 'en-AU', name: 'English(AU)' },
+      { id: 'zh-CN', name: '中文（简体）' }
+    ],
+    'dispatch': () => {return null;}
+  };
+
+  const mockStore = configureStore();
+  let store;
+  let wrapper;
+
+  beforeEach(() => {
+    store = mockStore(initialState);
+    wrapper = mount(
+      <Provider store={store}>
+        <BrowserRouter>
+          <App {...initialState} />
+        </BrowserRouter>
+      </Provider>
+    );
+  });
+
+  describe('Header', () => {
+    it("should be mounted", () => {
+      expect(wrapper.find('.header')).to.have.length(1);
+    });
+    it("should display title", () => {
+      expect(wrapper.find('.header__title')).to.have.length(1);
+    });
+  });
+
+  describe('Footer', () => {
+    it("should be mounted", () => {
+      expect(wrapper.find('.footer')).to.have.length(1);
+    });
+    it("should display title", () => {
+      expect(wrapper.find('.footer__title')).to.have.length(1);
+    });
+  });
+});
