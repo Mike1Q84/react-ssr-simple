@@ -65,6 +65,14 @@ describe('App', () => {
     );
   });
 
+  describe('Props', () => {
+    it("should match initialState", () => {
+      expect(wrapper.find(App).prop('url')).to.equal(initialState.url);
+      expect(wrapper.find(App).prop('lang')).to.equal(initialState.lang);
+      expect(wrapper.find(App).prop('languages')).to.equal(initialState.languages);
+    });
+  });
+
   describe('Header', () => {
     it("should be mounted", () => {
       expect(wrapper.find('.header')).to.have.length(1);
