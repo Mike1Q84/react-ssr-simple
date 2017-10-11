@@ -5,6 +5,7 @@ import Adapter from 'enzyme-adapter-react-16';
 configure({ adapter: new Adapter() });
 
 import { SysAdminPage } from './SysAdminPage';
+import t from './_lang.json';
 
 describe('SysAdmin Page', () => {
   const props = {
@@ -44,6 +45,6 @@ describe('SysAdmin Page Hero', () => {
     expect(wrapper.find('.hero')).to.have.length(1);
   });
   it("should display title", () => {
-    expect(wrapper.find('.hero__title')).to.have.length(1);
+    expect(wrapper.find('.hero__title').text()).to.equal(t[props.lang.id].title);
   });
 });
