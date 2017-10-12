@@ -5,6 +5,7 @@ import Adapter from 'enzyme-adapter-react-16';
 configure({ adapter: new Adapter() });
 
 import { NotFoundPage } from './NotFoundPage';
+import t from './_lang.json';
 
 describe('NotFoundPage', () => {
   const props = {
@@ -21,6 +22,6 @@ describe('NotFoundPage', () => {
     expect(wrapper.find('.not-found')).to.have.length(1);
   });
   it("should display title", () => {
-    expect(wrapper.find('.not-found__title')).to.have.length(1);
+    expect(wrapper.find('.not-found__title').text()).to.equal(t[props.lang.id].title);
   });
 });

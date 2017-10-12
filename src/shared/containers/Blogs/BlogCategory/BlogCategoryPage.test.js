@@ -5,6 +5,7 @@ import Adapter from 'enzyme-adapter-react-16';
 configure({ adapter: new Adapter() });
 
 import BlogCategoryPage from './BlogCategoryPage';
+import t from './_lang.json';
 
 describe('Blog Category Page', () => {
   const props = {
@@ -21,6 +22,7 @@ describe('Blog Category Page', () => {
     expect(wrapper.find('.blog-category')).to.have.length(1);
   });
   it("should display title", () => {
-    expect(wrapper.find('.blog-category__title')).to.have.length(1);
+    expect(wrapper.find('.blog-category__title').text())
+      .to.equal(t[props.lang.id].title);
   });
 });

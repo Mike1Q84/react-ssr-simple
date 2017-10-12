@@ -5,6 +5,7 @@ import Adapter from 'enzyme-adapter-react-16';
 configure({ adapter: new Adapter() });
 
 import BlogDetailPage from './BlogDetailPage';
+import t from './_lang.json';
 
 describe('Blog Detail Page', () => {
   const props = {
@@ -21,6 +22,7 @@ describe('Blog Detail Page', () => {
     expect(wrapper.find('.blog-detail')).to.have.length(1);
   });
   it("should display title", () => {
-    expect(wrapper.find('.blog-detail__title')).to.have.length(1);
+    expect(wrapper.find('.blog-detail__title').text())
+      .to.equal(t[props.lang.id].title);
   });
 });

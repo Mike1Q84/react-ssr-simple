@@ -5,6 +5,7 @@ import Adapter from 'enzyme-adapter-react-16';
 configure({ adapter: new Adapter() });
 
 import Footer from './Footer';
+import t from './_lang.json';
 
 describe('Footer', () => {
   const props = {
@@ -21,6 +22,6 @@ describe('Footer', () => {
     expect(wrapper.find('.footer')).to.have.length(1);
   });
   it("should display title", () => {
-    expect(wrapper.find('.footer__title')).to.have.length(1);
+    expect(wrapper.find('.footer__title').text()).to.equal(t[props.lang.id].name);
   });
 });

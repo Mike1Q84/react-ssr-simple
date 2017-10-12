@@ -31,6 +31,6 @@ describe('Hero', () => {
     expect(wrapper.find('.hero__image')).to.have.length(1);
   });
   it("should display title", () => {
-    expect(wrapper.find('.hero__title')).to.have.length(1);
+    expect(wrapper.find('.hero__title').text()).to.equal(props.title);
   });
 });
