@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import t from './_lang.json';
 import { Link } from 'react-router-dom'
 
+import './Header.sass';
+
 const Header = ({lang, languages}) => {
   return (
     <div className="header">
