@@ -31,4 +31,17 @@ describe('Header', () => {
   it("should display language", () => {
     expect(wrapper.find('.header__lang')).to.have.length(1);
   });
+
+  describe('Navbar', () => {
+    it("should be rendered", () => {
+      expect(wrapper.find('.navbar')).to.have.length(1);
+    });
+    it("should display dropdown button", () => {
+      expect(wrapper.find('.navbtn')).to.have.length(1);
+      expect(wrapper.find('.navbtn__line1')).to.have.length(1);
+      expect(wrapper.find('.navbtn__line2')).to.have.length(1);
+      expect(wrapper.find('.navbtn__line3')).to.have.length(1);
+    });
+
+  })
 });

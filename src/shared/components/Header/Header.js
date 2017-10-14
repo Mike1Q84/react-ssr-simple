@@ -9,6 +9,11 @@ const Header = ({lang, languages}) => {
   return (
     <div className="header">
       <h1 className="header__title">{t[lang.id].name}</h1>
+      <span className="navbtn">
+        <span className="navbtn__line1"></span>
+        <span className="navbtn__line2"></span>
+        <span className="navbtn__line3"></span>
+      </span>
       <nav className="navbar">
         <ul className="navlink">
           <li className="navlink__item">
@@ -31,6 +36,8 @@ const Header = ({lang, languages}) => {
           );
         })}
       </ul>
+
+
     </div>
   );
 };

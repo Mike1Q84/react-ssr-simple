@@ -644,6 +644,13 @@ var Header = function Header(_ref) {
       _lang2.default[lang.id].name
     ),
     _react2.default.createElement(
+      'span',
+      { className: 'navbtn' },
+      _react2.default.createElement('span', { className: 'navbtn__line1' }),
+      _react2.default.createElement('span', { className: 'navbtn__line2' }),
+      _react2.default.createElement('span', { className: 'navbtn__line3' })
+    ),
+    _react2.default.createElement(
       'nav',
       { className: 'navbar' },
       _react2.default.createElement(
