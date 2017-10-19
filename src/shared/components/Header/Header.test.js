@@ -44,10 +44,9 @@ describe('Header', () => {
         expect(wrapper.find('.navbtn__line2')).to.have.length(1);
         expect(wrapper.find('.navbtn__line3')).to.have.length(1);
       });
-      it('should toggle navbtn style after clicked', () => {
-
-        
-      });
-    })
-  })
+      // it('should toggle navbtn style after clicked', () => {
+      //
+      // });
+    });
+  });
 });

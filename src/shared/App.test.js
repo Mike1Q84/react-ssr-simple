@@ -7,7 +7,7 @@ configure({ adapter: new Adapter() });
 import { Provider } from "react-redux";
 import configureStore from 'redux-mock-store';
 import { BrowserRouter } from 'react-router-dom';
-import { App } from './App';
+import ConnectedApp, { App } from './App';
 
 describe('App', () => {
   const props = {
@@ -49,10 +49,8 @@ describe('App', () => {
     ],
     'dispatch': () => {return null;}
   };
-
   const mockStore = configureStore();
-  let store;
-  let wrapper;
+  let store, wrapper;
 
   beforeEach(() => {
     store = mockStore(initialState);
@@ -60,6 +58,7 @@ describe('App', () => {
       <Provider store={store}>
         <BrowserRouter>
           <App {...initialState} />
+          {/* <ConnectedApp /> */}
         </BrowserRouter>
       </Provider>
     );
@@ -68,6 +67,7 @@ describe('App', () => {
   describe('Props', () => {
     it("should match initialState", () => {
       expect(wrapper.find(App).prop('url')).to.equal(initialState.url);
+      expect(wrapper.find(App).prop('noLang')).to.equal(initialState.noLang);
       expect(wrapper.find(App).prop('lang')).to.equal(initialState.lang);
       expect(wrapper.find(App).prop('languages')).to.equal(initialState.languages);
     });
@@ -90,4 +90,5 @@ describe('App', () => {
       expect(wrapper.find('.footer__title')).to.have.length(1);
     });
   });
+
 });
